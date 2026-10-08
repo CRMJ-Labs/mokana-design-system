@@ -105,6 +105,150 @@
       "source": "src/components.tsx",
       "export": "Toggle",
       "story": "components-switch--overview"
+    },
+    {
+      "name": "Checkbox",
+      "nodeId": "44:8694",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=44-8694",
+      "source": "src/advanced-components.tsx",
+      "export": "Checkbox",
+      "story": "components-form-controls-·-extended--checkbox-and-radio"
+    },
+    {
+      "name": "Radio",
+      "nodeId": "44:8917",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=44-8917",
+      "source": "src/advanced-components.tsx",
+      "export": "Radio",
+      "story": "components-form-controls-·-extended--checkbox-and-radio"
+    },
+    {
+      "name": "Pagination",
+      "nodeId": "44:9042",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=44-9042",
+      "source": "src/advanced-components.tsx",
+      "export": "Pagination",
+      "story": "components-navigation-·-extended--pagination-example"
+    },
+    {
+      "name": "Textarea",
+      "nodeId": "54:1499",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=54-1499",
+      "source": "src/advanced-components.tsx",
+      "export": "Textarea",
+      "story": "components-form-controls-·-extended--text-areas"
+    },
+    {
+      "name": "DatePicker",
+      "nodeId": "54:1792",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=54-1792",
+      "source": "src/advanced-components.tsx",
+      "export": "DatePicker",
+      "story": "components-form-controls-·-extended--date-and-combobox"
+    },
+    {
+      "name": "Combobox",
+      "nodeId": "56:1630",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-1630",
+      "source": "src/advanced-components.tsx",
+      "export": "Combobox",
+      "story": "components-form-controls-·-extended--date-and-combobox"
+    },
+    {
+      "name": "FileUpload",
+      "nodeId": "56:1965",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-1965",
+      "source": "src/advanced-components.tsx",
+      "export": "FileUpload",
+      "story": "components-form-controls-·-extended--upload"
+    },
+    {
+      "name": "Tooltip",
+      "nodeId": "56:2042",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2042",
+      "source": "src/advanced-components.tsx",
+      "export": "Tooltip",
+      "story": "components-feedback-&-overlays-·-extended--tooltips-and-popover"
+    },
+    {
+      "name": "Popover",
+      "nodeId": "56:2159",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2159",
+      "source": "src/advanced-components.tsx",
+      "export": "Popover",
+      "story": "components-feedback-&-overlays-·-extended--tooltips-and-popover"
+    },
+    {
+      "name": "DropdownMenu",
+      "nodeId": "56:2388",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2388",
+      "source": "src/advanced-components.tsx",
+      "export": "DropdownMenu",
+      "story": "components-navigation-·-extended--menu-and-avatars"
+    },
+    {
+      "name": "Tabs",
+      "nodeId": "56:2461",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2461",
+      "source": "src/advanced-components.tsx",
+      "export": "Tabs",
+      "story": "components-navigation-·-extended--tabs-example"
+    },
+    {
+      "name": "Breadcrumbs",
+      "nodeId": "56:2600",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2600",
+      "source": "src/advanced-components.tsx",
+      "export": "Breadcrumbs",
+      "story": "components-navigation-·-extended--breadcrumbs-example"
+    },
+    {
+      "name": "Avatar",
+      "nodeId": "56:2637",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2637",
+      "source": "src/advanced-components.tsx",
+      "export": "Avatar",
+      "story": "components-navigation-·-extended--menu-and-avatars"
+    },
+    {
+      "name": "Skeleton",
+      "nodeId": "56:2692",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2692",
+      "source": "src/advanced-components.tsx",
+      "export": "Skeleton",
+      "story": "components-feedback-&-overlays-·-extended--loading-and-progress"
+    },
+    {
+      "name": "ProgressBar",
+      "nodeId": "56:2769",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2769",
+      "source": "src/advanced-components.tsx",
+      "export": "ProgressBar",
+      "story": "components-feedback-&-overlays-·-extended--loading-and-progress"
+    },
+    {
+      "name": "Toast",
+      "nodeId": "56:2922",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2922",
+      "source": "src/advanced-components.tsx",
+      "export": "Toast",
+      "story": "components-feedback-&-overlays-·-extended--toasts"
+    },
+    {
+      "name": "Drawer",
+      "nodeId": "56:3227",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-3227",
+      "source": "src/advanced-components.tsx",
+      "export": "Drawer",
+      "story": "components-feedback-&-overlays-·-extended--drawer-example"
+    },
+    {
+      "name": "Accordion",
+      "nodeId": "56:3284",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-3284",
+      "source": "src/advanced-components.tsx",
+      "export": "Accordion",
+      "story": "components-feedback-&-overlays-·-extended--accordion-example"
     }
   ]
 }

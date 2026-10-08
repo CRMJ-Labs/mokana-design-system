@@ -61,6 +61,51 @@
       "violations": []
     },
     {
+      "id": "components-feedback-overlays-·-extended--tooltips-and-popover",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-feedback-overlays-·-extended--loading-and-progress",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-feedback-overlays-·-extended--toasts",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-feedback-overlays-·-extended--drawer-example",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-feedback-overlays-·-extended--accordion-example",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-form-controls-·-extended--checkbox-and-radio",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-form-controls-·-extended--text-areas",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-form-controls-·-extended--date-and-combobox",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-form-controls-·-extended--upload",
+      "theme": "light",
+      "violations": []
+    },
+    {
       "id": "components-inputs--overview",
       "theme": "light",
       "violations": []
@@ -72,6 +117,26 @@
     },
     {
       "id": "components-navigation--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-navigation-·-extended--tabs-example",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-navigation-·-extended--breadcrumbs-example",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-navigation-·-extended--pagination-example",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-navigation-·-extended--menu-and-avatars",
       "theme": "light",
       "violations": []
     },
@@ -191,6 +256,51 @@
       "violations": []
     },
     {
+      "id": "components-feedback-overlays-·-extended--tooltips-and-popover",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-feedback-overlays-·-extended--loading-and-progress",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-feedback-overlays-·-extended--toasts",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-feedback-overlays-·-extended--drawer-example",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-feedback-overlays-·-extended--accordion-example",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-form-controls-·-extended--checkbox-and-radio",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-form-controls-·-extended--text-areas",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-form-controls-·-extended--date-and-combobox",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-form-controls-·-extended--upload",
+      "theme": "dark",
+      "violations": []
+    },
+    {
       "id": "components-inputs--overview",
       "theme": "dark",
       "violations": []
@@ -202,6 +312,26 @@
     },
     {
       "id": "components-navigation--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-navigation-·-extended--tabs-example",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-navigation-·-extended--breadcrumbs-example",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-navigation-·-extended--pagination-example",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-navigation-·-extended--menu-and-avatars",
       "theme": "dark",
       "violations": []
     },
