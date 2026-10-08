@@ -126,6 +126,11 @@
       "violations": []
     },
     {
+      "id": "product-themes-biyú--dashboard",
+      "theme": "light",
+      "violations": []
+    },
+    {
       "id": "inicio--overview",
       "theme": "dark",
       "violations": []
@@ -247,6 +252,11 @@
     },
     {
       "id": "product-themes--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "product-themes-biyú--dashboard",
       "theme": "dark",
       "violations": []
     }
