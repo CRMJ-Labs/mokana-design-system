@@ -1,0 +1,289 @@
+{
+  "stories": [
+    {
+      "id": "inicio--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "brand-foundations--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "ui-foundations--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-buttons--primary",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-buttons--secondary",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-buttons--ghost",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-buttons--loading",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-buttons--disabled",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-buttons--sizes",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-buttons--with-icon",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-cards--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-feedback--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-inputs--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-modals--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-navigation--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-selects--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-tables--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "components-switch--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "patterns-auth--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "patterns-crud--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "patterns-dashboards--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "patterns-empty-states--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "patterns-filters--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "patterns-settings--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "product-themes--overview",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "id": "inicio--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "brand-foundations--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "ui-foundations--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-buttons--primary",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-buttons--secondary",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-buttons--ghost",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-buttons--loading",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-buttons--disabled",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-buttons--sizes",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-buttons--with-icon",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-cards--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-feedback--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-inputs--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-modals--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-navigation--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-selects--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-tables--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "components-switch--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "patterns-auth--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "patterns-crud--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "patterns-dashboards--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "patterns-empty-states--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "patterns-filters--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "patterns-settings--overview",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "product-themes--overview",
+      "theme": "dark",
+      "violations": []
+    }
+  ],
+  "interactions": [
+    "Modal: Escape and focus restoration",
+    "CRUD: create, edit and confirmed delete",
+    "Filters: search, empty results and reset",
+    "Auth: validation and explicit demo feedback",
+    "Settings: keyboard switch and save feedback",
+    "Empty state: actionable transition"
+  ],
+  "mobile": [
+    {
+      "id": "inicio--overview",
+      "overflow": false
+    },
+    {
+      "id": "brand-foundations--overview",
+      "overflow": false
+    },
+    {
+      "id": "patterns-dashboards--overview",
+      "overflow": false
+    },
+    {
+      "id": "patterns-crud--overview",
+      "overflow": false
+    },
+    {
+      "id": "patterns-auth--overview",
+      "overflow": false
+    },
+    {
+      "id": "patterns-settings--overview",
+      "overflow": false
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,13 @@
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Button } from './components';
+const meta = {title:'Components/Buttons',component:Button,tags:['autodocs'],args:{children:'Dar forma a una idea',variant:'primary',size:'md'},parameters:{layout:'padded'}} satisfies Meta<typeof Button>;
+export default meta;
+type Story = StoryObj<typeof meta>;
+export const Primary:Story={};
+export const Secondary:Story={args:{variant:'secondary'}};
+export const Ghost:Story={args:{variant:'ghost'}};
+export const Loading:Story={args:{loading:true}};
+export const Disabled:Story={args:{disabled:true}};
+export const Sizes:Story={render:()=> <div className="mk-row">{(['sm','md','lg'] as const).map(size=><Button key={size} size={size}>{size.toUpperCase()} · Continuar</Button>)}</div>};
+export const WithIcon:Story={args:{icon:'arrow'}};

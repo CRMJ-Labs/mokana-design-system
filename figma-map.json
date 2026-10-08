@@ -1,0 +1,110 @@
+{
+  "status": "Reference map, not active Code Connect",
+  "figmaFile": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV",
+  "components": [
+    {
+      "name": "Button/Primary",
+      "nodeId": "11:176",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=11-176",
+      "source": "src/components.tsx",
+      "export": "Button",
+      "story": "components-buttons--primary"
+    },
+    {
+      "name": "Button/Secondary",
+      "nodeId": "11:327",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=11-327",
+      "source": "src/components.tsx",
+      "export": "Button",
+      "story": "components-buttons--secondary"
+    },
+    {
+      "name": "Button/Ghost",
+      "nodeId": "11:478",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=11-478",
+      "source": "src/components.tsx",
+      "export": "Button",
+      "story": "components-buttons--ghost"
+    },
+    {
+      "name": "Input",
+      "nodeId": "11:519",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=11-519",
+      "source": "src/components.tsx",
+      "export": "Input",
+      "story": "components-inputs--overview"
+    },
+    {
+      "name": "Select",
+      "nodeId": "11:584",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=11-584",
+      "source": "src/components.tsx",
+      "export": "Select",
+      "story": "components-selects--overview"
+    },
+    {
+      "name": "Card",
+      "nodeId": "12:124",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-124",
+      "source": "src/components.tsx",
+      "export": "Card",
+      "story": "components-cards--overview"
+    },
+    {
+      "name": "Badge",
+      "nodeId": "12:141",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-141",
+      "source": "src/components.tsx",
+      "export": "Badge",
+      "story": "components-feedback--overview"
+    },
+    {
+      "name": "Alert",
+      "nodeId": "12:198",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-198",
+      "source": "src/components.tsx",
+      "export": "Alert",
+      "story": "components-feedback--overview"
+    },
+    {
+      "name": "Navigation",
+      "nodeId": "12:213",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-213",
+      "source": "src/components.tsx",
+      "export": "Navigation",
+      "story": "components-navigation--overview"
+    },
+    {
+      "name": "Table",
+      "nodeId": "12:254",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-254",
+      "source": "src/components.tsx",
+      "export": "Table",
+      "story": "components-tables--overview"
+    },
+    {
+      "name": "Modal",
+      "nodeId": "12:309",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-309",
+      "source": "src/components.tsx",
+      "export": "Modal",
+      "story": "components-modals--overview"
+    },
+    {
+      "name": "EmptyState",
+      "nodeId": "12:326",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-326",
+      "source": "src/components.tsx",
+      "export": "EmptyState",
+      "story": "patterns-empty-states--overview"
+    },
+    {
+      "name": "Toggle",
+      "nodeId": "12:343",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-343",
+      "source": "src/components.tsx",
+      "export": "Toggle",
+      "story": "components-switch--overview"
+    }
+  ]
+}
