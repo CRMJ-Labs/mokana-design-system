@@ -8,4 +8,15 @@ css+=`  --font-display: ${t.typography.display}, sans-serif;\n  --font-body: ${t
 for(const name of ['fast','normal','slow'])css+=`  --duration-${name}: ${t.motion[name]}ms;\n`;
 css+=`  --ease: ${t.motion.ease};\n}\n`;
 for(const [i,selector]of ['.mk, .mk[data-theme="light"]','.mk[data-theme="dark"]'].entries()){css+=selector+' {\n';for(const [k,v]of Object.entries(t.semantic))css+=`  --${k}: var(--${v[i]});\n`;css+='}\n';}
+for(const [product,theme]of Object.entries(t.productThemes||{})){
+  css+=`\n.mk[data-product="${product}"] {\n`;
+  for(const [k,v]of Object.entries(theme.base||{}))css+=`  --${k}: ${v};\n`;
+  css+='}\n';
+  for(const mode of ['light','dark']){
+    const selector=mode==='light'?`.mk[data-product="${product}"],\n.mk[data-product="${product}"][data-theme="light"]`:`.mk[data-product="${product}"][data-theme="dark"]`;
+    css+=selector+' {\n';
+    for(const [k,v]of Object.entries(theme[mode]||{}))css+=`  --${k}: ${v};\n`;
+    css+='}\n';
+  }
+}
 fs.writeFileSync(new URL('../src/tokens.css',import.meta.url),css);
