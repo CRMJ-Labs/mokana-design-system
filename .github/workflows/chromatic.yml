@@ -25,7 +25,8 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        # npm install resolves the platform-specific optional packages required on Linux.
+        run: npm install --ignore-scripts
 
       - name: Publish to Chromatic
         uses: chromaui/action@latest
