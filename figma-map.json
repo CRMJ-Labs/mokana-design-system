@@ -249,6 +249,14 @@
       "source": "src/advanced-components.tsx",
       "export": "Accordion",
       "story": "components-feedback-&-overlays-·-extended--accordion-example"
+    },
+    {
+      "name": "Product Theme / Tuscan",
+      "nodeId": "69:2562",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=69-2562",
+      "source": "src/TuscanWorkspace.stories.tsx",
+      "export": "TuscanWorkspace",
+      "story": "product-themes-tuscan--workspace"
     }
   ]
 }

@@ -196,6 +196,11 @@
       "violations": []
     },
     {
+      "id": "product-themes-tuscan--workspace",
+      "theme": "light",
+      "violations": []
+    },
+    {
       "id": "inicio--overview",
       "theme": "dark",
       "violations": []
@@ -387,6 +392,11 @@
     },
     {
       "id": "product-themes-biyú--dashboard",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "id": "product-themes-tuscan--workspace",
       "theme": "dark",
       "violations": []
     }
