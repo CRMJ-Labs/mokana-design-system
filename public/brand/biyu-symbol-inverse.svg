@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="BIYÚ"><g transform="translate(14 0)"><defs>
+<clipPath id="ic"><path clip-rule="evenodd" d="M34 64Q34 46 52 46H112C150 46 164 72 152 96C148 104 142 109 136 112C172 116 182 152 168 174C158 190 140 194 120 194H52Q34 194 34 176ZM80 76H108C126 76 126 102 108 102H80ZM80 132H116C138 132 140 164 116 164H80Z"/></clipPath>
+<linearGradient id="ibar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10B981"/><stop offset="1" stop-color="#0E6F63"/></linearGradient>
+<linearGradient id="istem" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2DBE9B"/><stop offset="1" stop-color="#0F7F6D"/></linearGradient>
+<linearGradient id="iup" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0B8F73"/><stop offset=".6" stop-color="#10B981"/><stop offset="1" stop-color="#34D399"/></linearGradient>
+<linearGradient id="ilo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#10B981"/><stop offset=".6" stop-color="#34D399"/><stop offset="1" stop-color="#6EE7B7"/></linearGradient>
+<linearGradient id="ifold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#083540"/><stop offset="1" stop-color="#0E8C70"/></linearGradient>
+</defs>
+<rect x="70" y="10" width="16" height="48" rx="3" fill="url(#ibar)"/><rect x="112" y="0" width="16" height="58" rx="3" fill="url(#ibar)"/>
+<rect x="70" y="182" width="16" height="48" rx="3" fill="url(#ibar)"/><rect x="112" y="182" width="16" height="58" rx="3" fill="url(#ibar)"/>
+<g clip-path="url(#ic)">
+<rect x="30" y="40" width="160" height="80" fill="url(#iup)"/>
+<rect x="30" y="118" width="160" height="82" fill="url(#ilo)"/>
+<path d="M80 96L190 112V140L80 124Z" fill="url(#ifold)"/>
+<rect x="30" y="40" width="50" height="160" fill="url(#istem)"/>
+<path d="M34 46H112C150 46 164 72 152 96L80 98Z" fill="#fff" fill-opacity=".10"/>
+</g></g></svg>
