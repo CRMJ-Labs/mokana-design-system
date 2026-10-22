@@ -1,0 +1,41 @@
+name: Publish package
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+  id-token: write # provenance de npm
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22.17.0
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        # npm install resolves the platform-specific optional packages required on Linux.
+        run: npm install --ignore-scripts
+
+      - name: Check tag matches package version
+        run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
+
+      - name: Typecheck and build
+        run: |
+          npm run typecheck
+          npm run build
+
+      - name: Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
