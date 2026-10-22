@@ -1,7 +1,19 @@
 {
-  "name": "@mokana/design-system",
+  "name": "@mokanadev/design-system",
   "version": "0.1.0",
-  "private": true,
+  "description": "Sistema de diseño de Mokaná Dev: tokens semánticos, componentes React y temas por producto.",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CRMJ-Labs/mokana-design-system.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
   "type": "module",
   "scripts": {
     "storybook": "storybook dev -p 6006 --no-open",
@@ -11,7 +23,8 @@
     "test": "node --test tests/*.test.mjs",
     "tokens": "node scripts/build-tokens.mjs",
     "preview": "node scripts/serve.mjs",
-    "chromatic": "chromatic"
+    "chromatic": "chromatic",
+    "prepublishOnly": "npm run typecheck && npm run build"
   },
   "exports": {
     ".": {

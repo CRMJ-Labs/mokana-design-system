@@ -3,8 +3,8 @@ npm run storybook</pre><p>Comandos de verificación:</p><pre>npm run tokens
 npm run typecheck
 npm run build
 npm run build-storybook
-npm test</pre><p>Las pruebas de navegador usan Microsoft Edge instalado y Playwright. Las versiones exactas están fijadas en package-lock.json.</p></section><section><h2>Integrar en un producto</h2><p>Instala esta carpeta como dependencia local después de compilarla, o incorpora el paquete dentro de tu monorepo. El paquete aún no está publicado en npm.</p><pre>npm install /ruta/a/mokana-design-system</pre><pre>import { Button, Input } from '@mokana/design-system';
-import '@mokana/design-system/styles.css';
+npm test</pre><p>Las pruebas de navegador usan Microsoft Edge instalado y Playwright. Las versiones exactas están fijadas en package-lock.json.</p></section><section><h2>Integrar en un producto</h2><p>Instala esta carpeta como dependencia local después de compilarla, o incorpora el paquete dentro de tu monorepo. El paquete aún no está publicado en npm.</p><pre>npm install /ruta/a/mokana-design-system</pre><pre>import { Button, Input } from '@mokanadev/design-system';
+import '@mokanadev/design-system/styles.css';
 
 &lt;div className="mk" data-theme="light" data-product="mokana"&gt;
   &lt;Input label="Nombre del proyecto" /&gt;
