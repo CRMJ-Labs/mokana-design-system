@@ -28,7 +28,9 @@
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-pill: 999px;
-  --font-display: Fredoka, sans-serif;
+  --font-primary: Manrope, sans-serif;
+  --font-secondary: Fredoka, sans-serif;
+  --font-display: Manrope, sans-serif;
   --font-heading: Manrope, sans-serif;
   --font-body: Manrope, sans-serif;
   --duration-fast: 160ms;
@@ -67,6 +69,7 @@
 
 .mk[data-product="biyu"] {
   --font-display: Manrope, sans-serif;
+  --font-secondary: Fredoka, sans-serif;
   --font-body: Manrope, sans-serif;
   --ink: #1c1c17;
   --paper: #fcf9f0;
@@ -110,7 +113,8 @@
 }
 
 .mk[data-product="tuscan"] {
-  --font-display: Fredoka, sans-serif;
+  --font-display: Manrope, sans-serif;
+  --font-secondary: Fredoka, sans-serif;
   --font-heading: Manrope, sans-serif;
   --font-body: Manrope, sans-serif;
   --ink: #242423;
