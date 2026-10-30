@@ -28,11 +28,11 @@
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-pill: 999px;
-  --font-primary: Manrope, sans-serif;
-  --font-secondary: Fredoka, sans-serif;
-  --font-display: Manrope, sans-serif;
-  --font-heading: Manrope, sans-serif;
-  --font-body: Manrope, sans-serif;
+  --font-primary: Inter Variable, sans-serif;
+  --font-secondary: Inter Variable, sans-serif;
+  --font-display: Inter Variable, sans-serif;
+  --font-heading: Inter Variable, sans-serif;
+  --font-body: Inter Variable, sans-serif;
   --duration-fast: 160ms;
   --duration-normal: 240ms;
   --duration-slow: 400ms;
@@ -51,6 +51,11 @@
   --action-primary-text: var(--ink);
   --action-secondary: var(--accent-light);
   --action-secondary-text: var(--paper);
+  --button-primary-background: var(--ink);
+  --button-primary-text: var(--paper);
+  --button-secondary-background: var(--surface-light);
+  --button-secondary-text: var(--ink);
+  --button-ghost-text: var(--ink);
 }
 .mk[data-theme="dark"] {
   --background: var(--ink);
@@ -65,4 +70,9 @@
   --action-primary-text: var(--ink);
   --action-secondary: var(--accent-light);
   --action-secondary-text: var(--paper);
+  --button-primary-background: var(--paper);
+  --button-primary-text: var(--ink);
+  --button-secondary-background: var(--surface-dark);
+  --button-secondary-text: var(--paper);
+  --button-ghost-text: var(--paper);
 }
