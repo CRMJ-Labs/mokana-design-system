@@ -1,0 +1,35 @@
+/* Superficie común de lo que flota (Popover, DropdownMenu). Única sombra permitida: shadow-overlay. */
+.mk-overlay {
+  z-index: 50;
+  box-sizing: border-box;
+  max-width: calc(100vw - 32px);
+  max-height: var(--radix-popover-content-available-height, var(--radix-dropdown-menu-content-available-height, none));
+  overflow: auto;
+  color: var(--foreground);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-overlay);
+}
+
+/* Aparece desde su disparador: escala corta + opacidad; la salida es más rápida que la entrada. */
+.mk-overlay[data-state='open'] {
+  animation: mk-overlay-in var(--duration-fast) var(--ease);
+}
+.mk-overlay[data-state='closed'] {
+  animation: mk-overlay-out 100ms ease-in forwards;
+}
+
+@keyframes mk-overlay-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+@keyframes mk-overlay-out {
+  to {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+/* prefers-reduced-motion: lo resuelve la regla global de styles.css (sin animaciones). */

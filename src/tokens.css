@@ -14,6 +14,8 @@
   --surface-dark: #171b29;
   --line-light: rgb(11 13 22 / 18%);
   --line-dark: rgb(244 247 251 / 15%);
+  --danger-light: #b42318;
+  --danger-dark: #f97066;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -56,6 +58,7 @@
   --button-secondary-background: var(--surface-light);
   --button-secondary-text: var(--ink);
   --button-ghost-text: var(--ink);
+  --danger-text: var(--danger-light);
 }
 .mk[data-theme="dark"] {
   --background: var(--ink);
@@ -75,4 +78,5 @@
   --button-secondary-background: var(--surface-dark);
   --button-secondary-text: var(--paper);
   --button-ghost-text: var(--paper);
+  --danger-text: var(--danger-dark);
 }

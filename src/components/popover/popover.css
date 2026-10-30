@@ -1,0 +1,68 @@
+.mk-popover {
+  padding: var(--space-4);
+}
+.mk-popover-sm {
+  width: 240px;
+}
+.mk-popover-md {
+  width: 320px;
+}
+.mk-popover-lg {
+  width: 400px;
+}
+
+.mk-popover-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-1);
+}
+.mk .mk-popover-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.mk .mk-popover-description {
+  margin: 0 0 var(--space-3);
+  color: var(--secondary);
+  font-size: 13px;
+}
+.mk .mk-popover-description:last-child {
+  margin-bottom: 0;
+}
+
+/* Cierre: área de clic de 32px aunque el icono mida 16px; se alinea con la primera línea del título. */
+.mk-popover-close {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin: -6px -8px 0 auto;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--secondary);
+  cursor: pointer;
+}
+.mk-popover-close svg {
+  width: 16px;
+  height: 16px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .mk-popover-close:hover {
+    color: var(--foreground);
+    background: color-mix(in srgb, var(--foreground) 8%, transparent);
+  }
+}
+.mk .mk-popover-close:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 0;
+}
+
+/* El último bloque no añade margen al pie del panel (la regla global da 16px a cada <p>). */
+.mk .mk-popover > :last-child {
+  margin-bottom: 0;
+}

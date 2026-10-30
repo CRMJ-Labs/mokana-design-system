@@ -1,0 +1,59 @@
+.mk-tabs-root {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.mk-tabs {
+  display: flex;
+  gap: var(--space-1);
+  overflow-x: auto;
+  border-bottom: 1px solid var(--line);
+  scrollbar-width: none;
+}
+.mk-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.mk-tab {
+  margin-bottom: -1px;
+  padding: 10px 12px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--secondary);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+/* Indicador con accent-text: lime en oscuro, violeta profundo en claro (contraste no textual ≥ 3:1). */
+.mk-tab[data-state='active'] {
+  color: var(--foreground);
+  border-bottom-color: var(--accent-text);
+}
+.mk-tab[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+@media (hover: hover) and (pointer: fine) {
+  .mk-tab:not([data-state='active'], [data-disabled]):hover {
+    color: var(--foreground);
+  }
+}
+/* El contenedor desplaza en horizontal: el anillo va por dentro para que no se recorte. */
+.mk .mk-tab:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+.mk-tab-panel {
+  padding-top: var(--space-4);
+}
+.mk .mk-tab-panel:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}

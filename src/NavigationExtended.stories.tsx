@@ -1,9 +1,12 @@
 import React,{useState} from 'react';
 import type {Meta,StoryObj} from '@storybook/react-vite';
-import {Avatar,Breadcrumbs,DropdownMenu,Pagination,Tabs} from './advanced-components';
+import {Avatar,Breadcrumbs,Pagination} from './advanced-components';
+import {Button} from './components';
+import {DropdownMenu} from './components/dropdown-menu/DropdownMenu';
+import {Tabs} from './components/tabs/Tabs';
 const meta={title:'Components/Navigation · Extended',parameters:{layout:'padded'}} satisfies Meta;
 export default meta; type Story=StoryObj<typeof meta>;
-export const TabsExample:Story={render:()=>{const [active,setActive]=useState('overview');return <div className="mk-stack"><Tabs active={active} onChange={setActive} tabs={[{id:'overview',label:'Resumen'},{id:'activity',label:'Actividad'},{id:'settings',label:'Configuración'}]}/><p>Contenido de <strong>{active}</strong></p></div>}};
+export const TabsExample:Story={render:()=> <Tabs.Root defaultValue="overview"><Tabs.List label="Secciones del proyecto"><Tabs.Trigger value="overview">Resumen</Tabs.Trigger><Tabs.Trigger value="activity">Actividad</Tabs.Trigger><Tabs.Trigger value="settings">Configuración</Tabs.Trigger></Tabs.List><Tabs.Content value="overview"><p>Estado general del proyecto.</p></Tabs.Content><Tabs.Content value="activity"><p>Últimos cambios del equipo.</p></Tabs.Content><Tabs.Content value="settings"><p>Preferencias del proyecto.</p></Tabs.Content></Tabs.Root>};
 export const BreadcrumbsExample:Story={render:()=> <Breadcrumbs items={[{label:'Inicio',href:'#'},{label:'Proyectos',href:'#'},{label:'Portal de clientes'}]}/>};
 export const PaginationExample:Story={render:()=>{const [page,setPage]=useState(3);return <Pagination page={page} pages={8} onChange={setPage}/>}};
-export const MenuAndAvatars:Story={render:()=> <div className="mk-row"><DropdownMenu label="Acciones" items={[{label:'Editar',icon:'plus'},{label:'Duplicar',icon:'arrow'},{label:'Eliminar',icon:'warning',danger:true}]}/><Avatar name="Ana Torres" size="sm" status="online"/><Avatar name="Carlos Ruiz" status="away"/><Avatar name="Laura Gómez" size="lg" status="offline"/></div>};
+export const MenuAndAvatars:Story={render:()=> <div className="mk-row"><DropdownMenu.Root><DropdownMenu.Trigger asChild><Button variant="ghost" size="sm" icon="chevron">Acciones</Button></DropdownMenu.Trigger><DropdownMenu.Content><DropdownMenu.Item icon="plus">Editar</DropdownMenu.Item><DropdownMenu.Item icon="arrow">Duplicar</DropdownMenu.Item><DropdownMenu.Separator/><DropdownMenu.Item icon="warning" tone="danger">Eliminar proyecto</DropdownMenu.Item></DropdownMenu.Content></DropdownMenu.Root><Avatar name="Ana Torres" size="sm" status="online"/><Avatar name="Carlos Ruiz" status="away"/><Avatar name="Laura Gómez" size="lg" status="offline"/></div>};

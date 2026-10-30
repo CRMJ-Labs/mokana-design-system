@@ -30,9 +30,11 @@ jobs:
       - name: Check tag matches package version
         run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
 
-      - name: Typecheck and build
+      # Nada se publica si un componente rompe su contrato de teclado, foco o ARIA.
+      - name: Typecheck, test and build
         run: |
           npm run typecheck
+          npm test
           npm run build
 
       - name: Publish
