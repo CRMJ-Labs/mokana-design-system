@@ -1,0 +1,72 @@
+.mk-menu {
+  min-width: 200px;
+  padding: var(--space-1);
+}
+
+.mk-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 32px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--foreground);
+  font-size: 13px;
+  line-height: 1.4;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+}
+.mk-menu-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--secondary);
+}
+.mk-menu-item-label {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Resaltado (puntero o teclado): un paso de tono, igual en cualquier tema. */
+.mk-menu-item[data-highlighted] {
+  background: color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+/* Con teclado además se ve el anillo de foco; con ratón basta el resaltado. */
+.mk .mk-menu-item:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}
+
+.mk-menu-item[data-tone='danger'],
+.mk-menu-item[data-tone='danger'] svg {
+  color: var(--danger-text);
+}
+.mk-menu-item[data-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.mk-menu-shortcut {
+  margin-left: auto;
+  padding-left: var(--space-4);
+  color: var(--secondary);
+  font: inherit;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.mk-menu-label {
+  padding: 8px 10px 4px;
+  color: var(--secondary);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.mk-menu-separator {
+  height: 1px;
+  margin: var(--space-1) calc(var(--space-1) * -1);
+  background: var(--line);
+}

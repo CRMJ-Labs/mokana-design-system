@@ -1,10 +1,11 @@
 import React,{useState} from 'react';
 import type {Meta,StoryObj} from '@storybook/react-vite';
-import {Accordion,Drawer,Popover,ProgressBar,Skeleton,Toast,Tooltip} from './advanced-components';
+import {Accordion,Drawer,ProgressBar,Skeleton,Toast,Tooltip} from './advanced-components';
+import {Popover} from './components/popover/Popover';
 import {Button} from './components';
 const meta={title:'Components/Feedback & Overlays · Extended',parameters:{layout:'padded'}} satisfies Meta;
 export default meta; type Story=StoryObj<typeof meta>;
-export const TooltipsAndPopover:Story={render:()=> <div className="mk-row"><Tooltip content="Añade un proyecto nuevo"><Button size="sm">Pasa el cursor</Button></Tooltip><Popover title="Información del proyecto" trigger={<Button variant="ghost" size="sm">Abrir popover</Button>}><p>Contenido contextual sin cambiar de pantalla.</p></Popover></div>};
+export const TooltipsAndPopover:Story={render:()=> <div className="mk-row"><Tooltip content="Añade un proyecto nuevo"><Button size="sm">Pasa el cursor</Button></Tooltip><Popover.Root><Popover.Trigger asChild><Button variant="ghost" size="sm">Abrir popover</Button></Popover.Trigger><Popover.Content title="Información del proyecto" closeLabel="Cerrar información"><p>Contenido contextual sin cambiar de pantalla.</p></Popover.Content></Popover.Root></div>};
 export const LoadingAndProgress:Story={render:()=> <div className="mk-stack"><ProgressBar value={68} label="Configuración completada"/><ProgressBar label="Procesando"/><Skeleton kind="text"/><Skeleton kind="card"/></div>};
 export const Toasts:Story={render:()=> <div className="mk-stack"><Toast title="Cambios guardados" tone="success">El proyecto se actualizó correctamente.</Toast><Toast title="Revisa la información" tone="warning">Hay campos pendientes.</Toast><Toast title="No pudimos guardar" tone="error">Intenta nuevamente.</Toast></div>};
 export const DrawerExample:Story={render:()=>{const [open,setOpen]=useState(false);return <><Button onClick={()=>setOpen(true)}>Abrir drawer</Button><Drawer open={open} onClose={()=>setOpen(false)} title="Detalles del proyecto" footer={<Button onClick={()=>setOpen(false)}>Guardar</Button>}><p>Panel lateral para tareas complementarias que mantienen el contexto.</p></Drawer></>}};

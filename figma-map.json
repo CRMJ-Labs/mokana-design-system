@@ -174,25 +174,25 @@
       "name": "Popover",
       "nodeId": "56:2159",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2159",
-      "source": "src/advanced-components.tsx",
+      "source": "src/components/popover/Popover.tsx",
       "export": "Popover",
-      "story": "components-feedback-&-overlays-·-extended--tooltips-and-popover"
+      "story": "components-popover--overview"
     },
     {
       "name": "DropdownMenu",
       "nodeId": "56:2388",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2388",
-      "source": "src/advanced-components.tsx",
+      "source": "src/components/dropdown-menu/DropdownMenu.tsx",
       "export": "DropdownMenu",
-      "story": "components-navigation-·-extended--menu-and-avatars"
+      "story": "components-dropdown-menu--overview"
     },
     {
       "name": "Tabs",
       "nodeId": "56:2461",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2461",
-      "source": "src/advanced-components.tsx",
+      "source": "src/components/tabs/Tabs.tsx",
       "export": "Tabs",
-      "story": "components-navigation-·-extended--tabs-example"
+      "story": "components-tabs--overview"
     },
     {
       "name": "Breadcrumbs",
