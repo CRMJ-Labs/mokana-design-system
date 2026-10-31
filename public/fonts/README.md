@@ -1,7 +1,7 @@
 # Fuentes autoalojadas
 
-Fredoka y Manrope: archivos latin variable WOFF2 de @fontsource-variable/fredoka y @fontsource-variable/manrope, versión 5.3.0, descargados mediante pnpm con autorización del titular. El subset latin incluye caracteres españoles.
+El Design System usa exclusivamente Inter Variable mediante el paquete `@fontsource-variable/inter`.
 
-Se conservan las licencias OFL-1.1 junto a los archivos. No se modificaron los binarios. Se sirven localmente; no hay llamadas a Google Fonts en el navegador.
+La fuente se incorpora durante el build, admite pesos de 100 a 900 y no realiza llamadas a Google Fonts desde el navegador. La versión, integridad y licencia OFL-1.1 se registran en `package-lock.json` y dentro del paquete instalado.
 
-Procedencia: https://fontsource.org/fonts/fredoka y https://fontsource.org/fonts/manrope. Versiones/integridad de paquetes en pnpm-lock.yaml.
+Procedencia: https://fontsource.org/fonts/inter
