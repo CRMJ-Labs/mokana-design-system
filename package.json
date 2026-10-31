@@ -1,6 +1,6 @@
 {
   "name": "@mokanadev/design-system",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Sistema de diseño de Mokaná Dev: tokens semánticos, componentes React y temas por producto.",
   "license": "UNLICENSED",
   "repository": {
