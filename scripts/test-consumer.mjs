@@ -1,0 +1,106 @@
+import assert from 'node:assert/strict';
+import {spawn} from 'node:child_process';
+import {mkdirSync,readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {chromium,expect} from '@playwright/test';
+
+const consumer=resolve('examples/consumer');
+const css=readFileSync(resolve(consumer,'node_modules/@mokanadev/design-system/dist/styles.css'),'utf8');
+assert.doesNotMatch(css,/\.mk-(?:docs|foundations|icon-catalog|core-form|input-preview|button-example|table-doc|api-reference|integration)/,'Documentation CSS leaked into the installed package');
+assert.doesNotMatch(css,/url\(["']?\/brand\//,'Brand still depends on assets in the host application');
+const port=3035;
+const server=spawn(process.execPath,[resolve(consumer,'node_modules/vite/bin/vite.js'),'preview','--host','127.0.0.1','--port',String(port),'--strictPort'],{cwd:consumer,stdio:'pipe'});
+let browser;
+try{
+  await new Promise((resolve,reject)=>{
+    const timer=setTimeout(()=>reject(new Error('Consumer preview did not start')),20000);
+    server.stdout.on('data',data=>{if(data.toString().includes(String(port))){clearTimeout(timer);resolve();}});
+    server.once('error',error=>{clearTimeout(timer);reject(error);});
+    server.once('exit',code=>{clearTimeout(timer);reject(new Error(`Consumer preview exited: ${code}`));});
+  });
+  browser=await chromium.launch({channel:'msedge',headless:true});
+  const page=await browser.newPage({viewport:{width:1280,height:900}});
+  const errors=[];
+  page.on('pageerror',error=>errors.push(error.message));
+  page.on('response',response=>{if(response.status()>=400)errors.push(`${response.status()} ${response.url()}`);});
+  await page.goto(`http://127.0.0.1:${port}`);
+  await expect(page.getByRole('heading',{name:'Proyectos del equipo'})).toBeVisible();
+  assert.match(await page.locator('.mk-mark').evaluate(node=>getComputedStyle(node).maskImage),/data:image\/svg\+xml/);
+  await expect(page.locator('.consumer-app')).toHaveAttribute('data-theme','light');
+  const background=await page.locator('.consumer-app').evaluate(node=>getComputedStyle(node).backgroundColor);
+  await page.getByRole('radio',{name:'Oscuro'}).check();
+  await expect(page.locator('.consumer-app')).toHaveAttribute('data-theme','dark');
+  assert.notEqual(await page.locator('.consumer-app').evaluate(node=>getComputedStyle(node).backgroundColor),background);
+  await page.reload();await expect(page.locator('.consumer-app')).toHaveAttribute('data-theme','dark');
+  const opener=page.getByRole('button',{name:'Nuevo proyecto'});
+  await opener.click();const dialog=page.getByRole('dialog',{name:'Crear proyecto'});
+  await expect(dialog).toBeVisible();
+  await dialog.getByLabel('Nombre del proyecto').fill('Integración verificada');
+  await dialog.getByRole('button',{name:'Crear proyecto',exact:true}).click();
+  await expect(dialog).not.toBeVisible();
+  await expect(page.getByRole('cell',{name:'Integración verificada',exact:true})).toBeVisible();
+  await expect(page.locator('.mk-notification')).toContainText('Proyecto creado');
+  await expect(opener).toBeFocused();
+  const search=page.getByRole('searchbox',{name:'Buscar proyectos',exact:true});
+  await search.fill('integracion');
+  await expect(page.getByRole('cell',{name:'Integración verificada',exact:true})).toBeVisible();
+  await expect(page.locator('.mk-table-footer')).toContainText('1–1 de 1 registros');
+  await page.getByRole('checkbox',{name:'Seleccionar Integración verificada',exact:true}).check();
+  await search.fill('');
+  await expect(page.getByText('1 seleccionados',{exact:true})).toBeVisible();
+  await page.getByRole('button',{name:'Limpiar selección'}).click();
+  await page.getByRole('button',{name:'Página siguiente'}).click();
+  await expect(page.getByText('Página 2 de 2',{exact:true})).toBeVisible();
+  await page.getByRole('button',{name:'Página anterior'}).click();
+  await opener.click();await page.keyboard.press('Escape');await expect(dialog).not.toBeVisible();await expect(opener).toBeFocused();
+  // A plain .mk scope must not impose documentation page dimensions.
+  const scope=await page.evaluate(()=>{const node=document.createElement('div');node.className='mk';document.body.append(node);const style=getComputedStyle(node);const result={padding:style.padding,minHeight:style.minHeight};node.remove();return result;});
+  assert.equal(scope.padding,'0px');assert.equal(scope.minHeight,'0px');
+  for(const theme of ['Claro','Oscuro']){
+    await page.getByRole('radio',{name:theme}).check();
+    for(const width of [1280,390]){
+      await page.setViewportSize({width,height:900});
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`Overflow at ${width}px / ${theme}`);
+      await page.addScriptTag({path:resolve('node_modules/axe-core/axe.min.js')});
+      const violations=await page.evaluate(async()=>(await window.axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa']}})).violations);
+      assert.deepEqual(violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
+    }
+  }
+  mkdirSync('verification',{recursive:true});
+  await page.screenshot({path:'verification/consumer-mobile.png',fullPage:true});
+  await page.setViewportSize({width:1280,height:900});
+  await page.screenshot({path:'verification/consumer-desktop.png',fullPage:true});
+  await page.goto(`http://127.0.0.1:${port}/api.html`);
+  await page.getByRole('button',{name:'Comprobar referencias'}).click();
+  const events=page.getByLabel('Eventos de contrato');
+  await expect(events).toContainText('refs:ARTICLE,DIV,DIV,BUTTON,INPUT,INPUT,INPUT,SELECT,TEXTAREA,DIALOG,DIALOG,DIV');
+  await expect(page.getByLabel('Campo de contrato',{exact:true})).toBeFocused();
+  await expect(page.locator('#contract-card')).toHaveClass(/mk-card.*consumer-card/);
+  assert.equal(await page.locator('#contract-card').evaluate(node=>getComputedStyle(node).padding),'28px');
+  await expect(page.locator('[data-contract="alert"]')).toHaveAttribute('role','note');
+  await expect(page.locator('[data-contract="empty"]')).toHaveClass(/mk-empty.*consumer-empty/);
+  await expect(page.locator('#input-container')).toHaveClass(/mk-input.*consumer-field/);
+  const field=page.getByLabel('Campo de contrato',{exact:true});
+  const described=await field.getAttribute('aria-describedby');assert.ok(described.includes('shared-help'));assert.ok(described.split(' ').length===2);
+  await field.fill('Proyecto API');await expect(events).toContainText('native:Proyecto API');await expect(events).toContainText('value:Proyecto API');
+  await page.getByLabel('Campo cancelado',{exact:true}).fill('Sin aviso');await expect(events).not.toContainText('cancelled:');
+  await page.getByRole('combobox',{name:'Selector de contrato',exact:true}).selectOption('two');await expect(events).toContainText('select:two');
+  assert.ok((await page.getByLabel('Selector de contrato',{exact:true}).getAttribute('aria-describedby')).includes('shared-help'));
+  await page.getByLabel('Texto de contrato',{exact:true}).fill('Descripción');await expect(events).toContainText('textarea:Descripción');
+  await page.getByRole('checkbox',{name:'Casilla de contrato'}).focus();await page.keyboard.press('Space');await expect(events).toContainText('legacy-checked:true');await expect(events).toContainText('checked:true');
+  await page.getByRole('radio',{name:'Radio de contrato'}).focus();await page.keyboard.press('Space');await expect(events).toContainText('radio:true');
+  await page.getByRole('switch',{name:'Interruptor de contrato'}).click();await expect(page.getByRole('switch',{name:'Interruptor de contrato'})).toBeChecked();
+  await page.getByLabel('Limpiable de contrato',{exact:true}).fill('Editable');await expect(events).toContainText('clearable:Editable');
+  await page.getByLabel('Combinación',{exact:true}).fill('Dos');await expect(events).toContainText('combo:Dos');
+  await page.getByLabel('Fecha de contrato',{exact:true}).fill('2026-11-01');await expect(events).toContainText('date:2026-11-01');
+  await page.getByLabel('Archivo de contrato',{exact:true}).setInputFiles({name:'contract.txt',mimeType:'text/plain',buffer:Buffer.from('MOK')});await expect(events).toContainText('file-native:contract.txt');await expect(events).toContainText('file:contract.txt');
+  await page.getByRole('button',{name:'Página siguiente',exact:true}).click();await expect(page.getByLabel('Página actual')).toHaveText('2');await expect(events).not.toContainText('form:');
+  await page.getByRole('button',{name:'Enviar contrato'}).click();await expect(events).toContainText('form:Proyecto API');
+  await page.getByRole('tab',{name:'Dos',exact:true}).click();await expect(page.getByRole('tabpanel')).toHaveText('Panel dos');
+  await page.getByRole('button',{name:'Abrir modal de contrato'}).click();await expect(page.getByRole('dialog',{name:'Modal de contrato'})).toHaveClass(/consumer-modal/);await page.keyboard.press('Escape');await expect(events).toContainText('modal-open:false');
+  await page.getByRole('button',{name:'Abrir panel de contrato'}).click();await expect(page.getByRole('dialog',{name:'Panel de contrato'})).toHaveClass(/consumer-drawer/);await page.keyboard.press('Escape');await expect(events).toContainText('drawer-open:false');
+  await expect(page.getByRole('progressbar',{name:'Progreso limitado'})).toHaveAttribute('aria-valuenow','100');
+  await page.getByRole('button',{name:'Ayuda del contrato'}).focus();await expect(events).toContainText('tooltip-focus:true');await page.keyboard.press('Escape');
+  assert.deepEqual(errors,[]);
+  console.log('Consumer passed: packed types, HTML attributes, classes/style, refs, native and value events, legacy aliases, forms, dialogs, CSS isolation, themes, toast, accessibility and mobile layout.');
+}finally{await browser?.close();server.kill();}

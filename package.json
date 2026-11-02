@@ -1,11 +1,11 @@
 {
   "name": "@mokanadev/design-system",
-  "version": "0.2.0",
-  "description": "Sistema de diseño de Mokaná Dev: tokens semánticos, componentes React y temas por producto.",
+  "version": "0.1.0",
+  "description": "MOK Design System: tokens semánticos, componentes React y temas por producto.",
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CRMJ-Labs/mokana-design-system.git"
+    "url": "git+https://github.com/MiltonEsc/mok-design-system.git"
   },
   "publishConfig": {
     "access": "public",
@@ -16,17 +16,26 @@
   ],
   "type": "module",
   "scripts": {
-    "storybook": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build",
+    "dev": "vite --config vite.website.config.ts",
+    "start": "vite --config vite.website.config.ts",
     "typecheck": "tsc --noEmit",
-    "build": "vite build && tsc -p tsconfig.build.json",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:e2e": "node --test tests/*.test.mjs",
+    "build": "vite build --config vite.website.config.ts",
+    "build:cloudflare": "npm run build && node scripts/prepare-cloudflare.mjs",
+    "build:lib": "vite build && tsc -p tsconfig.build.json",
+    "test": "npm run build && npm run test:ui",
+    "test:ui": "node --test tests/*.test.mjs",
+    "test:checks": "node scripts/run-checks.mjs",
+    "verify": "npm run docs:check && npm run typecheck && npm run build && npm run build:lib && npm run test:ui && npm run test:checks && npm run test:consumer",
     "tokens": "node scripts/build-tokens.mjs",
-    "preview": "node scripts/serve.mjs",
-    "chromatic": "chromatic",
-    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+    "preview": "vite preview --config vite.website.config.ts",
+    "test:website": "node scripts/check-website.mjs",
+    "prepublishOnly": "npm run typecheck && npm run build:lib",
+    "check:links": "node scripts/check-links.mjs",
+    "consumer:prepare": "node scripts/prepare-consumer.mjs",
+    "consumer:dev": "npm --prefix examples/consumer run dev",
+    "test:consumer": "npm run consumer:prepare && node scripts/test-consumer.mjs && node scripts/test-palettes.mjs",
+    "docs:api": "node scripts/build-api-reference.mjs",
+    "docs:check": "node scripts/build-api-reference.mjs --check"
   },
   "exports": {
     ".": {
@@ -42,34 +51,25 @@
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
-    "@storybook/addon-a11y": "10.6.1",
-    "@storybook/addon-docs": "10.6.1",
-    "@storybook/react-vite": "10.6.1",
-    "@testing-library/jest-dom": "7.0.1",
-    "@testing-library/react": "16.3.3",
-    "@testing-library/user-event": "14.6.8",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.2",
-    "chromatic": "18.11.0",
-    "jsdom": "30.1.3",
+    "axe-core": "4.14.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "storybook": "10.6.1",
     "typescript": "7.0.2",
-    "vite": "8.3.3",
-    "vitest": "5.0.5"
+    "vite": "8.3.3"
   },
   "files": [
     "dist",
     "public",
     "tokens.json",
-    "figma-map.json"
+    "figma-map.json",
+    "THIRD_PARTY_NOTICES.md",
+    "docs/integration.md"
   ],
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
-    "@radix-ui/react-dropdown-menu": "2.2.1",
-    "@radix-ui/react-popover": "1.3.1",
-    "@radix-ui/react-tabs": "1.2.1"
+    "lucide-react": "1.66.0"
   }
 }

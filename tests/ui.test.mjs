@@ -1,23 +1,129 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from '@playwright/test';
-import { serve } from '../scripts/serve.mjs';
-test('Mokana: stories, contrast, mobile, keyboard and local workflows',async()=>{
- const server=serve(6007);const browser=await chromium.launch({channel:'msedge',headless:true});const page=await browser.newPage({viewport:{width:1440,height:1000}});const failures=[];const report={stories:[],interactions:[],mobile:[],errors:[]};page.on('pageerror',e=>report.errors.push(e.message));
- const index=JSON.parse(fs.readFileSync(new URL('../storybook-static/index.json',import.meta.url)));const entries=Object.values(index.entries).filter(e=>e.type==='story');
- async function open(id,theme='light'){await page.goto(`http://127.0.0.1:6007/iframe.html?id=${id}&viewMode=story&globals=theme:${theme}`);await page.locator('.mk').waitFor();await page.evaluate(()=>document.fonts.ready);}
- try{
- for(const theme of ['light','dark'])for(const entry of entries){await open(entry.id,theme);await page.addScriptTag({path:path.resolve('node_modules/axe-core/axe.min.js')});await page.waitForFunction(()=>window.axe&&!window.axe._running);const result=await page.evaluate(async()=>{for(let attempt=0;attempt<20;attempt++){try{return await axe.run(document.querySelector('.mk'),{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa']}});}catch(error){if(!String(error).includes('already running'))throw error;await new Promise(r=>setTimeout(r,100));}}throw Error('Axe runner remained busy');});const violations=result.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>({html:n.html,summary:n.failureSummary}))}));report.stories.push({id:entry.id,theme,violations});if(violations.length)failures.push({id:entry.id,theme,violations});}
- await open('components-modals--overview');const trigger=page.getByRole('button',{name:'Abrir diálogo'});await trigger.click();assert.equal(await page.getByRole('dialog').isVisible(),true);await page.keyboard.press('Escape');assert.equal(await page.getByRole('dialog').isVisible(),false);assert.equal(await trigger.evaluate(e=>e===document.activeElement),true);report.interactions.push('Modal: Escape and focus restoration');
- await open('patterns-crud--overview');await page.getByRole('button',{name:'Nuevo proyecto',exact:true}).click();await page.getByLabel('Nombre del proyecto').fill('Proyecto verificado');await page.getByRole('button',{name:'Guardar proyecto',exact:true}).click();assert.equal(await page.getByRole('cell',{name:'Proyecto verificado',exact:true}).count(),1);await page.getByRole('button',{name:'Editar Proyecto verificado',exact:true}).click();await page.getByLabel('Nombre del proyecto').fill('Proyecto editado');await page.getByRole('button',{name:'Guardar proyecto',exact:true}).click();assert.equal(await page.getByRole('cell',{name:'Proyecto editado',exact:true}).count(),1);await page.getByRole('button',{name:'Eliminar Proyecto editado',exact:true}).click();await page.getByRole('button',{name:'Confirmar eliminación'}).click();assert.equal(await page.getByRole('cell',{name:'Proyecto editado',exact:true}).count(),0);report.interactions.push('CRUD: create, edit and confirmed delete');
- await open('patterns-filters--overview');await page.getByLabel('Buscar proyectos').fill('no-existe');assert.match(await page.getByRole('status').textContent(),/0 proyectos/);await page.getByRole('button',{name:'Limpiar filtros'}).click();assert.match(await page.getByRole('status').textContent(),/3 proyectos/);report.interactions.push('Filters: search, empty results and reset');
- await open('patterns-auth--overview');await page.getByLabel('Correo electrónico').fill('demo@example.com');await page.getByLabel('Contraseña').fill('abc');await page.getByRole('button',{name:'Entrar',exact:true}).click();assert.equal(await page.getByLabel('Contraseña').getAttribute('aria-invalid'),'true');await page.getByLabel('Contraseña').fill('clave-larga-demo');await page.getByRole('button',{name:'Entrar',exact:true}).click();assert.match(await page.getByRole('status').textContent(),/Demostración completada/);report.interactions.push('Auth: validation and explicit demo feedback');
- await open('patterns-settings--overview');const toggle=page.getByRole('switch',{name:'Resumen semanal'});await toggle.focus();await page.keyboard.press('Space');assert.equal(await toggle.getAttribute('aria-checked'),'true');await page.getByRole('button',{name:'Guardar preferencias'}).click();assert.match(await page.getByRole('status').textContent(),/Preferencias actualizadas/);report.interactions.push('Settings: keyboard switch and save feedback');
- await open('patterns-empty-states--overview');await page.getByRole('button',{name:'Crear proyecto'}).click();assert.match(await page.getByRole('status').textContent(),/primer proyecto está listo/);report.interactions.push('Empty state: actionable transition');
- await page.setViewportSize({width:390,height:844});for(const id of ['inicio--overview','brand-foundations--overview','patterns-dashboards--overview','patterns-crud--overview','patterns-auth--overview','patterns-settings--overview']){await open(id);const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);report.mobile.push({id,overflow});assert.equal(overflow,false,id+' overflows mobile');}
- fs.mkdirSync('verification',{recursive:true});await open('patterns-dashboards--overview','dark');await page.screenshot({path:'verification/dashboard-mobile-dark.png',fullPage:true});await page.setViewportSize({width:1440,height:1000});await open('inicio--overview');await page.screenshot({path:'verification/storybook-home.png',fullPage:true});await open('patterns-dashboards--overview','dark');await page.screenshot({path:'verification/dashboard-dark.png',fullPage:true});
- }finally{fs.mkdirSync('verification',{recursive:true});fs.writeFileSync('verification/ui-report.json',JSON.stringify(report,null,2));await browser.close();await new Promise(r=>server.close(r));}
- assert.deepEqual(report.errors,[]);assert.deepEqual(failures,[],JSON.stringify(failures,null,2));
+
+const port = 3022;
+const base = `http://127.0.0.1:${port}`;
+
+function startPreview() {
+  const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--config', 'vite.website.config.ts', '--port', String(port)], { stdio: 'pipe' });
+  const ready = new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('La vista previa no arrancó')), 15000);
+    server.stdout.on('data', data => { if (data.toString().includes(String(port))) { clearTimeout(timer); resolve(); } });
+    server.once('error', reject);
+  });
+  return { server, ready };
+}
+
+test('MOK: pages, contrast, mobile, keyboard and local workflows', async () => {
+  assert.ok(fs.existsSync('website-dist/index.html'), 'Falta el build del sitio. Ejecuta npm test o npm run build.');
+  const failures = [];
+  const report = { pages: [], interactions: [], mobile: [], errors: [] };
+  let preview;
+  let browser;
+  try {
+    // Everything that holds the process open starts inside try, so a failure cannot hang the run.
+    preview = startPreview();
+    await preview.ready;
+    browser = await chromium.launch({ channel: 'msedge', headless: true });
+    const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+    page.on('pageerror', error => report.errors.push(`${page.url()}: ${error.message}`));
+    async function open(route, theme = 'light') {
+      await page.goto(base + route);
+      await page.locator('#main-content > div > :not(.mk-catalog-loading)').first().waitFor();
+      if(route.startsWith('/components/'))await page.locator('.mk-api-reference').waitFor();
+      await page.locator('.mk-website').evaluate((node, value) => node.setAttribute('data-theme', value), theme);
+      // Contrast must be measured on final colors, not halfway through a theme transition.
+      await page.addStyleTag({ content: '*,*::before,*::after{transition:none!important;animation:none!important}' });
+      await page.evaluate(() => document.fonts.ready);
+    }
+
+    await open('/introduction');
+    const routes = await page.locator('#website-navigation a').evaluateAll(nodes => nodes.map(node => new URL(node.href).pathname));
+    assert.ok(routes.length > 80, `Se esperaban todas las rutas del menú y hay ${routes.length}`);
+
+    for (const theme of ['light', 'dark']) for (const route of routes) {
+      await open(route, theme);
+      // Code panels render when opened, and their syntax colors must pass contrast too.
+      await page.evaluate(() => document.querySelectorAll('.mk-code-disclosure').forEach(node => { node.open = true; }));
+      await page.waitForFunction(() => [...document.querySelectorAll('.mk-code-disclosure')].every(node => node.querySelector('.mk-code-block-frame')));
+      await page.addScriptTag({ path: path.resolve('node_modules/axe-core/axe.min.js') });
+      const result = await page.evaluate(() => axe.run(document.querySelector('.mk-website'), { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] } }));
+      const violations = result.violations.map(violation => ({ id: violation.id, impact: violation.impact, nodes: violation.nodes.map(node => ({ html: node.html, summary: node.failureSummary })) }));
+      report.pages.push({ route, theme, violations });
+      if (violations.length) failures.push({ route, theme, violations });
+    }
+
+    await open('/components/modal');
+    const trigger = page.getByRole('button', { name: 'Abrir modal', exact: true });
+    await trigger.click();
+    assert.equal(await page.getByRole('dialog').isVisible(), true);
+    await page.keyboard.press('Escape');
+    assert.equal(await page.getByRole('dialog').isVisible(), false);
+    assert.equal(await trigger.evaluate(node => node === document.activeElement), true);
+    report.interactions.push('Modal: Escape and focus restoration');
+
+    await open('/patterns/crud');
+    await page.getByRole('button', { name: 'Nuevo proyecto', exact: true }).click();
+    await page.getByLabel('Nombre del proyecto').fill('Proyecto verificado');
+    await page.getByRole('button', { name: 'Guardar proyecto', exact: true }).click();
+    assert.equal(await page.getByRole('cell', { name: 'Proyecto verificado', exact: true }).count(), 1);
+    await page.getByRole('button', { name: 'Editar Proyecto verificado', exact: true }).click();
+    await page.getByLabel('Nombre del proyecto').fill('Proyecto editado');
+    await page.getByRole('button', { name: 'Guardar proyecto', exact: true }).click();
+    assert.equal(await page.getByRole('cell', { name: 'Proyecto editado', exact: true }).count(), 1);
+    await page.getByRole('button', { name: 'Eliminar Proyecto editado', exact: true }).click();
+    await page.getByRole('button', { name: 'Confirmar eliminación' }).click();
+    assert.equal(await page.getByRole('cell', { name: 'Proyecto editado', exact: true }).count(), 0);
+    report.interactions.push('CRUD: create, edit and confirmed delete');
+
+    await open('/patterns/filters');
+    await page.getByLabel('Buscar proyectos').fill('no-existe');
+    assert.match(await page.locator('#main-content').getByRole('status').textContent(), /0 proyectos/);
+    await page.getByRole('button', { name: 'Limpiar filtros' }).click();
+    assert.match(await page.locator('#main-content').getByRole('status').textContent(), /3 proyectos/);
+    report.interactions.push('Filters: search, empty results and reset');
+
+    await open('/patterns/auth');
+    await page.getByLabel('Correo electrónico').fill('demo@example.com');
+    await page.getByLabel('Contraseña').fill('abc');
+    await page.getByRole('button', { name: 'Entrar', exact: true }).click();
+    assert.equal(await page.getByLabel('Contraseña').getAttribute('aria-invalid'), 'true');
+    await page.getByLabel('Contraseña').fill('clave-larga-demo');
+    await page.getByRole('button', { name: 'Entrar', exact: true }).click();
+    assert.match(await page.locator('#main-content').getByRole('status').textContent(), /Demostración completada/);
+    report.interactions.push('Auth: validation and explicit demo feedback');
+
+    await open('/patterns/settings');
+    const toggle = page.getByRole('switch', { name: 'Resumen semanal' });
+    await toggle.focus();
+    await page.keyboard.press('Space');
+    assert.equal(await toggle.getAttribute('aria-checked'), 'true');
+    await page.getByRole('button', { name: 'Guardar preferencias' }).click();
+    assert.match(await page.locator('#main-content').getByRole('status').textContent(), /Preferencias actualizadas/);
+    report.interactions.push('Settings: keyboard switch and save feedback');
+
+    await open('/patterns/empty');
+    await page.getByRole('button', { name: 'Crear proyecto' }).click();
+    assert.match(await page.locator('#main-content').getByRole('status').textContent(), /primer proyecto está listo/);
+    report.interactions.push('Empty state: actionable transition');
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    for (const route of routes) {
+      await open(route);
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1);
+      report.mobile.push({ route, overflow });
+    }
+  } finally {
+    fs.mkdirSync('test-results', { recursive: true });
+    fs.writeFileSync('test-results/ui-report.json', JSON.stringify(report, null, 2));
+    await browser?.close();
+    preview?.server.kill();
+  }
+  assert.deepEqual(report.errors, []);
+  assert.deepEqual(report.mobile.filter(item => item.overflow).map(item => item.route), [], 'Rutas con desbordamiento en móvil');
+  assert.deepEqual(failures, [], JSON.stringify(failures, null, 2));
 });

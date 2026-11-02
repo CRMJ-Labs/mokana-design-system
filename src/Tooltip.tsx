@@ -1,0 +1,7 @@
+import {cloneElement,isValidElement,useId,useRef,useState,type ComponentPropsWithRef,type ReactNode} from 'react';
+export interface TooltipProps extends Omit<ComponentPropsWithRef<'span'>,'content'> {content:string;children:ReactNode;placement?:'top'|'bottom'|'left'|'right'}
+export function Tooltip({content,children,placement='top',className='',onMouseEnter,onMouseLeave,onFocusCapture,onBlurCapture,onKeyDown,...props}:TooltipProps){
+  const id=useId();const [open,setOpen]=useState(false);const focused=useRef(false);
+  const child=isValidElement<{'aria-describedby'?:string}>(children)?cloneElement(children,{'aria-describedby':[children.props['aria-describedby'],id].filter(Boolean).join(' ')}):children;
+  return <span {...props} className={`mk-tooltip mk-tooltip-${placement} ${className}`} tabIndex={props.tabIndex??(isValidElement(children)?undefined:0)} onMouseEnter={event=>{onMouseEnter?.(event);if(!event.defaultPrevented)setOpen(true);}} onMouseLeave={event=>{onMouseLeave?.(event);if(!focused.current)setOpen(false);}} onFocusCapture={event=>{onFocusCapture?.(event);if(event.defaultPrevented)return;focused.current=true;setOpen(true);}} onBlurCapture={event=>{onBlurCapture?.(event);if(!event.currentTarget.contains(event.relatedTarget as Node|null)){focused.current=false;setOpen(false);}}} onKeyDown={event=>{onKeyDown?.(event);if(!event.defaultPrevented&&event.key==='Escape'&&open){event.preventDefault();event.stopPropagation();setOpen(false);}}}>{child}<span id={id} role="tooltip" hidden={!open}>{content}</span></span>;
+}

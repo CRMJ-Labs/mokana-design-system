@@ -1,0 +1,4240 @@
+[
+  {
+    "name": "Accordion",
+    "source": "Collapse.tsx",
+    "signature": "CollapseGroupProps",
+    "props": [
+      {
+        "name": "items",
+        "type": "CollapseItem[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "defaultExpanded",
+        "type": "string[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "expanded",
+        "type": "string[]",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "onExpandedChange",
+        "type": "(expanded:string[])=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'",
+        "required": false,
+        "default": "'md'"
+      }
+    ]
+  },
+  {
+    "name": "AddressInput",
+    "source": "AddressInput.tsx",
+    "signature": "AddressInputProps",
+    "props": [
+      {
+        "name": "countries",
+        "type": "{value:string;label:string}[]",
+        "required": false,
+        "default": "defaultCountries"
+      },
+      {
+        "name": "defaultValue",
+        "type": "Partial<AddressValue>",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "mode",
+        "type": "AddressInputMode",
+        "required": false,
+        "default": "'search'"
+      },
+      {
+        "name": "onChange",
+        "type": "(value:AddressValue)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onModeChange",
+        "type": "(mode:AddressInputMode)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value:AddressValue)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "suggestions",
+        "type": "AddressSuggestion[]",
+        "required": false,
+        "default": "defaultSuggestions"
+      },
+      {
+        "name": "value",
+        "type": "Partial<AddressValue>",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Alert",
+    "source": "components.tsx",
+    "signature": "AlertProps",
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "tone",
+        "type": "'info'|'success'|'error'|'warning'",
+        "required": false,
+        "default": "'info'"
+      }
+    ]
+  },
+  {
+    "name": "Avatar",
+    "source": "Avatar.tsx",
+    "signature": "AvatarProps",
+    "props": [
+      {
+        "name": "name",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "git",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "icon",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "letter",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "placeholder",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'|'lg'|number",
+        "required": false,
+        "default": "'md'"
+      },
+      {
+        "name": "src",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "status",
+        "type": "'online'|'away'|'offline'",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "AvatarGroup",
+    "source": "Avatar.tsx",
+    "signature": "AvatarGroupProps",
+    "props": [
+      {
+        "name": "members",
+        "type": "AvatarProps[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "default": "4"
+      },
+      {
+        "name": "overlap",
+        "type": "'auto'|number",
+        "required": false,
+        "default": "'auto'"
+      },
+      {
+        "name": "reverse",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "size",
+        "type": "AvatarProps['size']",
+        "required": false,
+        "default": "'md'"
+      }
+    ]
+  },
+  {
+    "name": "Badge",
+    "source": "components.tsx",
+    "signature": "BadgeProps",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "icon",
+        "type": "IconName|false",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "iconPosition",
+        "type": "'start'|'end'",
+        "required": false,
+        "default": "'start'"
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'|'lg'",
+        "required": false,
+        "default": "'md'"
+      },
+      {
+        "name": "subtle",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "tone",
+        "type": "BadgeTone",
+        "required": false,
+        "default": "'neutral'"
+      }
+    ]
+  },
+  {
+    "name": "Banner",
+    "source": "Banner.tsx",
+    "signature": "BannerProps",
+    "props": [
+      {
+        "name": "action",
+        "type": "BannerAction",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "closeLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Cerrar anuncio'"
+      },
+      {
+        "name": "eyebrow",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "flush",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "mark",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "onClose",
+        "type": "()=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "tone",
+        "type": "'ink'|'brand'|'accent'|'surface'",
+        "required": false,
+        "default": "'ink'"
+      }
+    ]
+  },
+  {
+    "name": "Book",
+    "source": "FrameComponents.tsx",
+    "signature": "BookProps",
+    "props": [
+      {
+        "name": "title",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "required": false,
+        "default": "'var(--inverse-background)'"
+      },
+      {
+        "name": "icon",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "illustration",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "responsive",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "textColor",
+        "type": "string",
+        "required": false,
+        "default": "'var(--inverse-text)'"
+      },
+      {
+        "name": "textured",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "variant",
+        "type": "'simple'|'stripe'",
+        "required": false,
+        "default": "'stripe'"
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "required": false,
+        "default": "196"
+      }
+    ]
+  },
+  {
+    "name": "Brand",
+    "source": "components.tsx",
+    "signature": "BrandProps",
+    "props": [
+      {
+        "name": "compact",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      }
+    ]
+  },
+  {
+    "name": "Breadcrumbs",
+    "source": "Breadcrumbs.tsx",
+    "signature": "BreadcrumbsProps",
+    "props": [
+      {
+        "name": "items",
+        "type": "BreadcrumbItem[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Ruta'"
+      },
+      {
+        "name": "variant",
+        "type": "'text'|'menu'",
+        "required": false,
+        "default": "'text'"
+      }
+    ]
+  },
+  {
+    "name": "Browser",
+    "source": "FrameComponents.tsx",
+    "signature": "BrowserProps",
+    "props": [
+      {
+        "name": "aspectRatio",
+        "type": "string",
+        "required": false,
+        "default": "'16 / 10'"
+      },
+      {
+        "name": "caption",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "tone",
+        "type": "'auto'|'ink'",
+        "required": false,
+        "default": "'auto'"
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Button",
+    "source": "components.tsx",
+    "signature": "ButtonProps",
+    "props": [
+      {
+        "name": "icon",
+        "type": "IconName",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "prefix",
+        "type": "IconName",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "shadow",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "shape",
+        "type": "ButtonShape",
+        "required": false,
+        "default": "'pill'"
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'|'lg'",
+        "required": false,
+        "default": "'md'"
+      },
+      {
+        "name": "suffix",
+        "type": "IconName",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "svgOnly",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "variant",
+        "type": "ButtonVariant",
+        "required": false,
+        "default": "'primary'"
+      }
+    ]
+  },
+  {
+    "name": "ButtonLink",
+    "source": "components.tsx",
+    "signature": "ButtonLinkProps",
+    "props": [
+      {
+        "name": "href",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "icon",
+        "type": "IconName",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "prefix",
+        "type": "IconName",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "shadow",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "shape",
+        "type": "ButtonShape",
+        "required": false,
+        "default": "'pill'"
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'|'lg'",
+        "required": false,
+        "default": "'md'"
+      },
+      {
+        "name": "suffix",
+        "type": "IconName",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "svgOnly",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "variant",
+        "type": "ButtonVariant",
+        "required": false,
+        "default": "'primary'"
+      }
+    ]
+  },
+  {
+    "name": "Calendar",
+    "source": "ControlComponents.tsx",
+    "signature": "CalendarProps",
+    "props": [
+      {
+        "name": "defaultValue",
+        "type": "CalendarRange|null",
+        "required": false,
+        "default": "null"
+      },
+      {
+        "name": "horizontalLayout",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Rango de fechas'"
+      },
+      {
+        "name": "locale",
+        "type": "string",
+        "required": false,
+        "default": "'es'"
+      },
+      {
+        "name": "max",
+        "type": "Date",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "min",
+        "type": "Date",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onChange",
+        "type": "(range:CalendarRange|null)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "pinnedTimezone",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "default": "'Seleccionar fechas'"
+      },
+      {
+        "name": "presets",
+        "type": "CalendarPreset[]",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "presetsLayout",
+        "type": "'compact'|'stacked'",
+        "required": false,
+        "default": "'compact'"
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'",
+        "required": false,
+        "default": "'md'"
+      },
+      {
+        "name": "timezones",
+        "type": "string[]",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "value",
+        "type": "CalendarRange|null",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Card",
+    "source": "components.tsx",
+    "signature": "CardProps",
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "eyebrow",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "footer",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "tone",
+        "type": "'default'|'brand'|'accent'",
+        "required": false,
+        "default": "'default'"
+      }
+    ]
+  },
+  {
+    "name": "Checkbox",
+    "source": "Checkbox.tsx",
+    "signature": "CheckboxProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "indeterminate",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "onChange",
+        "type": "(checked:boolean)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onCheckedChange",
+        "type": "(checked:boolean)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rootProps",
+        "type": "ComponentPropsWithRef<'label'>",
+        "required": false,
+        "default": "{}"
+      }
+    ]
+  },
+  {
+    "name": "Choicebox",
+    "source": "Choicebox.tsx",
+    "signature": "ChoiceboxProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "options",
+        "type": "ChoiceboxOption[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "defaultValue",
+        "type": "string | string[]",
+        "required": false,
+        "conditional": false,
+        "default": null
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "disabledReason",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "multiple",
+        "type": "false | true",
+        "required": false,
+        "conditional": true,
+        "default": null
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onChange",
+        "type": "(value:string)=>void | (value:string[])=>void",
+        "required": false,
+        "conditional": false,
+        "default": null
+      },
+      {
+        "name": "value",
+        "type": "string | string[]",
+        "required": false,
+        "conditional": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "ClearableInput",
+    "source": "ClearableInput.tsx",
+    "signature": "ClearableInputProps",
+    "props": [
+      {
+        "name": "clearLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Limpiar texto'"
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "icon",
+        "type": "IconName",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onChange",
+        "type": "(value:string)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onClear",
+        "type": "()=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value:string)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rootProps",
+        "type": "ComponentPropsWithRef<'div'>",
+        "required": false,
+        "default": "{}"
+      },
+      {
+        "name": "shortcut",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Code",
+    "source": "CodeComponents.tsx",
+    "signature": "CodeProps",
+    "props": [
+      {
+        "name": "children",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "inline",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      }
+    ]
+  },
+  {
+    "name": "CodeBlock",
+    "source": "CodeComponents.tsx",
+    "signature": "CodeBlockProps",
+    "props": [
+      {
+        "name": "addedLines",
+        "type": "number[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "code",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "highlightLines",
+        "type": "number[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "languages",
+        "type": "CodeBlockLanguage[]",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "languageSwitcher",
+        "type": "'select'|'tabs'",
+        "required": false,
+        "default": "'select'"
+      },
+      {
+        "name": "linkableLines",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "removedLines",
+        "type": "number[]",
+        "required": false,
+        "default": "[]"
+      }
+    ]
+  },
+  {
+    "name": "CodeDisclosure",
+    "source": "CodeComponents.tsx",
+    "signature": "CodeDisclosureProps",
+    "props": [
+      {
+        "name": "code",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Ver código'"
+      },
+      {
+        "name": "openLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Ocultar código'"
+      }
+    ]
+  },
+  {
+    "name": "Collapse",
+    "source": "Collapse.tsx",
+    "signature": "CollapseProps",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "defaultExpanded",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "expanded",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onExpandedChange",
+        "type": "(expanded:boolean)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'",
+        "required": false,
+        "default": "'md'"
+      }
+    ]
+  },
+  {
+    "name": "CollapseGroup",
+    "source": "Collapse.tsx",
+    "signature": "CollapseGroupProps",
+    "props": [
+      {
+        "name": "items",
+        "type": "CollapseItem[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "defaultExpanded",
+        "type": "string[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "expanded",
+        "type": "string[]",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "onExpandedChange",
+        "type": "(expanded:string[])=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'",
+        "required": false,
+        "default": "'md'"
+      }
+    ]
+  },
+  {
+    "name": "Combobox",
+    "source": "advanced-components.tsx",
+    "signature": "ComboboxProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "options",
+        "type": "string[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "onChange",
+        "type": "(value:string)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value:string)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rootProps",
+        "type": "ComponentPropsWithRef<'div'>",
+        "required": false,
+        "default": "{}"
+      }
+    ]
+  },
+  {
+    "name": "CommandMenu",
+    "source": "CommandMenu.tsx",
+    "signature": "CommandMenuProps",
+    "props": [
+      {
+        "name": "items",
+        "type": "CommandItem[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open:boolean)=>void",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Comandos de MOK'"
+      },
+      {
+        "name": "pages",
+        "type": "CommandPage[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "default": "'Escribe un comando o busca…'"
+      },
+      {
+        "name": "shortcut",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      }
+    ]
+  },
+  {
+    "name": "ContextCard",
+    "source": "ContextCard.tsx",
+    "signature": "ContextCardProps",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "trigger",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "align",
+        "type": "'start'|'center'|'end'",
+        "required": false,
+        "default": "'center'"
+      },
+      {
+        "name": "render",
+        "type": "(props:ContextCardTriggerProps)=>ReactElement",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "side",
+        "type": "'top'|'bottom'|'left'|'right'",
+        "required": false,
+        "default": "'top'"
+      }
+    ]
+  },
+  {
+    "name": "ContextMenu",
+    "source": "ContextMenu.tsx",
+    "signature": "ContextMenuProps",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "items",
+        "type": "MenuEntry[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Acciones del elemento'"
+      }
+    ]
+  },
+  {
+    "name": "CopyButton",
+    "source": "CopyButton.tsx",
+    "signature": "CopyButtonProps",
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "copied",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Copiar'"
+      },
+      {
+        "name": "onCopy",
+        "type": "()=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onCopyError",
+        "type": "(error:unknown)=>void",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "CustomButton",
+    "source": "components.tsx",
+    "signature": "CustomButtonProps",
+    "props": [
+      {
+        "name": "colors",
+        "type": "{background:string;foreground:string;border:string;hoverBackground?:string;hoverForeground?:string;hoverBorder?:string;activeBackground?:string;activeForeground?:string;activeBorder?:string}",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "icon",
+        "type": "IconName",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "prefix",
+        "type": "IconName",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "shadow",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "shape",
+        "type": "ButtonShape",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'|'lg'",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "suffix",
+        "type": "IconName",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "svgOnly",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "variant",
+        "type": "ButtonVariant",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "DataTable",
+    "source": "DataTable.tsx",
+    "signature": "DataTableProps<T>",
+    "props": [
+      {
+        "name": "caption",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "columns",
+        "type": "Column<T>[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "rowKey",
+        "type": "(row:T)=>string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "rows",
+        "type": "T[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "actions",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "defaultSort",
+        "type": "TableSort",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "density",
+        "type": "TableDensity",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "empty",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "error",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "loadingLabel",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "maxHeight",
+        "type": "CSSProperties['maxHeight']",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onRetry",
+        "type": "()=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "pageSize",
+        "type": "number",
+        "required": false,
+        "default": "5"
+      },
+      {
+        "name": "searchLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Buscar registros'"
+      },
+      {
+        "name": "searchText",
+        "type": "(row:T)=>string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "selection",
+        "type": "TableSelection<T>",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "selectionActions",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "stickyHeader",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "variant",
+        "type": "TableVariant",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "DatePicker",
+    "source": "advanced-components.tsx",
+    "signature": "DatePickerProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value:string)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rootProps",
+        "type": "ComponentPropsWithRef<'div'>",
+        "required": false,
+        "default": "{}"
+      }
+    ]
+  },
+  {
+    "name": "Description",
+    "source": "Description.tsx",
+    "signature": "DescriptionProps",
+    "props": [
+      {
+        "name": "title",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "ellipsis",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "textRight",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      }
+    ]
+  },
+  {
+    "name": "DestructiveActionModal",
+    "source": "DestructiveActionModal.tsx",
+    "signature": "DestructiveActionModalProps",
+    "props": [
+      {
+        "name": "confirmLabel",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "description",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "onConfirm",
+        "type": "()=>void",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open:boolean)=>void",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "verificationPhrase",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "cancelLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Cancelar'"
+      },
+      {
+        "name": "error",
+        "type": "string|globalThis.Error",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "irreversibleDescription",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "verificationLabel",
+        "type": "string",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "DestructiveConfirmationInput",
+    "source": "DestructiveConfirmationInput.tsx",
+    "signature": "DestructiveConfirmationInputProps",
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "verificationPhrase",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "error",
+        "type": "string|globalThis.Error",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "verificationLabel",
+        "type": "string",
+        "required": false,
+        "default": "'el texto'"
+      }
+    ]
+  },
+  {
+    "name": "DotsMenu",
+    "source": "DotsMenu.tsx",
+    "signature": "DotsMenuProps",
+    "props": [
+      {
+        "name": "items",
+        "type": "MenuEntry[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Más acciones'"
+      },
+      {
+        "name": "position",
+        "type": "'bottom-start'|'bottom-end'|'top-start'|'top-end'|'left-start'|'right-start'",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'|'lg'",
+        "required": false,
+        "default": "'md'"
+      }
+    ]
+  },
+  {
+    "name": "Drawer",
+    "source": "Drawer.tsx",
+    "signature": "DrawerProps",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "onClose",
+        "type": "()=>void",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "footer",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open:boolean)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "side",
+        "type": "'left'|'right'",
+        "required": false,
+        "default": "'right'"
+      }
+    ]
+  },
+  {
+    "name": "DropdownMenu",
+    "source": "advanced-components.tsx",
+    "signature": "DropdownMenuProps",
+    "props": [
+      {
+        "name": "items",
+        "type": "MenuItem[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "defaultOpen",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Abrir menú'"
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open:boolean)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "EmptyState",
+    "source": "components.tsx",
+    "signature": "EmptyStateProps",
+    "props": [
+      {
+        "name": "action",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false,
+        "default": "'Crea tu primer proyecto para empezar a dar forma a tus ideas.'"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "default": "'Todavía no hay proyectos'"
+      }
+    ]
+  },
+  {
+    "name": "Entity",
+    "source": "Entity.tsx",
+    "signature": "EntityProps",
+    "props": [
+      {
+        "name": "fill",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "leftClassName",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "right",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rightClassName",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      }
+    ]
+  },
+  {
+    "name": "EntityList",
+    "source": "Entity.tsx",
+    "signature": "ComponentPropsWithRef<'ul'>",
+    "props": []
+  },
+  {
+    "name": "Error",
+    "source": "Error.tsx",
+    "signature": "ErrorProps",
+    "props": [
+      {
+        "name": "error",
+        "type": "string|globalThis.Error",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "ReactNode|false",
+        "required": false,
+        "default": "'Error:'"
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'|'lg'",
+        "required": false,
+        "default": "'md'"
+      }
+    ]
+  },
+  {
+    "name": "ErrorCard",
+    "source": "ErrorCard.tsx",
+    "signature": "ErrorCardProps",
+    "props": [
+      {
+        "name": "title",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "action",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "requestId",
+        "type": "string",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Feedback",
+    "source": "Feedback.tsx",
+    "signature": "FeedbackProps",
+    "props": [
+      {
+        "name": "onSubmit",
+        "type": "(feedback:FeedbackPayload)=>void|Promise<void>",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "copy",
+        "type": "string",
+        "required": false,
+        "default": "'¿Cómo fue tu experiencia?'"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "inline",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Feedback'"
+      },
+      {
+        "name": "metadata",
+        "type": "Record<string,string|number|boolean>",
+        "required": false,
+        "default": "{}"
+      },
+      {
+        "name": "prefix",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "suffix",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "topics",
+        "type": "{value:string;label:string}[]",
+        "required": false,
+        "default": "[]"
+      }
+    ]
+  },
+  {
+    "name": "Fieldset",
+    "source": "Fieldset.tsx",
+    "signature": "FieldsetProps",
+    "props": [
+      {
+        "name": "actions",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "description",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "disabledWall",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "footer",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "title",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "tone",
+        "type": "'default'|'error'|'warning'",
+        "required": false,
+        "default": "'default'"
+      },
+      {
+        "name": "warning",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "FileTree",
+    "source": "FileTree.tsx",
+    "signature": "FileTreeProps",
+    "props": [
+      {
+        "name": "items",
+        "type": "FileTreeNode[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "defaultExpanded",
+        "type": "string[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "defaultSelectedId",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Archivos del proyecto'"
+      },
+      {
+        "name": "onSelect",
+        "type": "(node:FileTreeNode)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "selectedId",
+        "type": "string",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "FileUpload",
+    "source": "advanced-components.tsx",
+    "signature": "FileUploadProps",
+    "props": [
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false,
+        "default": "'PNG, JPG o PDF'"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Subir archivo'"
+      },
+      {
+        "name": "onFiles",
+        "type": "(files:FileList|null)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onValueChange",
+        "type": "(files:FileList|null)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rootProps",
+        "type": "ComponentPropsWithRef<'label'>",
+        "required": false,
+        "default": "{}"
+      }
+    ]
+  },
+  {
+    "name": "FilterParamsBar",
+    "source": "FilterParams.tsx",
+    "signature": "FilterParamsBarProps",
+    "props": [
+      {
+        "name": "filters",
+        "type": "FilterDefinition[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "ai",
+        "type": "(query:string)=>Promise<Record<string,string>>",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Filtros'"
+      }
+    ]
+  },
+  {
+    "name": "Gauge",
+    "source": "Gauge.tsx",
+    "signature": "GaugeProps",
+    "props": [
+      {
+        "name": "arc",
+        "type": "'primary'|'equal'",
+        "required": false,
+        "default": "'primary'"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "colorScale",
+        "type": "GaugeColorStop[]",
+        "required": false,
+        "default": "defaultScale"
+      },
+      {
+        "name": "indeterminate",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Porcentaje'"
+      },
+      {
+        "name": "secondaryColor",
+        "type": "string",
+        "required": false,
+        "default": "'var(--line)'"
+      },
+      {
+        "name": "showValue",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "size",
+        "type": "number",
+        "required": false,
+        "default": "64"
+      },
+      {
+        "name": "value",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      }
+    ]
+  },
+  {
+    "name": "Grid",
+    "source": "Grid.tsx",
+    "signature": "GridProps",
+    "props": [
+      {
+        "name": "columns",
+        "type": "GridResponsive<number>",
+        "required": false,
+        "default": "3"
+      },
+      {
+        "name": "cross",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "dashed",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "hideColumnGuides",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "hideRowGuides",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "rows",
+        "type": "GridResponsive<number>",
+        "required": false,
+        "default": "2"
+      }
+    ]
+  },
+  {
+    "name": "GridCell",
+    "source": "Grid.tsx",
+    "signature": "GridCellProps",
+    "props": [
+      {
+        "name": "column",
+        "type": "GridResponsive<number>",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "columnSpan",
+        "type": "GridResponsive<number>",
+        "required": false,
+        "default": "1"
+      },
+      {
+        "name": "row",
+        "type": "GridResponsive<number>",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rowSpan",
+        "type": "GridResponsive<number>",
+        "required": false,
+        "default": "1"
+      },
+      {
+        "name": "solid",
+        "type": "GridResponsive<boolean>",
+        "required": false,
+        "default": "false"
+      }
+    ]
+  },
+  {
+    "name": "Icon",
+    "source": "Icon.tsx",
+    "signature": "IconProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "name",
+        "type": "IconName",
+        "required": false,
+        "default": "'arrow'"
+      }
+    ]
+  },
+  {
+    "name": "Input",
+    "source": "Input.tsx",
+    "signature": "InputProps",
+    "props": [
+      {
+        "name": "aria-label",
+        "type": "string",
+        "required": false,
+        "conditional": true,
+        "default": null
+      },
+      {
+        "name": "aria-labelledby",
+        "type": "string",
+        "required": false,
+        "conditional": true,
+        "default": null
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string | undefined",
+        "required": false,
+        "conditional": true,
+        "default": null
+      },
+      {
+        "name": "onClear",
+        "type": "()=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value:string)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "prefix",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "prefixStyling",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "rootProps",
+        "type": "ComponentPropsWithRef<'div'>",
+        "required": false,
+        "default": "{}"
+      },
+      {
+        "name": "rounded",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "search",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "shortcut",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'|'lg'|number",
+        "required": false,
+        "default": "'md'"
+      },
+      {
+        "name": "suffix",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "suffixStyling",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      }
+    ]
+  },
+  {
+    "name": "JsonView",
+    "source": "CodeComponents.tsx",
+    "signature": "JsonViewProps",
+    "props": [
+      {
+        "name": "value",
+        "type": "unknown",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "defaultExpandDepth",
+        "type": "number",
+        "required": false,
+        "default": "Number.POSITIVE_INFINITY"
+      },
+      {
+        "name": "embedded",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "highlightPattern",
+        "type": "RegExp",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Datos JSON'"
+      }
+    ]
+  },
+  {
+    "name": "Kbd",
+    "source": "CodeComponents.tsx",
+    "signature": "KbdProps",
+    "props": [
+      {
+        "name": "alt",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "ctrl",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "meta",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "shift",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "small",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      }
+    ]
+  },
+  {
+    "name": "Label",
+    "source": "Label.tsx",
+    "signature": "LabelProps",
+    "props": [
+      {
+        "name": "bypassCasing",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      }
+    ]
+  },
+  {
+    "name": "LoadingDots",
+    "source": "StatusComponents.tsx",
+    "signature": "LoadingDotsProps",
+    "props": [
+      {
+        "name": "size",
+        "type": "number",
+        "required": false,
+        "default": "4"
+      }
+    ]
+  },
+  {
+    "name": "LoadMoreButton",
+    "source": "LoadMoreButton.tsx",
+    "signature": "LoadMoreButtonProps",
+    "props": [
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "loadingText",
+        "type": "ReactNode",
+        "required": false,
+        "default": "'Cargando…'"
+      },
+      {
+        "name": "noBorderRadius",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "noGap",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      }
+    ]
+  },
+  {
+    "name": "Menu",
+    "source": "Menu.tsx",
+    "signature": "MenuProps",
+    "props": [
+      {
+        "name": "items",
+        "type": "MenuEntry[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "buttonProps",
+        "type": "Omit<ButtonProps,'children'|'onClick'|'onKeyDown'|'aria-haspopup'|'aria-expanded'|'aria-controls'>",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "chevron",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "contextArea",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Acciones'"
+      },
+      {
+        "name": "position",
+        "type": "'bottom-start'|'bottom-end'|'top-start'|'top-end'|'left-start'|'right-start'",
+        "required": false,
+        "default": "'bottom-start'"
+      },
+      {
+        "name": "trigger",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "MiddleTruncate",
+    "source": "CodeComponents.tsx",
+    "signature": "MiddleTruncateProps",
+    "props": [
+      {
+        "name": "text",
+        "type": "string",
+        "required": true,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Modal",
+    "source": "components.tsx",
+    "signature": "ModalProps",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "onClose",
+        "type": "()=>void",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "footer",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open:boolean)=>void",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "MultiSelect",
+    "source": "MultiSelect.tsx",
+    "signature": "MultiSelectProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "options",
+        "type": "MultiSelectOption[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "defaultValue",
+        "type": "string[]",
+        "required": false,
+        "default": "[]"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "emptyMessage",
+        "type": "string",
+        "required": false,
+        "default": "'No hay opciones disponibles.'"
+      },
+      {
+        "name": "hideLabel",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onChange",
+        "type": "(value:string[])=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "default": "'Sin selección'"
+      },
+      {
+        "name": "position",
+        "type": "'bottom-start'|'bottom-end'|'top-start'|'top-end'",
+        "required": false,
+        "default": "'bottom-start'"
+      },
+      {
+        "name": "summary",
+        "type": "(selected:MultiSelectOption[],options:MultiSelectOption[])=>ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "value",
+        "type": "string[]",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Navigation",
+    "source": "components.tsx",
+    "signature": "NavigationProps",
+    "props": [
+      {
+        "name": "items",
+        "type": "{label:string;href:string;active?:boolean}[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Principal'"
+      }
+    ]
+  },
+  {
+    "name": "Note",
+    "source": "StatusComponents.tsx",
+    "signature": "NoteProps",
+    "props": [
+      {
+        "name": "action",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "filled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'",
+        "required": false,
+        "default": "'md'"
+      },
+      {
+        "name": "tone",
+        "type": "NoteTone",
+        "required": false,
+        "default": "'default'"
+      }
+    ]
+  },
+  {
+    "name": "Pagination",
+    "source": "advanced-components.tsx",
+    "signature": "PaginationProps",
+    "props": [
+      {
+        "name": "page",
+        "type": "number",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "pages",
+        "type": "number",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "onChange",
+        "type": "(page:number)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onPageChange",
+        "type": "(page:number)=>void",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "PaletteProvider",
+    "source": "PaletteProvider.tsx",
+    "signature": "PaletteProviderProps",
+    "props": [
+      {
+        "name": "palette",
+        "type": "Palette",
+        "required": false,
+        "default": "mokPalette"
+      }
+    ]
+  },
+  {
+    "name": "Phone",
+    "source": "FrameComponents.tsx",
+    "signature": "PhoneProps",
+    "props": [
+      {
+        "name": "aspectRatio",
+        "type": "string",
+        "required": false,
+        "default": "'9 / 19.5'"
+      },
+      {
+        "name": "caption",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "tone",
+        "type": "'auto'|'ink'",
+        "required": false,
+        "default": "'auto'"
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "required": false,
+        "default": "280"
+      }
+    ]
+  },
+  {
+    "name": "PieGauge",
+    "source": "StatusComponents.tsx",
+    "signature": "PieGaugeProps",
+    "props": [
+      {
+        "name": "value",
+        "type": "number",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "size",
+        "type": "number",
+        "required": false,
+        "default": "16"
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Pill",
+    "source": "components.tsx",
+    "signature": "PillProps",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "icon",
+        "type": "IconName|false",
+        "required": false,
+        "default": "'arrow'"
+      },
+      {
+        "name": "iconPosition",
+        "type": "'start'|'end'",
+        "required": false,
+        "default": "'end'"
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'|'lg'",
+        "required": false,
+        "default": "'md'"
+      },
+      {
+        "name": "subtle",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "tone",
+        "type": "BadgeTone",
+        "required": false,
+        "default": "'neutral'"
+      }
+    ]
+  },
+  {
+    "name": "Popover",
+    "source": "advanced-components.tsx",
+    "signature": "PopoverProps",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "trigger",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "defaultOpen",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open:boolean)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "ProgressBar",
+    "source": "advanced-components.tsx",
+    "signature": "ProgressBarProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Progreso'"
+      },
+      {
+        "name": "state",
+        "type": "'default'|'success'|'error'",
+        "required": false,
+        "default": "'default'"
+      },
+      {
+        "name": "value",
+        "type": "number",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "ProjectBanner",
+    "source": "StatusComponents.tsx",
+    "signature": "ProjectBannerProps",
+    "props": [
+      {
+        "name": "action",
+        "type": "ProjectBannerAction",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "tone",
+        "type": "NoteTone",
+        "required": false,
+        "default": "'default'"
+      }
+    ]
+  },
+  {
+    "name": "Radio",
+    "source": "Radio.tsx",
+    "signature": "RadioProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onChange",
+        "type": "(checked:boolean)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onCheckedChange",
+        "type": "(checked:boolean)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rootProps",
+        "type": "ComponentPropsWithRef<'label'>",
+        "required": false,
+        "default": "{}"
+      }
+    ]
+  },
+  {
+    "name": "RangeSlider",
+    "source": "ControlComponents.tsx",
+    "signature": "RangeSliderProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "defaultValue",
+        "type": "[number,number]",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "inputs",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "default": "100"
+      },
+      {
+        "name": "min",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "onChange",
+        "type": "(value:[number,number])=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "step",
+        "type": "number",
+        "required": false,
+        "default": "1"
+      },
+      {
+        "name": "value",
+        "type": "[number,number]",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "RelativeTimeCard",
+    "source": "ControlComponents.tsx",
+    "signature": "RelativeTimeCardProps",
+    "props": [
+      {
+        "name": "date",
+        "type": "number",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "locale",
+        "type": "string",
+        "required": false,
+        "default": "'es'"
+      },
+      {
+        "name": "side",
+        "type": "'top'|'bottom'|'left'|'right'",
+        "required": false,
+        "default": "'top'"
+      }
+    ]
+  },
+  {
+    "name": "Scroller",
+    "source": "ControlComponents.tsx",
+    "signature": "ScrollerProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "buttons",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "direction",
+        "type": "'vertical'|'horizontal'|'free'",
+        "required": false,
+        "default": "'vertical'"
+      },
+      {
+        "name": "height",
+        "type": "string|number",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "width",
+        "type": "string|number",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "SearchInput",
+    "source": "ControlComponents.tsx",
+    "signature": "SearchInputProps",
+    "props": [
+      {
+        "name": "aria-label",
+        "type": "string",
+        "required": false,
+        "conditional": true,
+        "default": null
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string | undefined",
+        "required": false,
+        "conditional": true,
+        "default": null
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "onClear",
+        "type": "()=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value:string)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "prefix",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "prefixStyling",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rootProps",
+        "type": "ComponentPropsWithRef<'div'>",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rounded",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "shortcut",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'|'lg'|number",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "suffixStyling",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Select",
+    "source": "components.tsx",
+    "signature": "SelectProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "options",
+        "type": "{value:string;label:string;disabled?:boolean}[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value:string)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rootProps",
+        "type": "ComponentPropsWithRef<'div'>",
+        "required": false,
+        "default": "{}"
+      }
+    ]
+  },
+  {
+    "name": "Separator",
+    "source": "Separator.tsx",
+    "signature": "SeparatorProps",
+    "props": [
+      {
+        "name": "align",
+        "type": "'start'|'center' | undefined",
+        "required": false,
+        "conditional": false,
+        "default": "'start'"
+      },
+      {
+        "name": "inset",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "label",
+        "type": "string | undefined",
+        "required": false,
+        "conditional": false,
+        "default": null
+      },
+      {
+        "name": "mark",
+        "type": "boolean | undefined",
+        "required": false,
+        "conditional": false,
+        "default": "false"
+      },
+      {
+        "name": "orientation",
+        "type": "'horizontal' | 'vertical'",
+        "required": false,
+        "conditional": true,
+        "default": "'horizontal'"
+      },
+      {
+        "name": "tone",
+        "type": "'line'|'accent'",
+        "required": false,
+        "default": "'line'"
+      }
+    ]
+  },
+  {
+    "name": "Sheet",
+    "source": "ControlComponents.tsx",
+    "signature": "SheetProps",
+    "props": [
+      {
+        "name": "onClose",
+        "type": "()=>void",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "closeLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Cerrar panel'"
+      },
+      {
+        "name": "description",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "footer",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "modal",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "side",
+        "type": "'top'|'right'|'bottom'|'left'",
+        "required": false,
+        "default": "'right'"
+      }
+    ]
+  },
+  {
+    "name": "ShowMore",
+    "source": "ControlComponents.tsx",
+    "signature": "ShowMoreProps",
+    "props": [
+      {
+        "name": "expanded",
+        "type": "boolean",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "onToggle",
+        "type": "(expanded:boolean)=>void",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "border",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "controls",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "count",
+        "type": "number",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "lessLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Mostrar menos'"
+      },
+      {
+        "name": "moreLabel",
+        "type": "string",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Skeleton",
+    "source": "advanced-components.tsx",
+    "signature": "SkeletonProps",
+    "props": [
+      {
+        "name": "kind",
+        "type": "'text'|'card'|'table'",
+        "required": false,
+        "default": "'text'"
+      },
+      {
+        "name": "lines",
+        "type": "number",
+        "required": false,
+        "default": "3"
+      }
+    ]
+  },
+  {
+    "name": "Slider",
+    "source": "ControlComponents.tsx",
+    "signature": "SliderProps",
+    "props": [
+      {
+        "name": "defaultValue",
+        "type": "number",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "default": "100"
+      },
+      {
+        "name": "min",
+        "type": "number",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "name": "onChange",
+        "type": "(value:number)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onCommit",
+        "type": "(value:number)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "showValue",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "step",
+        "type": "number",
+        "required": false,
+        "default": "1"
+      },
+      {
+        "name": "unit",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "value",
+        "type": "number",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Snippet",
+    "source": "CodeComponents.tsx",
+    "signature": "SnippetProps",
+    "props": [
+      {
+        "name": "text",
+        "type": "string|string[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "copied",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "inverted",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "onCopy",
+        "type": "()=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "prompt",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "tone",
+        "type": "'default'|'success'|'warning'|'error'",
+        "required": false,
+        "default": "'default'"
+      },
+      {
+        "name": "width",
+        "type": "string|number",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Spinner",
+    "source": "StatusComponents.tsx",
+    "signature": "SpinnerProps",
+    "props": [
+      {
+        "name": "color",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Cargando'"
+      },
+      {
+        "name": "size",
+        "type": "number",
+        "required": false,
+        "default": "20"
+      }
+    ]
+  },
+  {
+    "name": "SplitButton",
+    "source": "ControlComponents.tsx",
+    "signature": "SplitButtonProps",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "items",
+        "type": "MenuEntry[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "menuButtonLabel",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "menuPosition",
+        "type": "'bottom-start'|'bottom-end'|'top-start'|'top-end'",
+        "required": false,
+        "default": "'bottom-end'"
+      },
+      {
+        "name": "onClick",
+        "type": "()=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "prefix",
+        "type": "ComponentPropsWithRef<typeof Button>['prefix']",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'|'lg'",
+        "required": false,
+        "default": "'md'"
+      },
+      {
+        "name": "variant",
+        "type": "Extract<ButtonVariant,'primary'|'secondary'>",
+        "required": false,
+        "default": "'primary'"
+      }
+    ]
+  },
+  {
+    "name": "StatusDot",
+    "source": "StatusComponents.tsx",
+    "signature": "StatusDotProps",
+    "props": [
+      {
+        "name": "state",
+        "type": "StatusDotState",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "titlePrefix",
+        "type": "string",
+        "required": false,
+        "default": "'Este despliegue'"
+      }
+    ]
+  },
+  {
+    "name": "Switch",
+    "source": "Toggle.tsx",
+    "signature": "ToggleProps",
+    "props": [
+      {
+        "name": "checked",
+        "type": "boolean",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onChange",
+        "type": "(checked:boolean)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onCheckedChange",
+        "type": "(checked:boolean)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rootProps",
+        "type": "ComponentPropsWithRef<'div'>",
+        "required": false,
+        "default": "{}"
+      }
+    ]
+  },
+  {
+    "name": "Table",
+    "source": "Table.tsx",
+    "signature": "TableProps<T>",
+    "props": [
+      {
+        "name": "caption",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "columns",
+        "type": "Column<T>[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "rowKey",
+        "type": "(row:T)=>string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "rows",
+        "type": "T[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "defaultSort",
+        "type": "TableSort",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "density",
+        "type": "TableDensity",
+        "required": false,
+        "default": "'normal'"
+      },
+      {
+        "name": "empty",
+        "type": "ReactNode",
+        "required": false,
+        "default": "'No hay registros.'"
+      },
+      {
+        "name": "error",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "footer",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "loadingLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Cargando registros…'"
+      },
+      {
+        "name": "maxHeight",
+        "type": "CSSProperties['maxHeight']",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onRetry",
+        "type": "()=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onSortChange",
+        "type": "(sort:TableSort)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "selection",
+        "type": "TableSelection<T>",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "sort",
+        "type": "TableSort|null",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "sortMode",
+        "type": "'client'|'manual'",
+        "required": false,
+        "default": "'client'"
+      },
+      {
+        "name": "stickyHeader",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "toolbar",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "variant",
+        "type": "TableVariant",
+        "required": false,
+        "default": "'bordered'"
+      }
+    ]
+  },
+  {
+    "name": "Tabs",
+    "source": "Tabs.tsx",
+    "signature": "TabsProps",
+    "props": [
+      {
+        "name": "active",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "tabs",
+        "type": "TabItem[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Secciones'"
+      },
+      {
+        "name": "onChange",
+        "type": "(id:string)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onValueChange",
+        "type": "(id:string)=>void",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Textarea",
+    "source": "Textarea.tsx",
+    "signature": "TextareaProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value:string)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rootProps",
+        "type": "ComponentPropsWithRef<'div'>",
+        "required": false,
+        "default": "{}"
+      },
+      {
+        "name": "showCount",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      }
+    ]
+  },
+  {
+    "name": "TextWithCopyButton",
+    "source": "CodeComponents.tsx",
+    "signature": "TextWithCopyButtonProps",
+    "props": [
+      {
+        "name": "text",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onCopy",
+        "type": "()=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "size",
+        "type": "'sm'|'md'",
+        "required": false,
+        "default": "'md'"
+      }
+    ]
+  },
+  {
+    "name": "ThemeProvider",
+    "source": "ThemeSwitcher.tsx",
+    "signature": "ThemeProviderProps",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "defaultTheme",
+        "type": "ThemePreference",
+        "required": false,
+        "default": "'system'"
+      },
+      {
+        "name": "forcedTheme",
+        "type": "ResolvedTheme",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "storageKey",
+        "type": "string|null",
+        "required": false,
+        "default": "'mok-theme'"
+      }
+    ]
+  },
+  {
+    "name": "ThemeSwitcher",
+    "source": "ThemeSwitcher.tsx",
+    "signature": "ThemeSwitcherProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Seleccionar tema de apariencia'"
+      },
+      {
+        "name": "small",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      }
+    ]
+  },
+  {
+    "name": "Toast",
+    "source": "Toast.tsx",
+    "signature": "ToastProps",
+    "props": [
+      {
+        "name": "title",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "action",
+        "type": "ToastAction",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "announce",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "onClose",
+        "type": "()=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "tone",
+        "type": "ToastTone",
+        "required": false,
+        "default": "'info'"
+      }
+    ]
+  },
+  {
+    "name": "ToastProvider",
+    "source": "Toast.tsx",
+    "signature": "{children:ReactNode}",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Toggle",
+    "source": "Toggle.tsx",
+    "signature": "ToggleProps",
+    "props": [
+      {
+        "name": "checked",
+        "type": "boolean",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onChange",
+        "type": "(checked:boolean)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onCheckedChange",
+        "type": "(checked:boolean)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rootProps",
+        "type": "ComponentPropsWithRef<'div'>",
+        "required": false,
+        "default": "{}"
+      }
+    ]
+  },
+  {
+    "name": "Tooltip",
+    "source": "Tooltip.tsx",
+    "signature": "TooltipProps",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "placement",
+        "type": "'top'|'bottom'|'left'|'right'",
+        "required": false,
+        "default": "'top'"
+      }
+    ]
+  },
+  {
+    "name": "Video",
+    "source": "FrameComponents.tsx",
+    "signature": "VideoProps",
+    "props": [
+      {
+        "name": "src",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "aspectRatio",
+        "type": "string",
+        "required": false,
+        "default": "'16 / 9'"
+      },
+      {
+        "name": "lazy",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      }
+    ]
+  }
+]

@@ -7,248 +7,224 @@
       "nodeId": "11:176",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=11-176",
       "source": "src/components.tsx",
-      "export": "Button",
-      "story": "components-buttons--primary"
+      "export": "Button"
     },
     {
       "name": "Button/Secondary",
       "nodeId": "11:327",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=11-327",
       "source": "src/components.tsx",
-      "export": "Button",
-      "story": "components-buttons--secondary"
+      "export": "Button"
     },
     {
       "name": "Button/Ghost",
       "nodeId": "11:478",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=11-478",
       "source": "src/components.tsx",
-      "export": "Button",
-      "story": "components-buttons--ghost"
+      "export": "Button"
     },
     {
       "name": "Input",
       "nodeId": "11:519",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=11-519",
       "source": "src/components.tsx",
-      "export": "Input",
-      "story": "components-inputs--overview"
+      "export": "Input"
     },
     {
       "name": "Select",
       "nodeId": "11:584",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=11-584",
       "source": "src/components.tsx",
-      "export": "Select",
-      "story": "components-selects--overview"
+      "export": "Select"
     },
     {
       "name": "Card",
       "nodeId": "12:124",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-124",
       "source": "src/components.tsx",
-      "export": "Card",
-      "story": "components-cards--overview"
+      "export": "Card"
     },
     {
       "name": "Badge",
       "nodeId": "12:141",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-141",
       "source": "src/components.tsx",
-      "export": "Badge",
-      "story": "components-feedback--overview"
+      "export": "Badge"
     },
     {
       "name": "Alert",
       "nodeId": "12:198",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-198",
       "source": "src/components.tsx",
-      "export": "Alert",
-      "story": "components-feedback--overview"
+      "export": "Alert"
     },
     {
       "name": "Navigation",
       "nodeId": "12:213",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-213",
       "source": "src/components.tsx",
-      "export": "Navigation",
-      "story": "components-navigation--overview"
+      "export": "Navigation"
     },
     {
       "name": "Table",
       "nodeId": "12:254",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-254",
       "source": "src/components.tsx",
-      "export": "Table",
-      "story": "components-tables--overview"
+      "export": "Table"
     },
     {
       "name": "Modal",
       "nodeId": "12:309",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-309",
       "source": "src/components.tsx",
-      "export": "Modal",
-      "story": "components-modals--overview"
+      "export": "Modal"
     },
     {
       "name": "EmptyState",
       "nodeId": "12:326",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-326",
       "source": "src/components.tsx",
-      "export": "EmptyState",
-      "story": "patterns-empty-states--overview"
+      "export": "EmptyState"
     },
     {
       "name": "Toggle",
       "nodeId": "12:343",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=12-343",
       "source": "src/components.tsx",
-      "export": "Toggle",
-      "story": "components-switch--overview"
+      "export": "Toggle"
     },
     {
       "name": "Checkbox",
       "nodeId": "44:8694",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=44-8694",
       "source": "src/advanced-components.tsx",
-      "export": "Checkbox",
-      "story": "components-form-controls-·-extended--checkbox-and-radio"
+      "export": "Checkbox"
     },
     {
       "name": "Radio",
       "nodeId": "44:8917",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=44-8917",
       "source": "src/advanced-components.tsx",
-      "export": "Radio",
-      "story": "components-form-controls-·-extended--checkbox-and-radio"
+      "export": "Radio"
     },
     {
       "name": "Pagination",
       "nodeId": "44:9042",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=44-9042",
       "source": "src/advanced-components.tsx",
-      "export": "Pagination",
-      "story": "components-navigation-·-extended--pagination-example"
+      "export": "Pagination"
     },
     {
       "name": "Textarea",
       "nodeId": "54:1499",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=54-1499",
       "source": "src/advanced-components.tsx",
-      "export": "Textarea",
-      "story": "components-form-controls-·-extended--text-areas"
+      "export": "Textarea"
     },
     {
       "name": "DatePicker",
       "nodeId": "54:1792",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=54-1792",
       "source": "src/advanced-components.tsx",
-      "export": "DatePicker",
-      "story": "components-form-controls-·-extended--date-and-combobox"
+      "export": "DatePicker"
     },
     {
       "name": "Combobox",
       "nodeId": "56:1630",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-1630",
       "source": "src/advanced-components.tsx",
-      "export": "Combobox",
-      "story": "components-form-controls-·-extended--date-and-combobox"
+      "export": "Combobox"
     },
     {
       "name": "FileUpload",
       "nodeId": "56:1965",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-1965",
       "source": "src/advanced-components.tsx",
-      "export": "FileUpload",
-      "story": "components-form-controls-·-extended--upload"
+      "export": "FileUpload"
     },
     {
       "name": "Tooltip",
       "nodeId": "56:2042",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2042",
       "source": "src/advanced-components.tsx",
-      "export": "Tooltip",
-      "story": "components-feedback-&-overlays-·-extended--tooltips-and-popover"
+      "export": "Tooltip"
     },
     {
       "name": "Popover",
       "nodeId": "56:2159",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2159",
-      "source": "src/components/popover/Popover.tsx",
-      "export": "Popover",
-      "story": "components-popover--overview"
+      "source": "src/advanced-components.tsx",
+      "export": "Popover"
     },
     {
       "name": "DropdownMenu",
       "nodeId": "56:2388",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2388",
-      "source": "src/components/dropdown-menu/DropdownMenu.tsx",
-      "export": "DropdownMenu",
-      "story": "components-dropdown-menu--overview"
+      "source": "src/advanced-components.tsx",
+      "export": "DropdownMenu"
     },
     {
       "name": "Tabs",
       "nodeId": "56:2461",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2461",
-      "source": "src/components/tabs/Tabs.tsx",
-      "export": "Tabs",
-      "story": "components-tabs--overview"
+      "source": "src/advanced-components.tsx",
+      "export": "Tabs"
     },
     {
       "name": "Breadcrumbs",
       "nodeId": "56:2600",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2600",
       "source": "src/advanced-components.tsx",
-      "export": "Breadcrumbs",
-      "story": "components-navigation-·-extended--breadcrumbs-example"
+      "export": "Breadcrumbs"
     },
     {
       "name": "Avatar",
       "nodeId": "56:2637",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2637",
       "source": "src/advanced-components.tsx",
-      "export": "Avatar",
-      "story": "components-navigation-·-extended--menu-and-avatars"
+      "export": "Avatar"
     },
     {
       "name": "Skeleton",
       "nodeId": "56:2692",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2692",
       "source": "src/advanced-components.tsx",
-      "export": "Skeleton",
-      "story": "components-feedback-&-overlays-·-extended--loading-and-progress"
+      "export": "Skeleton"
     },
     {
       "name": "ProgressBar",
       "nodeId": "56:2769",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2769",
       "source": "src/advanced-components.tsx",
-      "export": "ProgressBar",
-      "story": "components-feedback-&-overlays-·-extended--loading-and-progress"
+      "export": "ProgressBar"
     },
     {
       "name": "Toast",
       "nodeId": "56:2922",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-2922",
       "source": "src/advanced-components.tsx",
-      "export": "Toast",
-      "story": "components-feedback-&-overlays-·-extended--toasts"
+      "export": "Toast"
     },
     {
       "name": "Drawer",
       "nodeId": "56:3227",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-3227",
       "source": "src/advanced-components.tsx",
-      "export": "Drawer",
-      "story": "components-feedback-&-overlays-·-extended--drawer-example"
+      "export": "Drawer"
     },
     {
       "name": "Accordion",
       "nodeId": "56:3284",
       "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=56-3284",
       "source": "src/advanced-components.tsx",
-      "export": "Accordion",
-      "story": "components-feedback-&-overlays-·-extended--accordion-example"
+      "export": "Accordion"
+    },
+    {
+      "name": "Address Input",
+      "nodeId": "228:3539",
+      "source": "src/AddressInput.tsx",
+      "export": "AddressInput",
+      "figmaUrl": "https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV?node-id=228-3539"
     }
   ]
 }

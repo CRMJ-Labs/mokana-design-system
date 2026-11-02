@@ -1,0 +1,23 @@
+{
+  "name": "mok-consumer-smoke",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 3001 --strictPort --force",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 3001 --strictPort"
+  },
+  "dependencies": {
+    "@mokanadev/design-system": "file:../../.consumer-pack/design-system.tgz",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.3"
+  }
+}

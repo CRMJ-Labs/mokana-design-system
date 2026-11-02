@@ -1,0 +1,20 @@
+import {CodeDisclosure} from './CodeComponents';
+import type {ReactNode} from 'react';
+import {Description} from './Description';
+
+function Example({id,title,description,code,children}:{id:string;title:string;description:string;code:string;children:ReactNode}){
+  return <section id={id} className="mk-description-example"><h2><a href={`#${id}`}>{title}</a></h2><p>{description}</p><div className="mk-description-preview">{children}</div><CodeDisclosure code={code}/></section>;
+}
+
+const longValue='Sistema de diseño MOK para crear productos digitales con una identidad coherente, componentes accesibles y temas claro y oscuro.';
+
+export function DescriptionPage(){
+  return <article className="mk-docs-component-page"><header><p className="mk-eyebrow">COMPONENTE</p><h1>Description</h1><p>Una etiqueta breve y su valor para presentar información y contexto de forma clara.</p></header>
+    <nav className="mk-description-index" aria-label="Secciones de Description"><a href="#default">Predeterminado</a><a href="#text-right">Texto a la derecha</a><a href="#ellipsis">Texto truncado</a><a href="#metadata">Metadatos</a></nav>
+    <Example id="default" title="Predeterminado" description="La etiqueta secundaria identifica el dato y el valor mantiene el contraste principal. Los textos largos se ajustan al ancho disponible." code={'<Description title="Nombre del proyecto">\n  MOK Design System\n</Description>'}><Description title="Nombre del proyecto" className="mk-description-sample">MOK Design System</Description></Example>
+    <Example id="text-right" title="Texto a la derecha" description="Alinea la etiqueta y el contenido a la derecha, por ejemplo en un resumen de datos." code={'<Description title="Último despliegue" textRight>\n  Hace 5 minutos\n</Description>'}><Description title="Último despliegue" textRight className="mk-description-sample">Hace 5 minutos</Description></Example>
+    <Example id="ellipsis" title="Texto truncado" description="Limita un valor de texto a una línea con puntos suspensivos. El contenido completo permanece disponible para lectores de pantalla y en la ayuda nativa al pasar el cursor." code={'<Description title="Descripción del proyecto" ellipsis style={{ width: 360 }}>\n  Sistema de diseño MOK para crear productos digitales con una identidad coherente, componentes accesibles y temas claro y oscuro.\n</Description>'}><Description title="Descripción del proyecto" ellipsis className="mk-description-sample">{longValue}</Description></Example>
+    <Example id="metadata" title="Metadatos" description="Combina pares de etiqueta y valor para resumir un proyecto. El contenido también admite enlaces y otros elementos React." code={'<div className="mk-description-grid">\n  <Description title="Proyecto">MOK Design System</Description>\n  <Description title="Estado">Listo para producción</Description>\n  <Description title="Documentación">\n    <a href="/components/button">Ver componentes</a>\n  </Description>\n</div>'}><div className="mk-description-grid"><Description title="Proyecto">MOK Design System</Description><Description title="Estado">Listo para producción</Description><Description title="Documentación"><a href="/components/button">Ver componentes</a></Description></div></Example>
+    <section className="mk-description-guidelines"><h2>Uso y accesibilidad</h2><ul><li>Usa una etiqueta corta que identifique el valor: proyecto, región o último despliegue.</li><li>El componente utiliza dl, dt y dd para conservar la relación semántica entre etiqueta y valor.</li><li>Coloca los enlaces y controles en el contenido; reserva el título para la etiqueta.</li><li>Usa el texto de ayuda del campo para instrucciones de formularios.</li><li>Aplica ellipsis a valores de texto y define un ancho en el componente o su contenedor.</li></ul><p>Importa Description y DescriptionProps desde <code>@mokanadev/design-system</code>. Acepta atributos nativos de dl, incluido ref, y utiliza los tokens de MOK en ambos temas.</p><a href="https://vercel.com/geist/description" target="_blank" rel="noreferrer">Referencia: Geist Description</a></section>
+  </article>;
+}

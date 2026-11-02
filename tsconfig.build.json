@@ -1,1 +1,1 @@
-{"extends":"./tsconfig.json","compilerOptions":{"noEmit":false,"declaration":true,"emitDeclarationOnly":true,"rootDir":"src","outDir":"dist"},"include":["src/components.tsx","src/index.ts","src/vite-env.d.ts"]}
+{"extends":"./tsconfig.json","compilerOptions":{"noEmit":false,"declaration":true,"emitDeclarationOnly":true,"rootDir":"src","outDir":"dist"},"include":["src/components.tsx","src/advanced-components.tsx","src/AddressInput.tsx","src/index.ts","src/vite-env.d.ts"]}

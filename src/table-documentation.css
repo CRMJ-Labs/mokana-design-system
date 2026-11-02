@@ -1,0 +1,6 @@
+.mk-table-doc-stack{display:flex;flex-direction:column;gap:20px;width:100%;min-width:0}
+.mk-table-doc-project-icon{display:grid;place-items:center;flex:none;width:36px;height:36px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--background);color:var(--secondary)}
+.mk-table-doc-controls{display:flex;flex-wrap:wrap;gap:16px}
+.mk-table-doc-controls label{display:flex;flex-direction:column;gap:8px;font-size:12px;font-weight:600}
+.mk-table-doc-controls select{min-height:40px;padding:8px 12px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);color:var(--foreground)}
+.mk .mk-table-doc-status{margin:0;font-size:12px;color:var(--secondary)}
