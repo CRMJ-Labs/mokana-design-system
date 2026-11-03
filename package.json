@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MiltonEsc/mok-design-system.git"
+    "url": "git+https://github.com/CRMJ-Labs/mokana-design-system.git"
   },
   "publishConfig": {
     "access": "public",
