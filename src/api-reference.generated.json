@@ -2546,6 +2546,12 @@
         "default": null
       },
       {
+        "name": "defaultOpen",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
         "name": "disabled",
         "type": "boolean",
         "required": false,
@@ -2556,6 +2562,18 @@
         "type": "string",
         "required": false,
         "default": "'Acciones'"
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open:boolean)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": false,
+        "default": null
       },
       {
         "name": "position",
@@ -2937,7 +2955,7 @@
   },
   {
     "name": "Popover",
-    "source": "advanced-components.tsx",
+    "source": "Popover.tsx",
     "signature": "PopoverProps",
     "props": [
       {
@@ -2957,6 +2975,12 @@
         "type": "boolean",
         "required": false,
         "default": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Información adicional'"
       },
       {
         "name": "onOpenChange",

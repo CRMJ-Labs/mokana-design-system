@@ -1,5 +1,6 @@
-import { useId, useState, type ComponentPropsWithRef, type ReactNode } from 'react';
+import { useId, type ComponentPropsWithRef } from 'react';
 import { Button, Icon, type IconName } from './components';
+import {Menu} from './Menu';
 
 export {Checkbox, type CheckboxProps} from './Checkbox';
 export {Radio,type RadioProps} from './Radio';
@@ -14,11 +15,12 @@ export interface FileUploadProps extends Omit<ComponentPropsWithRef<'input'>,'ty
 export function FileUpload({label='Subir archivo',hint='PNG, JPG o PDF',id:givenId,onFiles,onChange,onValueChange,rootProps={},...props}:FileUploadProps){const generated=useId();const id=givenId??generated;return <label {...rootProps} className={`mk-upload ${rootProps.className??''}`} htmlFor={id}><input {...props} id={id} type="file" aria-label={props['aria-label']??label} aria-describedby={[props['aria-describedby'],hint?`${id}-help`:null].filter(Boolean).join(' ')||undefined} onChange={e=>{onChange?.(e);if(!e.defaultPrevented){onFiles?.(e.target.files);onValueChange?.(e.target.files);}}}/><Icon name="plus"/><strong>{label}</strong>{hint&&<span id={`${id}-help`}>{hint}</span>}</label>}
 
 export {Tooltip,type TooltipProps} from './Tooltip';
-export interface PopoverProps extends Omit<ComponentPropsWithRef<'span'>,'title'> {trigger:ReactNode;children:ReactNode;title?:string;open?:boolean;defaultOpen?:boolean;onOpenChange?:(open:boolean)=>void}
-export function Popover({trigger,children,title,open:controlled,defaultOpen=false,onOpenChange,className='',...props}:PopoverProps){const [local,setLocal]=useState(defaultOpen);const open=controlled??local;const change=(next:boolean)=>{if(controlled===undefined)setLocal(next);onOpenChange?.(next);};return <span {...props} className={`mk-popover ${className}`}><span onClick={()=>change(!open)}>{trigger}</span>{open&&<section className="mk-popover-panel"><div><strong>{title}</strong><button type="button" aria-label="Cerrar" onClick={()=>change(false)}><Icon name="close"/></button></div>{children}</section>}</span>}
+export {Popover,type PopoverProps} from './Popover';
 export type MenuItem={label:string;icon?:IconName;disabled?:boolean;danger?:boolean;onSelect?:()=>void};
 export interface DropdownMenuProps extends Omit<ComponentPropsWithRef<'span'>,'children'> {label?:string;items:MenuItem[];open?:boolean;defaultOpen?:boolean;onOpenChange?:(open:boolean)=>void}
-export function DropdownMenu({label='Abrir menú',items,open:controlled,defaultOpen=false,onOpenChange,className='',...props}:DropdownMenuProps){const [local,setLocal]=useState(defaultOpen);const open=controlled??local;const change=(next:boolean)=>{if(controlled===undefined)setLocal(next);onOpenChange?.(next);};return <span {...props} className={`mk-dropdown ${className}`}><Button variant="ghost" onClick={()=>change(!open)} aria-expanded={open}>{label}<Icon name="chevron"/></Button>{open&&<div role="menu">{items.map(item=><button type="button" key={item.label} role="menuitem" disabled={item.disabled} className={item.danger?'mk-danger':''} onClick={()=>{item.onSelect?.();change(false)}}>{item.icon&&<Icon name={item.icon}/>}<span>{item.label}</span></button>)}</div>}</span>}
+export function DropdownMenu({label='Abrir menú',items,open,defaultOpen=false,onOpenChange,className='',...props}:DropdownMenuProps){
+  return <span {...props} className={`mk-dropdown ${className}`}><Menu label={label} items={items.map((item,index)=>({id:String(index),label:item.label,disabled:item.disabled,danger:item.danger,onSelect:item.onSelect,prefix:item.icon?<Icon name={item.icon}/>:undefined}))} open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange} chevron position="bottom-end" buttonProps={{variant:'ghost'}}/></span>;
+}
 
 export {Tabs,type TabsProps,type TabItem} from './Tabs';
 export {Breadcrumbs, type BreadcrumbsProps, type BreadcrumbItem} from './Breadcrumbs';

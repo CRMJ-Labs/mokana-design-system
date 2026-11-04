@@ -1,4 +1,4 @@
-.mk-load-more{display:flex;align-items:center;justify-content:center;gap:var(--space-2);width:100%;min-height:44px;margin-top:var(--space-4);padding:var(--space-3) var(--space-4);border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);color:var(--foreground);font-family:var(--font-body);font-size:13px;font-weight:600;line-height:1.5;cursor:pointer;transition:background var(--duration-fast),border-color var(--duration-fast)}
+.mk-load-more{display:flex;align-items:center;justify-content:center;gap:var(--space-2);width:100%;min-height:44px;margin-top:var(--space-4);padding:var(--space-3) var(--space-4);border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);color:var(--foreground);font-family:var(--font-body);font-size:var(--text-ui);font-weight:var(--weight-semibold);line-height:var(--leading-ui);cursor:pointer;transition:background var(--duration-fast),border-color var(--duration-fast)}
 .mk-load-more:hover:not(:disabled){background:color-mix(in srgb,var(--action-secondary) 8%,var(--surface));border-color:var(--action-secondary)}
 .mk-load-more:active:not(:disabled){background:color-mix(in srgb,var(--action-secondary) 14%,var(--surface))}
 .mk-load-more:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
@@ -7,5 +7,3 @@
 .mk-load-more-spinner{width:14px;height:14px;flex:none;border:2px solid var(--line);border-top-color:currentColor;border-radius:50%;animation:mk-load-more-spin .8s linear infinite}
 @keyframes mk-load-more-spin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.mk-load-more{transition:none}.mk-load-more-spinner{animation:none}}
-.mk-load-more-results{list-style:none;padding:0;margin:0}.mk-load-more-results li{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);font-size:13px}.mk-load-more-results li span{color:var(--secondary)}
-.mk-load-more-count{font-size:13px;color:var(--secondary)}.mk-load-more-code{margin-top:12px;font-size:13px;color:var(--secondary)}.mk-load-more-code summary{cursor:pointer;width:max-content}.mk-load-more-code pre{overflow:auto;padding:20px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);color:var(--foreground)}

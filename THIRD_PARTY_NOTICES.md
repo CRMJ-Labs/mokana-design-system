@@ -1,5 +1,13 @@
 # Third-party notices
 
+## Inter Variable
+
+Source: https://fontsource.org/fonts/inter
+
+The optional `fonts.css` entry distributes Inter Variable WOFF2 subsets under
+the SIL Open Font License 1.1. The complete license and copyright notices are
+included in `dist/fonts/OFL.txt`. Component styles do not load these fonts.
+
 ## Lucide React 1.66.0
 
 Source: https://lucide.dev

@@ -49,7 +49,7 @@ try{
   assert.equal(await page.locator('.mk-website').getAttribute('data-theme'),after);
   await page.goto('http://127.0.0.1:3011/components/address-input');
   await page.locator('#default').getByLabel('Dirección',{exact:true}).fill('Calle 93');
-  await page.getByRole('button',{name:/Calle 93/}).click();
+  await page.getByRole('option',{name:/Calle 93/}).click();
   await page.locator('#default').getByRole('button',{name:'Ingresar la dirección manualmente'}).click();
   assert.equal(await page.locator('#default').getByLabel('Ciudad',{exact:true}).inputValue(),'Bogotá');
   await page.goto('http://127.0.0.1:3011/components/avatar');

@@ -17,6 +17,9 @@ export interface MenuEntry {
   onSelect?:()=>void;
 }
 export interface MenuProps {
+  open?:boolean;
+  defaultOpen?:boolean;
+  onOpenChange?:(open:boolean)=>void;
   contextArea?:ReactNode;
   items:MenuEntry[];
   label?:string;
@@ -27,7 +30,7 @@ export interface MenuProps {
   buttonProps?:Omit<ButtonProps,'children'|'onClick'|'onKeyDown'|'aria-haspopup'|'aria-expanded'|'aria-controls'>;
 }
 
-export function Menu({items,label='Acciones',trigger,chevron=false,position='bottom-start',disabled=false,buttonProps,contextArea}:MenuProps){
+export function Menu({items,label='Acciones',trigger,chevron=false,position='bottom-start',disabled=false,buttonProps,contextArea,open:controlledOpen,defaultOpen=false,onOpenChange}:MenuProps){
   const id=useId();
   const root=useRef<HTMLDivElement>(null);
   const contextTarget=useRef<HTMLDivElement>(null);
@@ -37,7 +40,9 @@ export function Menu({items,label='Acciones',trigger,chevron=false,position='bot
   const panel=useRef<HTMLDivElement>(null);
   const initialFocus=useRef<'first'|'last'>('first');
   const search=useRef({text:'',time:0});
-  const [open,setOpen]=useState(false);
+  const [localOpen,setLocalOpen]=useState(defaultOpen);
+  const open=controlledOpen??localOpen;
+  function setOpen(next:boolean){if(controlledOpen===undefined)setLocalOpen(next);if(next!==open)onOpenChange?.(next);}
   const [style,setStyle]=useState<CSSProperties>({visibility:'hidden'});
   const triggerButton=()=>root.current?.querySelector<HTMLButtonElement>(':scope > button');
   const enabled=()=>Array.from(panel.current?.querySelectorAll<HTMLElement>('[role="menuitem"]:not([aria-disabled="true"])')??[]);

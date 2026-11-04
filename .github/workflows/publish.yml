@@ -11,7 +11,7 @@ permissions:
 jobs:
   publish:
     name: Publish to npm
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
@@ -24,20 +24,30 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
-        # npm install resolves the platform-specific optional packages required on Linux.
-        run: npm install --ignore-scripts
+        run: npm ci --ignore-scripts
 
       - name: Check tag matches package version
+        shell: bash
         run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
 
-      # Nada se publica si un componente rompe su contrato de teclado, foco o ARIA.
-      - name: Typecheck, test and build
-        run: |
-          npm run typecheck
-          npm test
-          npm run build
+      - name: Install Microsoft Edge and browser dependencies
+        run: npx playwright install --with-deps msedge
+
+      - name: Verify docs, types, builds, UI, components and installed consumer
+        run: npm run verify
+
+      - name: Upload visual comparisons
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-visual-comparisons
+          path: |
+            verification/visual-report
+            test-results/visual
+          if-no-files-found: ignore
 
       - name: Publish
-        run: npm publish
+        # Verification already ran above; avoid repeating prepublishOnly.
+        run: npm publish --ignore-scripts
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

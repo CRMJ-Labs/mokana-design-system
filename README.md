@@ -67,6 +67,7 @@ npm run build:lib
 ```tsx
 import { Button, Input, AddressInput } from '@mokanadev/design-system';
 import '@mokanadev/design-system/styles.css';
+import '@mokanadev/design-system/fonts.css'; // Opcional: Inter autoalojada.
 
 export function Form() {
   return <div className="mk" data-theme="light">
@@ -77,7 +78,7 @@ export function Form() {
 }
 ```
 
-La biblioteca se genera en `dist/`. Las fuentes y el isotipo se incluyen en sus estilos; no necesitas copiar `public/brand` ni `public/fonts` para consumirla. Address Input incluye sugerencias de demostración; sus propiedades `suggestions`, `value` y `onValueChange` permiten conectarlo a tus datos.
+La biblioteca se genera en `dist/`. `styles.css` incluye componentes, tokens e isotipo. Para conservar Inter, importa también `fonts.css`: carga archivos WOFF2 independientes según los caracteres utilizados. Puedes omitirlo y definir tu propia familia con `--font-body` y `--font-heading`. No necesitas copiar `public/brand` ni `public/fonts`. Address Input incluye sugerencias de demostración; sus propiedades `suggestions`, `value` y `onValueChange` permiten conectarlo a tus datos.
 
 La [guía de integración](docs/integration.md), disponible también en `/integration`, documenta atributos HTML, refs, estilos, contenedores, formularios y compatibilidad de eventos. Las páginas del catálogo incluyen tablas de propiedades generadas desde TypeScript. Ejecuta `npm run docs:api` después de cambiar una API y `npm run docs:check` para detectar documentación desactualizada.
 
@@ -90,11 +91,30 @@ La [guía de integración](docs/integration.md), disponible también en `/integr
 - `src/Drawer.tsx`, `src/Tabs.tsx`, `src/Textarea.tsx`: componentes con gestión de foco, teclado y estado nativo.
 - `src/Documentation.tsx`: fundamentos de MOK.
 - `src/components.tsx`, `src/advanced-components.tsx`: biblioteca de componentes.
-- `tokens.json`: fuente de tokens; `npm run tokens` genera el CSS.
+- `tokens.json`: fuente de colores, espaciado, radios, sombras y tipografía por escala y rol; `npm run tokens` genera el CSS y `npm run tokens:check` detecta archivos desactualizados.
 - `src/Icon.tsx`: registro de 80 iconos Lucide, con compatibilidad para los nombres anteriores. El catálogo buscable está en `/foundations/iconography`.
 - `figma-map.json`: referencias de diseño y ejemplos de la biblioteca.
 
-La web principal funciona en el puerto 3000. `npm run verify` corre tipos, builds y todas las pruebas, y es el mismo comando que ejecuta CI en GitHub.
+La web principal funciona en el puerto 3000. `npm run verify` comprueba tokens y API, tipos, builds y todas las pruebas, incluidas las comparaciones visuales. Es el mismo comando que ejecuta CI en GitHub.
+
+CI y publicación instalan las dependencias con `npm ci --ignore-scripts`, preparan Microsoft Edge con `npx playwright install --with-deps msedge` y ejecutan `npm run verify`. La instalación explícita del navegador sigue la [guía de Playwright](https://playwright.dev/docs/browsers#google-chrome--microsoft-edge).
+
+### Comparaciones visuales
+
+Las 28 referencias en `tests/visual/baselines/win32` cubren controles, formularios, superficies y cuatro overlays, en claro/oscuro y a 390/1280 px. Se tomaron antes de consolidar el CSS y se comparan con el paquete instalado, usando fuentes locales y animaciones desactivadas. No constituyen una cobertura visual de los 98 componentes públicos.
+
+```sh
+npm run consumer:prepare
+npm run test:visual
+# Solo para cambios visuales intencionales, revisando cada PNG modificado:
+npm run test:visual:update
+```
+
+La comparación falla ante imágenes ausentes o diferencias; el comando normal nunca actualiza referencias. El informe HTML queda en `verification/visual-report` y las imágenes actual/diff en `test-results/visual`. CI y publicación adjuntan ambos como artefactos incluso si fallan. Sustituye el antiguo workflow incompleto de Chromatic/Storybook.
+
+Genera y revisa estas referencias en Windows con Edge; los workflows usan Windows para reducir diferencias de renderizado. Playwright recomienda mantener el mismo entorno al [comparar capturas](https://playwright.dev/docs/test-snapshots). Si cambia el navegador o el entorno, revisa los diffs antes de actualizar los PNG.
+
+`prepublishOnly` también ejecuta `verify` para las publicaciones manuales con `npm publish`. El workflow de tags ejecuta esa misma verificación en un paso previo y después usa `npm publish --ignore-scripts` para evitar repetirla. `consumer:prepare` empaqueta con `--ignore-scripts`, por lo que verificar el consumidor no vuelve a entrar en el hook de publicación. Véase el [ciclo de scripts de npm](https://docs.npmjs.com/cli/v11/using-npm/scripts/).
 
 ## Integración en una aplicación independiente
 
@@ -107,7 +127,7 @@ npm run consumer:dev
 
 Disponible en http://127.0.0.1:3001. `npm run test:consumer` prepara el paquete y verifica su integración en navegador; también forma parte de `npm run verify`.
 
-`src/styles.css` y los CSS de componentes forman los estilos publicados. `src/documentation.css` contiene la navegación, fundamentos y ejemplos de la documentación, y solo se importa desde `src/website.tsx`, junto a `src/website.css`. El paquete conserva tokens, tipografía, estilos base y utilidades de composición; la raíz `.mk` ya no impone padding ni altura de página. Cada aplicación define su layout y aplica `data-theme` dentro de su propio `ThemeProvider`.
+`src/styles.css` y los CSS de componentes forman los estilos publicados. `src/examples.css`, `src/documentation.css`, `src/website.css` y los CSS específicos de páginas pertenecen al sitio y quedan fuera del paquete. `scripts/example-css-classes.json` permite comprobar que las clases extraídas no reaparezcan en el CSS instalado. El paquete conserva tokens, reglas tipográficas, estilos base y utilidades de composición; las fuentes se ofrecen por separado. La raíz `.mk` no impone padding ni altura de página. Cada aplicación define su layout y aplica `data-theme` dentro de su propio `ThemeProvider`.
 
 ## Tablas
 
@@ -147,4 +167,4 @@ Los iconos decorativos se ocultan al lector de pantalla. Los botones sin texto n
 
 Lucide se importa de forma explícita; no se incluye su catálogo completo. Las licencias y atribuciones se distribuyen con el paquete en `THIRD_PARTY_NOTICES.md`. Los símbolos de marca y los SVG de gráficas permanecen separados de los iconos de interfaz.
 
-[Figma](https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV) · [Repositorio](https://github.com/MiltonEsc/mok-design-system)
+[Figma](https://www.figma.com/design/0aIrchHaC4p0je6UxVYfZV) · [Repositorio](https://github.com/CRMJ-Labs/mokana-design-system)

@@ -10,8 +10,9 @@ permissions:
 
 jobs:
   verify:
-    name: Typecheck, test and build
-    runs-on: ubuntu-latest
+    name: Complete verification
+    # Match the OS used to review and generate the visual baselines.
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
@@ -24,14 +25,20 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        # npm install resolves the platform-specific optional packages required on Linux.
-        run: npm install --ignore-scripts
+        run: npm ci --ignore-scripts
 
-      - name: Typecheck
-        run: npm run typecheck
+      - name: Install Microsoft Edge and browser dependencies
+        run: npx playwright install --with-deps msedge
 
-      - name: Component tests
-        run: npm test
+      - name: Verify docs, types, builds, UI, components and installed consumer
+        run: npm run verify
 
-      - name: Build package
-        run: npm run build
+      - name: Upload visual comparisons
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: visual-comparisons
+          path: |
+            verification/visual-report
+            test-results/visual
+          if-no-files-found: ignore

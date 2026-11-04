@@ -21,21 +21,24 @@
     "typecheck": "tsc --noEmit",
     "build": "vite build --config vite.website.config.ts",
     "build:cloudflare": "npm run build && node scripts/prepare-cloudflare.mjs",
-    "build:lib": "vite build && tsc -p tsconfig.build.json",
+    "build:lib": "npm run tokens:check && vite build && tsc -p tsconfig.build.json && node scripts/build-fonts.mjs",
     "test": "npm run build && npm run test:ui",
     "test:ui": "node --test tests/*.test.mjs",
     "test:checks": "node scripts/run-checks.mjs",
-    "verify": "npm run docs:check && npm run typecheck && npm run build && npm run build:lib && npm run test:ui && npm run test:checks && npm run test:consumer",
+    "verify": "npm run tokens:check && npm run docs:check && npm run typecheck && npm run build && npm run build:lib && npm run test:ui && npm run test:checks && npm run test:consumer && npm run test:visual",
     "tokens": "node scripts/build-tokens.mjs",
     "preview": "vite preview --config vite.website.config.ts",
     "test:website": "node scripts/check-website.mjs",
-    "prepublishOnly": "npm run typecheck && npm run build:lib",
+    "prepublishOnly": "npm run verify",
     "check:links": "node scripts/check-links.mjs",
     "consumer:prepare": "node scripts/prepare-consumer.mjs",
     "consumer:dev": "npm --prefix examples/consumer run dev",
     "test:consumer": "npm run consumer:prepare && node scripts/test-consumer.mjs && node scripts/test-palettes.mjs",
     "docs:api": "node scripts/build-api-reference.mjs",
-    "docs:check": "node scripts/build-api-reference.mjs --check"
+    "docs:check": "node scripts/build-api-reference.mjs --check",
+    "tokens:check": "node scripts/build-tokens.mjs --check",
+    "test:visual": "node scripts/run-visual.mjs",
+    "test:visual:update": "node scripts/run-visual.mjs --update-snapshots"
   },
   "exports": {
     ".": {
@@ -43,7 +46,8 @@
       "import": "./dist/mokana.js"
     },
     "./styles.css": "./dist/styles.css",
-    "./tokens": "./tokens.json"
+    "./tokens": "./tokens.json",
+    "./fonts.css": "./dist/fonts.css"
   },
   "peerDependencies": {
     "react": ">=19",
@@ -58,18 +62,17 @@
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "typescript": "7.0.2",
-    "vite": "8.3.3"
+    "vite": "8.3.3",
+    "@fontsource-variable/inter": "^5.3.0"
   },
   "files": [
     "dist",
-    "public",
     "tokens.json",
     "figma-map.json",
     "THIRD_PARTY_NOTICES.md",
     "docs/integration.md"
   ],
   "dependencies": {
-    "@fontsource-variable/inter": "^5.3.0",
     "lucide-react": "1.66.0"
   }
 }

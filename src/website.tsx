@@ -7,6 +7,8 @@ import {lazy,Suspense} from 'react';
 import {Intro, BrandFoundations, UIFoundations, ProductThemes} from './Documentation';
 import {AuthPattern, DashboardPattern, CrudPattern, FiltersPattern, EmptyPattern, SettingsPattern} from './patterns';
 import './styles.css';
+import './fonts.css';
+import './examples.css';
 import './documentation.css';
 import './website.css';
 

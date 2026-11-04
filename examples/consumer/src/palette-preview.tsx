@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {Badge,Banner,Button,Card,Checkbox,Error,Input,Modal,Note,PaletteProvider,ProgressBar,Select,ThemeProvider,ThemeSwitcher,ToastProvider,useToasts} from '@mokanadev/design-system';
 import '@mokanadev/design-system/styles.css';
+import '@mokanadev/design-system/fonts.css';
 import {appPalettes,defaultAppPalette,type AppPaletteName} from './palette';
 import './palette-preview.css';
 

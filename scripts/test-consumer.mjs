@@ -1,11 +1,22 @@
 import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
-import {mkdirSync,readFileSync} from 'node:fs';
+import {mkdirSync,readFileSync,readdirSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {chromium,expect} from '@playwright/test';
+import {testInteractionRegressions} from './test-interaction-regressions.mjs';
 
 const consumer=resolve('examples/consumer');
 const css=readFileSync(resolve(consumer,'node_modules/@mokanadev/design-system/dist/styles.css'),'utf8');
+const packageRoot=resolve(consumer,'node_modules/@mokanadev/design-system');
+const exampleClasses=JSON.parse(readFileSync('scripts/example-css-classes.json','utf8'));
+for(const name of exampleClasses)assert.doesNotMatch(css,new RegExp('\\.'+name+'(?![\\w-])'),`${name}: example CSS leaked into the installed package`);
+assert.doesNotMatch(css,/@font-face|data:font|data:application\/font/,'Component CSS must not embed or register fonts');
+assert.ok(Buffer.byteLength(css)<180000,'Component CSS exceeded its 180 KB budget');
+const fontCss=readFileSync(resolve(packageRoot,'dist/fonts.css'),'utf8');
+assert.match(fontCss,/@font-face/);assert.doesNotMatch(fontCss,/data:/);
+for(const match of fontCss.matchAll(/url\(\.\/([^\s)]+)\)/g))assert.ok(readFileSync(resolve(packageRoot,'dist',match[1])).length>0,'Missing packaged font asset');
+assert.ok(!readdirSync(packageRoot).includes('public'),'Documentation public assets were packaged');
+assert.ok(!readdirSync(resolve(packageRoot,'dist')).includes('demo'),'Demo media leaked into dist');
 assert.doesNotMatch(css,/\.mk-(?:docs|foundations|icon-catalog|core-form|input-preview|button-example|table-doc|api-reference|integration)/,'Documentation CSS leaked into the installed package');
 assert.doesNotMatch(css,/url\(["']?\/brand\//,'Brand still depends on assets in the host application');
 const port=3035;
@@ -20,11 +31,15 @@ try{
   });
   browser=await chromium.launch({channel:'msedge',headless:true});
   const page=await browser.newPage({viewport:{width:1280,height:900}});
+  const fonts=[];page.on('request',request=>{if(request.resourceType()==='font')fonts.push(request.url());});
   const errors=[];
   page.on('pageerror',error=>errors.push(error.message));
   page.on('response',response=>{if(response.status()>=400)errors.push(`${response.status()} ${response.url()}`);});
   await page.goto(`http://127.0.0.1:${port}`);
   await expect(page.getByRole('heading',{name:'Proyectos del equipo'})).toBeVisible();
+  await page.evaluate(()=>document.fonts.ready);
+  assert.equal(fonts.length,1,'The Spanish consumer should fetch only the Latin subset');
+  assert.match(fonts[0],/inter-latin-wght-normal.*\.woff2/);
   assert.match(await page.locator('.mk-mark').evaluate(node=>getComputedStyle(node).maskImage),/data:image\/svg\+xml/);
   await expect(page.locator('.consumer-app')).toHaveAttribute('data-theme','light');
   const background=await page.locator('.consumer-app').evaluate(node=>getComputedStyle(node).backgroundColor);
@@ -101,6 +116,21 @@ try{
   await page.getByRole('button',{name:'Abrir panel de contrato'}).click();await expect(page.getByRole('dialog',{name:'Panel de contrato'})).toHaveClass(/consumer-drawer/);await page.keyboard.press('Escape');await expect(events).toContainText('drawer-open:false');
   await expect(page.getByRole('progressbar',{name:'Progreso limitado'})).toHaveAttribute('aria-valuenow','100');
   await page.getByRole('button',{name:'Ayuda del contrato'}).focus();await expect(events).toContainText('tooltip-focus:true');await page.keyboard.press('Escape');
+  await testInteractionRegressions(page,`http://127.0.0.1:${port}`);
+  await page.goto(`http://127.0.0.1:${port}/visual.html?view=controls`);
+  const tokenStyles=await page.evaluate(()=>{
+    const root=document.querySelector('.mk');root.style.setProperty('--space-2','20px');root.style.setProperty('--text-ui','18px');
+    const style=getComputedStyle(document.querySelector('.mk-button'));
+    return {gap:style.gap,fontSize:style.fontSize};
+  });
+  assert.deepEqual(tokenStyles,{gap:'20px',fontSize:'18px'},'Shared spacing and typography overrides must reach controls');
+  const noFonts=await browser.newPage();const unexpectedFonts=[];
+  noFonts.on('request',request=>{if(request.resourceType()==='font')unexpectedFonts.push(request.url());});
+  await noFonts.goto(`http://127.0.0.1:${port}/without-fonts.html`);
+  await expect(noFonts.getByRole('button',{name:'Continuar sin Inter'})).toBeVisible();
+  await noFonts.evaluate(()=>document.fonts.ready);
+  assert.equal(await noFonts.evaluate(()=>document.fonts.size),0,'Font loading must be opt-in');
+  assert.deepEqual(unexpectedFonts,[]);await noFonts.close();
   assert.deepEqual(errors,[]);
   console.log('Consumer passed: packed types, HTML attributes, classes/style, refs, native and value events, legacy aliases, forms, dialogs, CSS isolation, themes, toast, accessibility and mobile layout.');
 }finally{await browser?.close();server.kill();}

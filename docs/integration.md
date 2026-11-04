@@ -14,6 +14,7 @@ Importa el CSS público una vez antes de tus estilos:
 
 ```tsx
 import '@mokanadev/design-system/styles.css';
+import '@mokanadev/design-system/fonts.css'; // Opcional: Inter autoalojada.
 import './app.css';
 ```
 
@@ -26,7 +27,7 @@ npm run consumer:dev
 
 La aplicación en http://127.0.0.1:3001 instala el `.tgz` generado con `npm pack`. Después de cambiar la biblioteca, vuelve a prepararla y reinicia el servidor consumidor para renovar la caché de Vite.
 
-El CSS publicado incluye tokens, tipografía, componentes, fuentes e isotipo. No es necesario copiar `public/brand` ni `public/fonts` para usar la biblioteca. Los recursos de demostración de la documentación pertenecen al sitio. `src/documentation.css`, `src/website.css` y los CSS específicos de páginas quedan fuera del paquete.
+`styles.css` incluye tokens, reglas tipográficas, componentes e isotipo, sin cargar fuentes. Importa también `fonts.css` para conservar Inter: los WOFF2 se sirven como archivos independientes y el navegador descarga solo los subconjuntos necesarios. Para usar tu propia fuente, omite ese import y define `--font-body` y `--font-heading` en la raíz `.mk`. No es necesario copiar `public/brand` ni `public/fonts`. Los recursos de demostración pertenecen al sitio; `src/examples.css`, `src/documentation.css`, `src/website.css` y los CSS específicos de páginas quedan fuera del paquete.
 
 ## Raíz, tema y notificaciones
 
@@ -112,6 +113,8 @@ Para estilos propios de la aplicación utiliza funciones, no nombres de pigmento
 
 Otros tokens disponibles: `--background`, `--surface`, `--foreground`, `--secondary`, `--line`, `--brand-primary`, `--brand-on-primary`, `--focus`, `--action-primary`, `--action-primary-text`, `--error-text`, `--warning-text` y los pares de estado `--success-solid` / `--success-on-solid`, etc. Los tokens base y los valores predeterminados del generador proceden de `tokens.json`; después de cambiarlos ejecuta `npm run tokens`.
 
+La escala exporta `--font-size-9` a `--font-size-64` para los tamaños declarados en JSON; los roles incluyen `--text-body`, `--text-ui`, `--text-caption` y `--text-heading-lg`. También hay pesos `--weight-*`, alturas `--leading-*`, radios `--radius-*`, sombras y espaciado: `--space-2` equivale a 8 px y `--space-0-5` a 2 px. Button consume `--text-ui` y `--space-2` para su texto y separación. Puedes sobrescribirlos en tu raíz para personalizar esos valores. `npm run tokens:check`, incluido en builds de biblioteca y `verify`, falla si los archivos generados no corresponden al JSON.
+
 Prueba `/palette.html` en la aplicación consumidora del puerto 3001. El archivo `examples/consumer/src/palette.ts` concentra sus tres paletas; `defaultAppPalette` selecciona la inicial. Cambiar el selector modifica la paleta completa sin recargar ni recrear los componentes.
 
 ## Atributos HTML y referencias
@@ -158,11 +161,27 @@ Los componentes que necesitan una referencia interna comparten el nodo con el co
 | Pagination | `onPageChange(page)` | `onChange(page)` |
 | FileUpload | `onValueChange(files)` y `onChange(event)` nativo | `onFiles(files)` |
 | Modal, Drawer | `onOpenChange(false)` al solicitar cierre | `onClose()` sigue siendo necesario. |
-| Popover, DropdownMenu | `open`, `defaultOpen`, `onOpenChange(open)` | Funcionan sin props de control como antes. |
+| Popover, Menu, DropdownMenu | `open`, `defaultOpen`, `onOpenChange(open)` | Funcionan sin props de control como antes. |
 
 Los alias son aditivos: si pasas ambos manejadores de valor, se ejecutan ambos. Elige uno para cada efecto. En controles nativos, `onChange` se ejecuta primero; si llama a `preventDefault`, no se dispara la notificación adicional de valor. Esto no revierte por sí solo el valor de un campo no controlado.
 
 Los componentes especializados conservan contratos propios: consulta, por ejemplo, los tipos de Slider, Calendar, MultiSelect o Feedback. No se cambian automáticamente sus eventos de valor por eventos DOM.
+
+`DropdownMenu` conserva su contenedor `span`, propiedades HTML y API anterior, y utiliza `Menu` para foco, flechas, búsqueda por letras, Escape y cierre exterior. Para nuevos menús utiliza `Menu`; admite también estado controlado con `open` y `onOpenChange`.
+
+En `AddressInput`, `value.address` controla el texto visible tanto en búsqueda como en entrada manual. Las actualizaciones externas y los reinicios de ese valor se reflejan en el campo. ArrowUp/Down recorre las sugerencias sin sacar el foco del campo, Enter selecciona y Escape o Tab cierra la lista. `mode` sigue indicando el modo inicial; `onModeChange` informa de los cambios del usuario.
+
+`Tooltip` permanece visible al recorrer con el puntero el control, la separación y la ayuda. Escape lo descarta también al abrirlo solo por hover, sin mover el foco. Después de descartarlo, deja de enfocar y de señalar el conjunto para volver a abrirlo.
+
+`Popover` abre un diálogo **no modal**: el foco entra en el panel al abrir y Tab continúa por sus controles y el resto de la página. Escape y el botón de cierre devuelven el foco al disparador. Al hacer clic o enfocar fuera, cierra sin quitar el foco al destino elegido. También admite `open`, `defaultOpen` y `onOpenChange`; un cierre externo devuelve el foco si estaba dentro del panel.
+
+Pasa a `trigger` texto, contenido o un único control que propague los atributos y eventos recibidos, como `Button`. Un control conserva sus eventos y su ref; `preventDefault()` en su clic cancela la apertura. No incluyas varios controles interactivos dentro de un disparador. El título da nombre accesible al diálogo; si lo omites, utiliza `label` (por defecto, «Información adicional»). El panel adapta su posición, ancho y altura al viewport, y permite desplazar contenido largo.
+
+```tsx
+<Popover title="Detalles del proyecto" trigger={<Button>Ver detalles</Button>}>
+  <p>Información adicional y acciones del proyecto.</p>
+</Popover>
+```
 
 ## Formularios
 
@@ -198,7 +217,7 @@ La integración automatizada cubre React + Vite en navegador y el paquete real i
 ```sh
 npm run docs:api     # Actualiza la referencia desde el código.
 npm run docs:check   # Falla si la referencia está desactualizada.
-npm run verify      # Tipos, builds, sitio, componentes y consumidor.
+npm run verify      # Tokens, tipos, builds, sitio, consumidor y comparación visual.
 ```
 
 La referencia generada muestra propiedades propias, tipos, obligatoriedad y valores predeterminados declarados al desestructurar las propiedades. Los atributos HTML heredados no se repiten; TypeScript ofrece su lista completa. Los requisitos condicionales de variantes se marcan como «Según variante». Los valores calculados se muestran como expresiones del código y no como resultados evaluados.

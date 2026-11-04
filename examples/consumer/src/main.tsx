@@ -2,6 +2,7 @@ import {StrictMode, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {Badge, Brand, Button, Card, DataTable, Icon, Input, Modal, ThemeProvider, ThemeSwitcher, ToastProvider, useTheme, useToasts} from '@mokanadev/design-system';
 import '@mokanadev/design-system/styles.css';
+import '@mokanadev/design-system/fonts.css';
 import './app.css';
 
 function ProjectApp(){

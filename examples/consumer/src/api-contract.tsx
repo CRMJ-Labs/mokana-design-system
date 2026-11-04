@@ -2,6 +2,7 @@ import {useRef,useState,type ComponentProps} from 'react';
 import {createRoot} from 'react-dom/client';
 import {AddressInput,Alert,Avatar,AvatarGroup,Badge,Brand,Button,ButtonLink,Card,Checkbox,ClearableInput,Collapse,Combobox,DatePicker,Drawer,EmptyState,FileUpload,Input,Modal,Navigation,Pagination,Pill,ProgressBar,Radio,Select,Skeleton,Table,Tabs,Textarea,Toggle,Tooltip,type AlertProps,type CardProps,type EmptyStateProps,type ComboboxProps,type PaginationProps} from '@mokanadev/design-system';
 import '@mokanadev/design-system/styles.css';
+import '@mokanadev/design-system/fonts.css';
 import './app.css';
 
 // This entry compiles against the installed declarations and runs against the packed JS.
