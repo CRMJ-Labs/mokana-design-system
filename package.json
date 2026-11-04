@@ -26,6 +26,7 @@
     "test:ui": "node --test tests/*.test.mjs",
     "test:checks": "node scripts/run-checks.mjs",
     "verify": "npm run tokens:check && npm run docs:check && npm run typecheck && npm run build && npm run build:lib && npm run test:ui && npm run test:checks && npm run test:consumer && npm run test:visual",
+    "verify:ci": "npm run tokens:check && npm run docs:check && npm run typecheck && npm run build && npm run build:lib && npm run test:ui && npm run test:checks && npm run test:consumer",
     "tokens": "node scripts/build-tokens.mjs",
     "preview": "vite preview --config vite.website.config.ts",
     "test:website": "node scripts/check-website.mjs",

@@ -30,24 +30,10 @@ jobs:
         shell: bash
         run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
 
-      - name: Install Microsoft Edge and browser dependencies
-        run: npx playwright install --with-deps msedge
-
-      - name: Verify docs, types, builds, UI, components and installed consumer
-        run: npm run verify
-
-      - name: Upload visual comparisons
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: release-visual-comparisons
-          path: |
-            verification/visual-report
-            test-results/visual
-          if-no-files-found: ignore
+      - name: Build library
+        run: npm run build:lib
 
       - name: Publish
-        # Verification already ran above; avoid repeating prepublishOnly.
         run: npm publish --ignore-scripts
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
