@@ -68,6 +68,6 @@ for(const [name,{node,file}] of collect('index.ts')){
 const output=JSON.stringify(entries.sort((a,b)=>a.name.localeCompare(b.name)),null,2)+'\n';
 const destination=path.join(root,'src/api-reference.generated.json');
 if(process.argv.includes('--check')){
-  if(!fs.existsSync(destination)||fs.readFileSync(destination,'utf8')!==output){console.error('API reference is stale. Run npm run docs:api.');process.exit(1);}
+  if(!fs.existsSync(destination)||fs.readFileSync(destination,'utf8').replace(/\r\n/g,'\n')!==output){console.error('API reference is stale. Run npm run docs:api.');process.exit(1);}
   console.log(`API reference is current: ${entries.length} public components.`);
 }else{fs.writeFileSync(destination,output);console.log(`Generated API reference: ${entries.length} public components.`);}
