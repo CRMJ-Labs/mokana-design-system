@@ -7,7 +7,7 @@ import {
   Folder,FolderOpen,File,FileText,FileCode,Image,Paperclip,Archive,Package,CodeXml,
   Terminal,Database,Server,Globe,Mail,MessageSquare,Bell,BellOff,Send,Smile,Frown,Laugh,
   Info,TriangleAlert,CircleX,CircleCheck,CircleHelp,LoaderCircle,Clock,Calendar,Wifi,
-  Sun,Moon,Monitor,Smartphone,ChartNoAxesColumnIncreasing,CreditCard,Meh,
+  Sun,Moon,Monitor,Smartphone,ChartNoAxesColumnIncreasing,CreditCard,Meh,PanelLeftClose,PanelLeftOpen,
 } from 'lucide-react';
 import './icon.css';
 
@@ -25,6 +25,7 @@ const glyphs={
   mail:Mail,message:MessageSquare,bell:Bell,'bell-off':BellOff,send:Send,smile:Smile,frown:Frown,laugh:Laugh,meh:Meh,
   info:Info,warning:TriangleAlert,error:CircleX,success:CircleCheck,help:CircleHelp,loading:LoaderCircle,clock:Clock,calendar:Calendar,wifi:Wifi,
   sun:Sun,moon:Moon,monitor:Monitor,smartphone:Smartphone,chart:ChartNoAxesColumnIncreasing,'credit-card':CreditCard,
+  'panel-left-close':PanelLeftClose,'panel-left-open':PanelLeftOpen,
 } as const;
 export type CanonicalIconName=keyof typeof glyphs;
 export const iconAliases={arrow:'arrow-right',chevron:'chevron-down'} as const satisfies Record<string,CanonicalIconName>;

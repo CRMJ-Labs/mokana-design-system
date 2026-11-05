@@ -1,0 +1,26 @@
+.mk-dashboard-pattern.is-sidebar-collapsed .mk-app-shell-body{
+  grid-template-columns:72px minmax(0,1fr);
+}
+
+.mk-dashboard-sidebar.is-collapsed{
+  align-items:center;
+  padding:var(--space-4) var(--space-2);
+}
+
+.mk-dashboard-sidebar.is-collapsed .mk-dashboard-account{
+  width:100%;
+  justify-content:center;
+  padding-bottom:0;
+  border-bottom:0;
+}
+
+.mk-dashboard-sidebar.is-collapsed .mk-dashboard-avatar,
+.mk-dashboard-sidebar.is-collapsed .mk-dashboard-account>div,
+.mk-dashboard-sidebar.is-collapsed>nav{
+  display:none;
+}
+
+@media(max-width:900px){
+  .mk-dashboard-pattern.is-sidebar-collapsed .mk-app-shell-body{grid-template-columns:minmax(0,1fr)}
+  .mk-dashboard-sidebar.is-collapsed{display:none}
+}

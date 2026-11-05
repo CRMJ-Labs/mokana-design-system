@@ -16,9 +16,12 @@ import './website.css';
 type Page = {label: string; path: string; pending?: boolean; render: () => ReactNode};
 const IconographyPage=lazy(()=>import('./IconographyPage').then(module=>({default:module.IconographyPage})));
 const IntegrationPage=lazy(()=>import('./IntegrationPage').then(module=>({default:module.IntegrationPage})));
+const ApplicationLayoutPage=lazy(()=>import('./ApplicationLayoutPage').then(module=>({default:module.ApplicationLayoutPage})));
+const CrmPattern=lazy(()=>import('./CrmPattern').then(module=>({default:module.CrmPattern})));
 const foundations: Page[] = [
   {label:'Introducción',path:'/introduction',render:()=> <Intro/>},
   {label:'Integración',path:'/integration',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando integración…</p>}><IntegrationPage/></Suspense>},
+  {label:'Estructura de aplicación',path:'/foundations/application-layout',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando estructura…</p>}><ApplicationLayoutPage/></Suspense>},
   {label:'Marca',path:'/foundations/brand',render:()=> <BrandFoundations/>},
   {label:'Color',path:'/foundations/colors',render:()=> <ColorFoundations/>},
   {label:'Tipografía',path:'/foundations/typography',render:()=> <BrandFoundations/>},
@@ -31,9 +34,10 @@ const components: Page[] = componentCatalog.map(item=> {
   return {label:item.label,path:`/components/${slug}`,pending:!isComponentImplemented(slug),render:()=> <CatalogPage slug={slug}/>};
 });
 const patterns: Page[] = [
+  {label:'CRM',path:'/patterns/crm',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando CRM…</p>}><CrmPattern/></Suspense>},
   {label:'Autenticación',path:'/patterns/auth',render:()=> <AuthPattern/>},
   {label:'Dashboard',path:'/patterns/dashboard',render:()=> <DashboardPattern/>},
-  {label:'Gestión de registros',path:'/patterns/crud',render:()=> <CrudPattern/>},
+  {label:'CRUD completo',path:'/patterns/crud',render:()=> <CrudPattern/>},
   {label:'Filtros',path:'/patterns/filters',render:()=> <FiltersPattern/>},
   {label:'Estados vacíos',path:'/patterns/empty',render:()=> <EmptyPattern/>},
   {label:'Configuración',path:'/patterns/settings',render:()=> <SettingsPattern/>},

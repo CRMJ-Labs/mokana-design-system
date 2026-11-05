@@ -55,6 +55,63 @@ export function App() {
 
 `.mk` proporciona el contexto visual. La aplicación define padding, altura y ancho; la biblioteca no impone dimensiones de página. `ThemeProvider` no crea una raíz DOM: aplica `resolvedTheme` a `data-theme`. `ToastProvider` debe estar dentro de la raíz para heredar sus tokens.
 
+## Estructura de aplicación y página
+
+No reconstruyas el ancho, los gutters y la alineación en cada pantalla. `AppShell` define las regiones de la aplicación; `ContentContainer` centra el contenido; `PageHeader`, `PageToolbar` y `FilterBar` mantienen las acciones y controles alineados al responder.
+
+```tsx
+import {
+  AppShell, ContentContainer, PageHeader, PageToolbar, FilterBar,
+  Button, Input,
+} from '@mokanadev/design-system';
+
+<AppShell header={<ProductHeader />} sidebar={<PrimaryNavigation />}>
+  <ContentContainer>
+    <PageHeader
+      title="Equipos"
+      description="Administra equipos y su documentación técnica."
+      actions={<Button>Nuevo equipo</Button>}
+    />
+    <PageToolbar actions={<ViewOptions />}>
+      <Input label="Buscar" search placeholder="Código o nombre" />
+    </PageToolbar>
+    <FilterBar actions={<Button variant="ghost">Limpiar</Button>}>
+      <StatusFilter />
+      <ValidationFilter />
+    </FilterBar>
+    <EquipmentTable />
+  </ContentContainer>
+</AppShell>
+```
+
+`ContentContainer` acepta `size="compact" | "default" | "wide" | "full"`; el valor predeterminado limita el contenido a 1200 px y mantiene gutters fluidos. Reserva `wide` para tablas con muchas columnas. Las acciones principales pertenecen a `PageHeader`; búsqueda y controles de vista a `PageToolbar`; los filtros que alteran el conjunto de datos a `FilterBar`. Ninguno sustituye el uso de `DotsMenu` para acciones secundarias por fila.
+
+### Tabla administrativa y prioridades responsive
+
+`AdminTable` añade una sola columna de acciones por fila y la implementa con `DotsMenu`. Las columnas `primary` permanecen en la fila; las `secondary` y `tertiary` se trasladan automáticamente a un bloque de detalles al reducirse el contenedor. No uses renderizadores interactivos en columnas que puedan trasladarse: las acciones pertenecen a `rowActions`.
+
+```tsx
+const columns: Column<Equipment>[] = [
+  { key: 'name', header: 'Equipo', responsivePriority: 'primary',
+    render: row => row.name },
+  { key: 'dimensions', header: 'Dimensiones', responsivePriority: 'tertiary',
+    render: row => row.dimensions },
+  { key: 'status', header: 'Estado', responsivePriority: 'secondary',
+    render: row => <Badge>{row.status}</Badge> },
+];
+
+<AdminTable caption="Equipos" rows={equipment} columns={columns}
+  rowKey={row => row.id}
+  rowActionLabel={row => `Acciones de ${row.name}`}
+  rowActions={row => [
+    { id: 'history', label: 'Ver historial', onSelect: () => openHistory(row) },
+    { id: 'edit', label: 'Editar equipo', onSelect: () => edit(row) },
+    { id: 'deactivate', label: 'Desactivar', danger: true,
+      onSelect: () => deactivate(row) },
+  ]}
+/>
+```
+
 | Propiedad | Predeterminado | Uso |
 | --- | --- | --- |
 | `ThemeProvider.defaultTheme` | `system` | Preferencia si no hay una guardada. |

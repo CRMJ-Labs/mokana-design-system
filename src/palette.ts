@@ -74,19 +74,21 @@ export function createPalette(options:PaletteOptions):Palette {
       'border-secondary':mix(foreground,surface,.78),'border-tertiary':mix(foreground,surface,.66),link:foreground,
     };
     for(const [name,color]of Object.entries({accent:brand,success,warning,danger:error,default:custom.default!})){
+      const soft=mix(color,surface,.9);
       Object.assign(custom,{[name]:color,[`${name}-foreground`]:on(color),[`${name}-hover`]:mix(color,surface,.1),
-        [`${name}-soft`]:mix(color,surface,.9),[`${name}-soft-foreground`]:name==='default'?foreground:color,[`${name}-soft-hover`]:mix(color,surface,.85)});
+        [`${name}-soft`]:soft,[`${name}-soft-foreground`]:name==='default'?foreground:readable(color,soft),[`${name}-soft-hover`]:mix(color,surface,.85)});
     }
+    const accentSoft=mix(brand,surface,.9),infoSoft=mix(info,surface,.9);
     result[mode]={...defaults,...custom,background,surface,foreground,secondary,
       line:mix(foreground,surface,.82),
       'brand-primary':brand,'brand-on-primary':on(brand),'brand-subtle':mix(brand,surface,.9),
-      'accent-text':brand,'info-text':info,focus:brand,
+      'accent-text':readable(brand,accentSoft),'info-text':readable(info,infoSoft),focus:brand,
       'action-primary':accent,'action-primary-text':on(accent),
       'action-secondary':brand,'action-secondary-text':on(brand),
       'button-primary-background':brand,'button-primary-text':on(brand),
-      'button-secondary-background':custom.default!,'button-secondary-text':brand,'button-ghost-text':foreground,
+      'button-secondary-background':custom.default!,'button-secondary-text':readable(brand,custom.default!),'button-ghost-text':foreground,
       'chart-primary':brand,'chart-secondary':accent,
-      'selection-background':mix(brand,surface,.88),'selection-text':brand,
+      'selection-background':mix(brand,surface,.88),'selection-text':readable(brand,mix(brand,surface,.88)),
       'success-text':success,'success-background':mix(success,surface,.9),'success-solid':success,'success-on-solid':on(success),
       'warning-text':warning,'warning-background':mix(warning,surface,.9),'warning-solid':warning,'warning-on-solid':on(warning),
       'error-text':error,'error-background':mix(error,surface,.9),'error-solid':error,'error-on-solid':on(error),

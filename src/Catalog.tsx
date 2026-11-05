@@ -13,6 +13,7 @@ const pages:Record<string,ComponentType>={
   'button':lazy(()=>import('./ButtonPage').then(module=>({default:module.ButtonPage}))),
   'calendar':lazy(()=>import('./ControlPages').then(module=>({default:module.CalendarPage}))),
   'card':lazy(()=>import('./CoreSurfacePages').then(module=>({default:module.CardPage}))),
+  'charts':lazy(()=>import('./ChartsPage').then(module=>({default:module.ChartsPage}))),
   'checkbox':lazy(()=>import('./CheckboxPage').then(module=>({default:module.CheckboxPage}))),
   'choicebox':lazy(()=>import('./ChoiceboxPage').then(module=>({default:module.ChoiceboxPage}))),
   'clearable-input':lazy(()=>import('./ClearableInputPage').then(module=>({default:module.ClearableInputPage}))),

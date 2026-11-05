@@ -6,7 +6,7 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import {createElement} from 'react';
 
 const library=await import('../dist/mokana.js');
-assert.equal(library.iconNames.length,80);
+assert.equal(library.iconNames.length,82);
 for(const name of [...library.iconNames,'arrow','chevron']){
   const svg=renderToStaticMarkup(createElement(library.Icon,{name}));
   assert.match(svg,/viewBox="0 0 24 24"/);assert.match(svg,/stroke-width="1.8"/);assert.match(svg,/aria-hidden="true"/);
@@ -31,7 +31,7 @@ try{
   const page=await context.newPage();const errors=[];page.on('pageerror',error=>errors.push(error.message));
   await page.goto(`http://localhost:${port}/foundations/iconography`);
   await page.getByRole('heading',{name:'Iconografía',exact:true}).waitFor();
-  const tiles=page.locator('.mk-icon-tile');await expect(tiles).toHaveCount(80);
+  const tiles=page.locator('.mk-icon-tile');await expect(tiles).toHaveCount(82);
   await page.getByRole('searchbox',{name:'Buscar iconos'}).fill('eliminar');await expect(tiles).toHaveCount(1);await expect(tiles.locator('code')).toHaveText('trash');
   await page.getByRole('radio',{name:'16 píxeles',exact:true}).check();
   await expect(tiles.locator('.mk-icon-tile-visual svg')).toHaveAttribute('width','16');
@@ -39,8 +39,8 @@ try{
   assert.equal(await page.evaluate(()=>navigator.clipboard.readText()),'<Icon name="trash" size={16} />');
   await page.getByRole('searchbox',{name:'Buscar iconos'}).fill('no-existe');await expect(tiles).toHaveCount(0);
   await expect(page.getByText('No hay coincidencias. Prueba otra palabra o selecciona todas las categorías.')).toBeVisible();
-  await page.getByRole('searchbox',{name:'Buscar iconos'}).press('Escape');await expect(tiles).toHaveCount(80);
-  await page.getByRole('searchbox',{name:'Buscar iconos'}).fill('navegacion');await expect(tiles).toHaveCount(14);
+  await page.getByRole('searchbox',{name:'Buscar iconos'}).press('Escape');await expect(tiles).toHaveCount(82);
+  await page.getByRole('searchbox',{name:'Buscar iconos'}).fill('navegacion');await expect(tiles).toHaveCount(16);
   await page.getByRole('searchbox',{name:'Buscar iconos'}).press('Escape');
   await page.getByRole('combobox',{name:'Categoría'}).selectOption('Personas y seguridad');
   await expect(tiles).toHaveCount(12);await expect(tiles.locator('code',{hasText:/^lock$/})).toHaveCount(1);
@@ -58,5 +58,5 @@ try{
     assert.ok(await page.locator(`#main-content svg[data-icon="${icon}"]`).count()>0,route);
   }
   assert.deepEqual(errors,[]);
-  console.log('Iconography: 80 icons, legacy aliases, accessible names, search/categories, sizes, copied code, migrated components, notices, themes and mobile passed.');
+  console.log('Iconography: 82 icons, legacy aliases, accessible names, search/categories, sizes, copied code, migrated components, notices, themes and mobile passed.');
 }finally{await browser?.close();server.kill();}

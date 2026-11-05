@@ -13,7 +13,7 @@
 .mk .mk-button-tertiary{--mk-button-bg:var(--default);--mk-button-fg:var(--default-foreground);--mk-button-hover:var(--default-hover)}
 .mk .mk-button-outline{--mk-button-bg:transparent;--mk-button-fg:var(--default-foreground);--mk-button-border:var(--border);--mk-button-hover:var(--default-soft-hover);--mk-button-active:var(--default);border-width:1px}
 .mk .mk-button-ghost{--mk-button-bg:transparent;--mk-button-fg:var(--button-ghost-text);--mk-button-hover:var(--default)}
-.mk .mk-button-danger{--mk-button-bg:var(--danger);--mk-button-fg:var(--danger-foreground);--mk-button-hover:var(--danger-hover)}
+.mk .mk-button-danger{--mk-button-bg:var(--error-text);--mk-button-fg:var(--background);--mk-button-hover:color-mix(in oklab,var(--error-text) 90%,var(--background) 10%)}
 .mk .mk-button-danger-soft,.mk .mk-button-error{--mk-button-bg:var(--danger-soft);--mk-button-fg:var(--danger-soft-foreground);--mk-button-hover:var(--danger-soft-hover)}
 /* Legacy warning remains an additional MOK variant. */
 .mk .mk-button-warning{--mk-button-bg:var(--warning-background);--mk-button-fg:var(--warning-text);--mk-button-border:var(--warning-text);--mk-button-hover:var(--warning-soft-hover);border:1px dashed var(--warning-text)}

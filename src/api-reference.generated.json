@@ -116,6 +116,181 @@
     ]
   },
   {
+    "name": "AdminTable",
+    "source": "AdminTable.tsx",
+    "signature": "AdminTableProps<T>",
+    "props": [
+      {
+        "name": "caption",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "columns",
+        "type": "Column<T>[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "rowActionLabel",
+        "type": "(row:T)=>string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "rowActions",
+        "type": "(row:T)=>MenuEntry[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "rowKey",
+        "type": "(row:T)=>string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "rows",
+        "type": "T[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "actionsHeader",
+        "type": "ReactNode",
+        "required": false,
+        "default": "<span className=\"mk-sr-only\">Acciones</span>"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": "''"
+      },
+      {
+        "name": "defaultSort",
+        "type": "TableSort",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "density",
+        "type": "TableDensity",
+        "required": false,
+        "default": "'compact'"
+      },
+      {
+        "name": "empty",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "error",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "expansion",
+        "type": "TableExpansion<T>",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "footer",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "loadingLabel",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "loadMore",
+        "type": "TableLoadMore",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "maxHeight",
+        "type": "CSSProperties['maxHeight']",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onColumnWidthsChange",
+        "type": "(widths:Record<string,number>)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onRetry",
+        "type": "()=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onSortChange",
+        "type": "(sort:TableSort)=>void",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "rowActionsDisabled",
+        "type": "(row:T)=>boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "selection",
+        "type": "TableSelection<T>",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "sort",
+        "type": "TableSort|null",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "sortMode",
+        "type": "'client'|'manual'",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "stickyHeader",
+        "type": "boolean",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "toolbar",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "variant",
+        "type": "TableVariant",
+        "required": false,
+        "default": "'primary'"
+      }
+    ]
+  },
+  {
     "name": "Alert",
     "source": "components.tsx",
     "signature": "AlertProps",
@@ -131,6 +306,61 @@
         "type": "'info'|'success'|'error'|'warning'",
         "required": false,
         "default": "'info'"
+      }
+    ]
+  },
+  {
+    "name": "AppShell",
+    "source": "ApplicationLayout.tsx",
+    "signature": "AppShellProps",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "footer",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "header",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "mainId",
+        "type": "string",
+        "required": false,
+        "default": "'main-content'"
+      },
+      {
+        "name": "mainLabel",
+        "type": "string",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "navigation",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "sidebar",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "skipLinkLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Saltar al contenido'"
       }
     ]
   },
@@ -321,6 +551,31 @@
         "type": "'ink'|'brand'|'accent'|'surface'",
         "required": false,
         "default": "'ink'"
+      }
+    ]
+  },
+  {
+    "name": "BarChart",
+    "source": "Charts.tsx",
+    "signature": "BarChartProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "labels",
+        "type": "string[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "series",
+        "type": "BarChartSeries[]",
+        "required": true,
+        "default": null
       }
     ]
   },
@@ -1090,7 +1345,7 @@
   },
   {
     "name": "Combobox",
-    "source": "advanced-components.tsx",
+    "source": "Combobox.tsx",
     "signature": "ComboboxProps",
     "props": [
       {
@@ -1171,6 +1426,19 @@
         "type": "boolean",
         "required": false,
         "default": "true"
+      }
+    ]
+  },
+  {
+    "name": "ContentContainer",
+    "source": "ApplicationLayout.tsx",
+    "signature": "ContentContainerProps",
+    "props": [
+      {
+        "name": "size",
+        "type": "ContentContainerSize",
+        "required": false,
+        "default": "'default'"
       }
     ]
   },
@@ -1670,6 +1938,31 @@
     ]
   },
   {
+    "name": "DonutChart",
+    "source": "Charts.tsx",
+    "signature": "DonutChartProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "segments",
+        "type": "DonutSegment[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "center",
+        "type": "string",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
     "name": "DotsMenu",
     "source": "DotsMenu.tsx",
     "signature": "DotsMenuProps",
@@ -2107,6 +2400,31 @@
     ]
   },
   {
+    "name": "FilterBar",
+    "source": "ApplicationLayout.tsx",
+    "signature": "FilterBarProps",
+    "props": [
+      {
+        "name": "actions",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "activeFilters",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Filtros'"
+      }
+    ]
+  },
+  {
     "name": "FilterParamsBar",
     "source": "FilterParams.tsx",
     "signature": "FilterParamsBarProps",
@@ -2128,6 +2446,25 @@
         "type": "string",
         "required": false,
         "default": "'Filtros'"
+      }
+    ]
+  },
+  {
+    "name": "FunnelChart",
+    "source": "Charts.tsx",
+    "signature": "FunnelChartProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "steps",
+        "type": "FunnelStep[]",
+        "required": true,
+        "default": null
       }
     ]
   },
@@ -2485,6 +2822,31 @@
     ]
   },
   {
+    "name": "LineChart",
+    "source": "Charts.tsx",
+    "signature": "LineChartProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "labels",
+        "type": "string[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "series",
+        "type": "LineChartSeries[]",
+        "required": true,
+        "default": null
+      }
+    ]
+  },
+  {
     "name": "LoadingDots",
     "source": "StatusComponents.tsx",
     "signature": "LoadingDotsProps",
@@ -2789,6 +3151,62 @@
         "type": "NoteTone",
         "required": false,
         "default": "'default'"
+      }
+    ]
+  },
+  {
+    "name": "PageHeader",
+    "source": "ApplicationLayout.tsx",
+    "signature": "PageHeaderProps",
+    "props": [
+      {
+        "name": "title",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "actions",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "description",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "eyebrow",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "headingLevel",
+        "type": "1|2",
+        "required": false,
+        "default": "1"
+      }
+    ]
+  },
+  {
+    "name": "PageToolbar",
+    "source": "ApplicationLayout.tsx",
+    "signature": "PageToolbarProps",
+    "props": [
+      {
+        "name": "actions",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "'Herramientas de página'"
       }
     ]
   },
@@ -3667,6 +4085,31 @@
         "type": "string|number",
         "required": false,
         "default": null
+      }
+    ]
+  },
+  {
+    "name": "Sparkline",
+    "source": "Charts.tsx",
+    "signature": "SparklineProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "values",
+        "type": "number[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "required": false,
+        "default": "'var(--accent-text)'"
       }
     ]
   },

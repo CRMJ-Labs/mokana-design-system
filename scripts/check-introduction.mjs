@@ -21,7 +21,7 @@ try{
   const hero=page.locator('.mk-doc-hero');
   const primary=hero.getByRole('link',{name:'Ver componentes'});
   assert.equal(await hero.getByRole('link').count(),2);
-  assert.deepEqual(await primary.evaluate(node=>{const style=getComputedStyle(node);return [style.backgroundColor,style.color];}),['oklch(0.6204 0.195 253.83)','oklch(0.9911 0 0)']);
+  assert.deepEqual(await primary.evaluate(node=>{const style=getComputedStyle(node);return [style.backgroundColor,style.color];}),['oklch(0.6204 0.195 253.83)','oklch(0.2103 0.0059 285.89)']);
   assert.equal(await hero.getByRole('link',{name:/Figma/}).getAttribute('target'),'_blank');
   assert.equal(await main.getByRole('link',{name:/código de la landing/}).getAttribute('rel'),'noreferrer');
   assert.equal(await hero.locator('.mk-eyebrow').textContent(),'Versión 0.1.0');

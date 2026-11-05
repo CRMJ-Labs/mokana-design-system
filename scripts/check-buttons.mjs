@@ -3,7 +3,7 @@ import {spawn} from 'node:child_process';
 import {mkdirSync} from 'node:fs';
 import {chromium,expect} from '@playwright/test';
 
-const variants=[['primary','Primary','button-primary-background','button-primary-text','accent-hover'],['secondary','Secondary','default','accent-soft-foreground','default-hover'],['tertiary','Tertiary','default','default-foreground','default-hover'],['outline','Outline',null,'default-foreground','default-soft-hover'],['ghost','Ghost',null,'default-foreground','default'],['danger','Danger','danger','danger-foreground','danger-hover'],['danger-soft','Danger Soft','danger-soft','danger-soft-foreground','danger-soft-hover']];
+const variants=[['primary','Primary','button-primary-background','button-primary-text','accent-hover'],['secondary','Secondary','button-secondary-background','button-secondary-text','default-hover'],['tertiary','Tertiary','default','default-foreground','default-hover'],['outline','Outline',null,'default-foreground','default-soft-hover'],['ghost','Ghost',null,'default-foreground','default'],['danger','Danger','error-text','background','raw:color-mix(in oklab,var(--error-text) 90%,var(--background) 10%)'],['danger-soft','Danger Soft','danger-soft','danger-soft-foreground','danger-soft-hover']];
 const port=3042;
 const server=spawn(process.execPath,['node_modules/vite/bin/vite.js','preview','--config','vite.website.config.ts','--port',String(port)],{stdio:'pipe'});
 let browser;
@@ -16,7 +16,7 @@ try{
   await page.locator('#variants').waitFor();
   await page.addStyleTag({content:'*,*::before,*::after{transition:none!important;animation:none!important}'});
   await page.evaluate(()=>document.fonts.ready);
-  const roleColor=(role,property='backgroundColor')=>page.evaluate(({role,property})=>{const probe=document.createElement('span');probe.style[property]=role?`var(--${role})`:'transparent';document.querySelector('.mk-website').append(probe);const value=getComputedStyle(probe)[property];probe.remove();return value;},{role,property});
+  const roleColor=(role,property='backgroundColor')=>page.evaluate(({role,property})=>{const probe=document.createElement('span');probe.style[property]=role?(role.startsWith('raw:')?role.slice(4):`var(--${role})`):'transparent';document.querySelector('.mk-website').append(probe);const value=getComputedStyle(probe)[property];probe.remove();return value;},{role,property});
   const appearance=locator=>locator.evaluate(node=>{const style=getComputedStyle(node);return {background:style.backgroundColor,color:style.color,border:style.borderColor};});
   mkdirSync('verification',{recursive:true});
   for(const theme of ['light','dark']){

@@ -161,6 +161,10 @@ const columns: Column<Project>[] = [
 
 `DataTable` compone búsqueda local sin distinguir acentos, ordenación estable sobre todos los resultados y paginación. El checkbox del encabezado afecta a las filas visibles y habilitadas; conserva la selección de otras páginas. `rowLabel` da nombre a cada checkbox. Las acciones por fila se componen con `DotsMenu`; `actions` y `selectionActions` permiten añadir acciones al conjunto.
 
+`AdminTable` formaliza el patrón operativo: usa densidad compacta y añade una sola columna de acciones con `DotsMenu`. `rowActionLabel` identifica la fila para tecnologías de asistencia y `rowActions` entrega sus opciones. No apiles botones en una celda.
+
+Las columnas pueden declarar `responsivePriority`: `primary` permanece visible, `secondary` pasa al detalle cuando la tabla mide menos de 480 px y `tertiary` cuando mide menos de 720 px. Los umbrales usan el ancho del contenedor, no el viewport. Las columnas sin prioridad conservan el comportamiento anterior y permanecen visibles.
+
 El CSS de producción está en `src/table.css`. Los estilos exclusivos de los ejemplos están en `src/table-documentation.css` y no se incluyen en el paquete. `node scripts/check-tables.mjs` comprueba los comportamientos, estados, accesibilidad y vistas móvil/escritorio sobre el build de la documentación.
 
 `node scripts/check-table-patterns.mjs` comprueba expansión controlada, redimensionado con puntero/teclado/RTL, carga progresiva con recuperación, selección entre páginas y las cinco superficies en ambos temas y tamaños. Las pruebas visuales de `tables` verifican también estas capacidades desde el paquete instalado.

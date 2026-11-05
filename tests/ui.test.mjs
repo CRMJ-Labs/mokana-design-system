@@ -67,17 +67,20 @@ test('MOK: pages, contrast, mobile, keyboard and local workflows', async () => {
     report.interactions.push('Modal: Escape and focus restoration');
 
     await open('/patterns/crud');
-    await page.getByRole('button', { name: 'Nuevo proyecto', exact: true }).click();
-    await page.getByLabel('Nombre del proyecto').fill('Proyecto verificado');
-    await page.getByRole('button', { name: 'Guardar proyecto', exact: true }).click();
-    assert.equal(await page.getByRole('cell', { name: 'Proyecto verificado', exact: true }).count(), 1);
-    await page.getByRole('button', { name: 'Editar Proyecto verificado', exact: true }).click();
-    await page.getByLabel('Nombre del proyecto').fill('Proyecto editado');
-    await page.getByRole('button', { name: 'Guardar proyecto', exact: true }).click();
-    assert.equal(await page.getByRole('cell', { name: 'Proyecto editado', exact: true }).count(), 1);
-    await page.getByRole('button', { name: 'Eliminar Proyecto editado', exact: true }).click();
-    await page.getByRole('button', { name: 'Confirmar eliminación' }).click();
-    assert.equal(await page.getByRole('cell', { name: 'Proyecto editado', exact: true }).count(), 0);
+    const crudTable=page.locator('.mk-admin-table');
+    await page.getByRole('button', { name: 'Nuevo equipo', exact: true }).first().click();
+    await page.getByLabel('Nombre del equipo').fill('Equipo verificado');
+    await page.getByRole('button', { name: 'Crear equipo', exact: true }).click();
+    assert.equal(await crudTable.getByText('Equipo verificado', { exact: true }).count(), 1);
+    await crudTable.getByRole('button', { name: 'Acciones de Equipo verificado', exact: true }).click();
+    await page.getByRole('menuitem', { name: 'Editar equipo', exact: true }).click();
+    await page.getByLabel('Nombre del equipo').fill('Equipo editado');
+    await page.getByRole('button', { name: 'Guardar cambios', exact: true }).click();
+    assert.equal(await crudTable.getByText('Equipo editado', { exact: true }).count(), 1);
+    await crudTable.getByRole('button', { name: 'Acciones de Equipo editado', exact: true }).click();
+    await page.getByRole('menuitem', { name: 'Eliminar equipo', exact: true }).click();
+    await page.getByRole('button', { name: 'Eliminar definitivamente', exact: true }).click();
+    assert.equal(await crudTable.getByText('Equipo editado', { exact: true }).count(), 0);
     report.interactions.push('CRUD: create, edit and confirmed delete');
 
     await open('/patterns/filters');

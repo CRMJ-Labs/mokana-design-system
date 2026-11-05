@@ -44,6 +44,10 @@ export const componentCatalog = [
     "slug": "card"
   },
   {
+    "label": "Charts",
+    "slug": "charts"
+  },
+  {
     "label": "Checkbox",
     "slug": "checkbox"
   },

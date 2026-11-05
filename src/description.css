@@ -3,4 +3,4 @@
 .mk-description>dd{margin:0;font-weight:var(--weight-regular);overflow-wrap:anywhere}
 .mk-description-right{text-align:right}
 .mk-description-ellipsis>dd{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.mk-description a{color:var(--accent);text-underline-offset:3px}.mk-description a:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:2px}
+.mk-description a{color:var(--accent-text);text-underline-offset:3px}.mk-description a:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:2px}

@@ -15,7 +15,7 @@ for(const brand of ['#fff','#000','#ff0','#00ffff','#7557ff','#15803d','#0369a1'
   const palette=createPalette({brand,neutral});
   for(const mode of ['light','dark']){
     const colors=palette[mode];assert.deepEqual(Object.keys(colors).sort(),Object.keys(tokens.semantic).sort());
-    for(const [text,background]of [['foreground','background'],['secondary','surface'],['accent-text','surface'],['selection-text','selection-background'],['brand-on-primary','brand-primary'],['button-primary-text','button-primary-background'],['action-primary-text','action-primary'],['inverse-text','inverse-background'],['inverse-accent','inverse-background'],...['success','warning','error','info'].flatMap(tone=>[[`${tone}-text`,`${tone}-background`],[`${tone}-on-solid`,`${tone}-solid`]])]){
+    for(const [text,background]of [['foreground','background'],['secondary','surface'],['accent-text','surface'],['selection-text','selection-background'],['brand-on-primary','brand-primary'],['button-primary-text','button-primary-background'],['button-secondary-text','button-secondary-background'],['action-primary-text','action-primary'],['inverse-text','inverse-background'],['inverse-accent','inverse-background'],...['success','warning','error','info'].flatMap(tone=>[[`${tone}-text`,`${tone}-background`],[`${tone}-on-solid`,`${tone}-solid`]])]){
       assert.ok(contrast(colors[text],colors[background])>=4.5,`${brand} ${neutral} ${mode}: ${text} on ${background}`);
     }
   }

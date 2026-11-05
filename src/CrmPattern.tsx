@@ -1,0 +1,61 @@
+import {useMemo,useState,type FormEvent, type ReactNode} from 'react';
+import {AppShell,ContentContainer,PageHeader,PageToolbar} from './ApplicationLayout';
+import {BarChart,DonutChart,FunnelChart,LineChart,Sparkline} from './Charts';
+import {Alert,Badge,Button,Icon,Input,Modal,Select,type IconName} from './components';
+import {ProgressBar} from './advanced-components';
+import './crm-pattern.css';
+
+type Period='30'|'90'|'year';
+type Metric={title:string;value:string;detail:string;icon:IconName;tone:'brand'|'success'|'warning'|'error'|'neutral';trend?:string;spark?:number[];progress?:number};
+const periodOptions=[{value:'30',label:'Últimos 30 días'},{value:'90',label:'Últimos 90 días'},{value:'year',label:'Este año'}];
+const data:Record<Period,{pipeline:number;open:number;won:number;meetings:number;lost:number;rate:number;risk:number;overdue:number}>={
+  '30':{pipeline:2180000,open:12,won:4,meetings:5,lost:1,rate:71,risk:2,overdue:3},
+  '90':{pipeline:8420000,open:20,won:11,meetings:8,lost:3,rate:67,risk:4,overdue:5},
+  year:{pipeline:24600000,open:38,won:29,meetings:11,lost:8,rate:74,risk:6,overdue:7},
+};
+const navGroups=[
+  {title:'Principal',items:[['Resumen','home'],['Próximas acciones','clock'],['Notificaciones','bell']] as [string,IconName][]},
+  {title:'Registros',items:[['Empresas','package'],['Oportunidades','chart'],['Contactos','users']] as [string,IconName][]},
+  {title:'Recursos',items:[['Tareas','clipboard'],['Reuniones','calendar'],['Notas','file-text']] as [string,IconName][]},
+];
+const money=new Intl.NumberFormat('es-CO',{style:'currency',currency:'USD',notation:'compact',maximumFractionDigits:1});
+
+function MetricCard({metric}:{metric:Metric}){
+  const badgeTone=metric.tone==='neutral'?'neutral':metric.tone;
+  return <article className="mk-crm-metric"><header><span className={`mk-crm-metric-icon is-${metric.tone}`}><Icon name={metric.icon} size={18}/></span><h3>{metric.title}</h3>{metric.trend&&<Badge size="sm" tone={badgeTone} subtle>{metric.trend}</Badge>}</header><div className="mk-crm-metric-value">{metric.value}</div>{metric.spark&&<Sparkline values={metric.spark} label={`Tendencia de ${metric.title}`}/>} {metric.progress!==undefined&&<ProgressBar value={metric.progress} label={`${metric.title}: ${metric.progress}%`}/>}<p>{metric.detail}</p></article>;
+}
+
+function ChartCard({title,description,children}:{title:string;description:string;children:ReactNode}){return <article className="mk-crm-chart-card"><header><div><h2>{title}</h2><p>{description}</p></div></header>{children}</article>}
+
+export function CrmPattern(){
+  const [period,setPeriod]=useState<Period>('90');const [query,setQuery]=useState('');const [createOpen,setCreateOpen]=useState(false);const [notice,setNotice]=useState('');const [extraPipeline,setExtraPipeline]=useState(0);const [extraOpen,setExtraOpen]=useState(0);const [opportunity,setOpportunity]=useState({name:'',amount:'',stage:'Prospección',owner:'Ana Torres'});const [error,setError]=useState('');
+  const current=data[period];
+  const visibleGroups=useMemo(()=>navGroups.map(group=>({...group,items:group.items.filter(([label])=>label.toLocaleLowerCase().includes(query.toLocaleLowerCase()))})).filter(group=>group.items.length),[query]);
+  const metrics:Metric[]=[
+    {title:'Pipeline',value:money.format(current.pipeline+extraPipeline),detail:`${current.open+extraOpen} oportunidades · ${current.won} ganadas`,icon:'chart',tone:'brand',trend:'+8%',spark:[24,31,27,43,39,52,48,61]},
+    {title:'Reuniones de hoy',value:String(current.meetings),detail:'3 comerciales · 2 seguimientos',icon:'calendar',tone:'brand',spark:[4,6,3,8,4,7,5]},
+    {title:'Perdidas en el periodo',value:String(current.lost),detail:'Revisa causas y competidores',icon:'error',tone:'error',spark:[1,1,2,2,3,4,8]},
+    {title:'Tasa de cierre',value:`${current.rate}%`,detail:`${current.won} ganadas · ${current.lost} perdidas`,icon:'success',tone:'success',trend:'+4%',progress:current.rate},
+    {title:'Oportunidades en riesgo',value:String(current.risk),detail:`${money.format(current.pipeline*.065)} con baja actividad`,icon:'warning',tone:'warning',progress:Math.min(100,current.risk/current.open*100)},
+    {title:'Seguimientos vencidos',value:String(current.overdue),detail:'Prioriza los contactos sin respuesta',icon:'clock',tone:'error',progress:Math.min(100,current.overdue/10*100)},
+  ];
+  function saveOpportunity(event:FormEvent){event.preventDefault();const amount=Number(opportunity.amount);if(!opportunity.name.trim()){setError('Escribe el nombre de la oportunidad.');return;}if(!Number.isFinite(amount)||amount<=0){setError('Ingresa un valor mayor que cero.');return;}setExtraPipeline(value=>value+amount);setExtraOpen(value=>value+1);setNotice(`${opportunity.name.trim()} se añadió al pipeline.`);setCreateOpen(false);setOpportunity({name:'',amount:'',stage:'Prospección',owner:'Ana Torres'});setError('');}
+  return <article className="mk-crm-pattern">
+    <AppShell mainId="crm-pattern-main" header={<div className="mk-crm-product-header"><a href="#crm-pattern-main" className="mk-crm-brand"><span className="mk-mark" aria-hidden="true"/><strong>MOK CRM</strong></a><Input aria-label="Buscar clientes, contactos u oportunidades" search placeholder="Buscar en CRM…" rootProps={{className:'mk-crm-global-search'}}/><div className="mk-crm-header-actions"><Button variant="ghost" shape="circle" svgOnly icon="bell" aria-label="Notificaciones">Notificaciones</Button><span className="mk-crm-avatar" aria-label="Cuenta de Milton Escorcia">ME</span></div></div>} navigation={<nav className="mk-crm-mobile-nav" aria-label="CRM móvil"><a aria-current="page" href="#crm-pattern-main">Resumen</a><a href="#crm-pattern-main">Oportunidades</a><a href="#crm-pattern-main">Contactos</a></nav>} sidebar={<aside className="mk-crm-sidebar"><div className="mk-crm-workspace"><span className="mk-crm-avatar">MK</span><div><strong>Equipo comercial</strong><small>Espacio principal</small></div></div><Input aria-label="Filtrar navegación" search size="sm" value={query} onValueChange={setQuery} onClear={()=>setQuery('')} placeholder="Filtrar menú"/>{visibleGroups.map(group=><nav key={group.title} aria-label={group.title}><h2>{group.title}</h2>{group.items.map(([label,icon],index)=><a key={label} href="#crm-pattern-main" aria-current={group.title==='Principal'&&index===0&&!query?'page':undefined}><Icon name={icon} size={17}/><span>{label}</span>{label==='Notificaciones'&&<Badge size="sm" subtle>2</Badge>}</a>)}</nav>)}{!visibleGroups.length&&<p className="mk-crm-nav-empty" role="status">No hay coincidencias.</p>}<nav aria-label="Listas"><h2>Listas</h2><a href="#crm-pattern-main"><Icon name="plus" size={17}/><span>Nueva lista</span></a><a href="#crm-pattern-main"><Icon name="file-text" size={17}/><span>Cuentas clave</span></a><a href="#crm-pattern-main"><Icon name="file-text" size={17}/><span>Renovaciones</span></a></nav></aside>}>
+      <ContentContainer size="wide">
+        <PageHeader eyebrow="Ventas / Resumen" title="Pulso comercial" description="Cobertura, velocidad y seguimiento del equipo en un solo lugar." actions={<Button prefix="plus" onClick={()=>setCreateOpen(true)}>Nueva oportunidad</Button>}/>
+        {notice&&<Alert title={notice} tone="success">Los datos pertenecen a esta demostración local.</Alert>}
+        <PageToolbar actions={<Select label="Periodo" value={period} options={periodOptions} onValueChange={value=>setPeriod(value as Period)} rootProps={{className:'mk-crm-period'}}/>} label="Controles del resumen"><div className="mk-crm-toolbar-copy"><strong>Pipeline general</strong><span>Actualizado hace 8 minutos</span></div></PageToolbar>
+        <section className="mk-crm-metrics" aria-label="Indicadores comerciales">{metrics.map(metric=><MetricCard key={metric.title} metric={metric}/>)}</section>
+        <section className="mk-crm-analysis" aria-label="Análisis comercial">
+          <ChartCard title="Oportunidades creadas y cerradas" description="Volumen semanal del equipo."><BarChart label="Oportunidades creadas frente a cerradas durante ocho semanas" labels={['S1','S2','S3','S4','S5','S6','S7','S8']} series={[{label:'Creadas',values:[4,3,2,5,3,2,4,3],color:'var(--accent-text)'},{label:'Cerradas',values:[1,0,2,1,0,1,2,1],color:'var(--foreground)'}]}/></ChartCard>
+          <ChartCard title="Días para cerrar" description="Tiempo mediano por tipo de oportunidad."><LineChart label="Evolución de días para cerrar oportunidades" labels={['S1','S2','S3','S4','S5','S6','S7','S8']} series={[{label:'Nuevas',values:[56,49,47,61,53,45,47,52],color:'var(--foreground)'},{label:'Expansión',values:[39,34,33,42,37,32,34,38],color:'var(--accent-text)'},{label:'Renovación',values:[22,18,17,25,21,16,18,21],color:'var(--info-text)'}]}/></ChartCard>
+          <ChartCard title="Pronóstico ponderado" description="Valor esperado según probabilidad de cierre."><DonutChart label="Pronóstico ponderado por etapa" center={money.format((current.pipeline+extraPipeline)*.64)} segments={[{label:'Comprometido',value:42,color:'var(--foreground)'},{label:'Probable',value:34,color:'var(--accent-text)'},{label:'Temprano',value:24,color:'var(--line)'}]}/></ChartCard>
+          <ChartCard title="Embudo del pipeline" description="Conversión desde prospección hasta cierre."><FunnelChart label="Embudo de oportunidades por etapa" steps={[{label:'Prospección',value:current.open+extraOpen},{label:'Calificación',value:Math.max(1,current.open-4+extraOpen)},{label:'Propuesta',value:Math.max(1,current.open-9)},{label:'Negociación',value:Math.max(1,current.open-13)},{label:'Ganadas',value:current.won,color:'var(--success-text)'}]}/></ChartCard>
+        </section>
+        <p className="mk-crm-demo-note">Patrón demostrativo: integra estructura, componentes y visualizaciones de MOK con datos locales.</p>
+      </ContentContainer>
+    </AppShell>
+    <Modal open={createOpen} onClose={()=>{setCreateOpen(false);setError('');}} title="Nueva oportunidad"><form className="mk-crm-opportunity-form" onSubmit={saveOpportunity} noValidate><Input label="Nombre de la oportunidad" value={opportunity.name} onValueChange={name=>setOpportunity({...opportunity,name})} error={error&& !opportunity.name.trim()?error:undefined} autoFocus required/><Input label="Valor estimado" type="number" min="1" prefix="$" value={opportunity.amount} onValueChange={amount=>setOpportunity({...opportunity,amount})} error={error&&opportunity.name.trim()?error:undefined} required/><Select label="Etapa" value={opportunity.stage} options={['Prospección','Calificación','Propuesta','Negociación'].map(value=>({value,label:value}))} onValueChange={stage=>setOpportunity({...opportunity,stage})}/><Select label="Responsable" value={opportunity.owner} options={['Ana Torres','Carlos Ruiz','Laura Gómez'].map(value=>({value,label:value}))} onValueChange={owner=>setOpportunity({...opportunity,owner})}/><footer><Button type="submit">Añadir al pipeline</Button><Button variant="ghost" onClick={()=>setCreateOpen(false)}>Cancelar</Button></footer></form></Modal>
+  </article>;
+}

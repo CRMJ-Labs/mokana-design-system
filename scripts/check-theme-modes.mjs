@@ -6,8 +6,8 @@ const port=3024;
 const base=`http://127.0.0.1:${port}`;
 // Exact MOK values, serialized by the browser without converting OKLCH to hex.
 const modes={
-  light:{background:'oklch(0.9702 0 0)',surface:'oklch(1 0 0)',foreground:'oklch(0.2103 0.0059 285.89)',secondary:'oklch(0.5517 0.0138 285.94)',buttonBackground:'oklch(0.6204 0.195 253.83)',buttonText:'oklch(0.9911 0 0)',scheme:'light'},
-  dark:{background:'oklch(0.12 0.005 285.823)',surface:'oklch(0.2103 0.0059 285.89)',foreground:'oklch(0.9911 0 0)',secondary:'oklch(0.705 0.015 286.067)',buttonBackground:'oklch(0.6204 0.195 253.83)',buttonText:'oklch(0.9911 0 0)',scheme:'dark'},
+  light:{background:'oklch(0.9702 0 0)',surface:'oklch(1 0 0)',foreground:'oklch(0.2103 0.0059 285.89)',secondary:'rgb(95, 95, 104)',buttonBackground:'oklch(0.6204 0.195 253.83)',buttonText:'oklch(0.2103 0.0059 285.89)',scheme:'light'},
+  dark:{background:'oklch(0.12 0.005 285.823)',surface:'oklch(0.2103 0.0059 285.89)',foreground:'oklch(0.9911 0 0)',secondary:'rgb(180, 180, 188)',buttonBackground:'oklch(0.6204 0.195 253.83)',buttonText:'oklch(0.2103 0.0059 285.89)',scheme:'dark'},
 };
 const server=spawn(process.execPath,['node_modules/vite/bin/vite.js','preview','--config','vite.website.config.ts','--port',String(port)],{stdio:'pipe'});
 let browser;

@@ -30,6 +30,14 @@
   .mk-feedback-form>textarea,.mk-destructive-field>input,.mk-filter-dialog>input):is([aria-invalid=true],[data-invalid]:not([data-invalid=false]),:has(>input[aria-invalid=true])){
   --mk-control-border:var(--danger);border-color:var(--mk-control-border);
 }
+/* Validation has visual priority over the regular blue focus ring. Keep a
+   visible keyboard indicator, but express it with the error color. */
+.mk :is(.mk-field>input,.mk-field>textarea,select:not([multiple]),
+  .mk-input-control,.mk-clearable-control,.mk-address-search-control,
+  .mk-combobox>input,.mk-input-icon>input,.mk-multi-select-trigger,
+  .mk-feedback-form>textarea,.mk-destructive-field>input,.mk-filter-dialog>input):is([aria-invalid=true],[data-invalid]:not([data-invalid=false]),:has(>input[aria-invalid=true])):is(:focus-visible,:has(:focus-visible)){
+  --mk-control-border:var(--danger);border-color:var(--mk-control-border);outline:2px solid var(--danger);outline-offset:0;
+}
 .mk .mk-field input::placeholder,.mk .mk-field textarea::placeholder{color:var(--field-placeholder)}
 /* The wrapper owns the boundary, including validation and keyboard focus. */
 .mk :is(.mk-input-control,.mk-clearable-control,.mk-address-search-control)>input:not([type=hidden]){
@@ -38,15 +46,15 @@
 
 .mk .mk-badge-neutral{background:var(--default);color:var(--default-foreground);border-color:transparent}
 .mk .mk-badge-neutral.mk-badge-subtle{background:var(--default-soft);color:var(--default-soft-foreground)}
-.mk .mk-badge-brand.mk-badge-subtle{background:var(--accent-soft);color:var(--accent-soft-foreground)}
-.mk .mk-badge-info.mk-badge-subtle{background:var(--accent-soft);color:var(--accent-soft-foreground)}
+.mk .mk-badge-brand.mk-badge-subtle{background:var(--accent-soft);color:var(--accent-text)}
+.mk .mk-badge-info.mk-badge-subtle{background:var(--accent-soft);color:var(--info-text)}
 
-.mk .mk-alert-info{background:var(--accent-soft);color:var(--accent-soft-foreground);border-color:transparent}
-.mk .mk-alert-success{background:var(--success-soft);color:var(--success-soft-foreground);border-color:transparent}
-.mk .mk-alert-warning{background:var(--warning-soft);color:var(--warning-soft-foreground);border-color:transparent}
-.mk .mk-alert-error{background:var(--danger-soft);color:var(--danger-soft-foreground);border-color:transparent}
+.mk .mk-alert-info{background:var(--accent-soft);color:var(--info-text);border-color:transparent}
+.mk .mk-alert-success{background:var(--success-soft);color:var(--success-text);border-color:transparent}
+.mk .mk-alert-warning{background:var(--warning-soft);color:var(--warning-text);border-color:transparent}
+.mk .mk-alert-error{background:var(--danger-soft);color:var(--error-text);border-color:transparent}
 .mk .mk-alert div>div{color:inherit}
-.mk .mk-alert-info>svg{color:var(--accent-soft-foreground)}
+.mk .mk-alert-info>svg{color:var(--info-text)}
 
 .mk .mk-modal,.mk .mk-popover-panel,.mk .mk-menu-panel,.mk .mk-select-panel{
   background:var(--overlay);color:var(--overlay-foreground);

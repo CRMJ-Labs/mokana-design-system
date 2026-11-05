@@ -5,7 +5,7 @@ const groups:Record<string,[CanonicalIconName,string,string][]>={
   'Navegación':[
     ['arrow-right','Flecha derecha','siguiente avanzar'],['arrow-left','Flecha izquierda','volver anterior'],['arrow-up','Flecha arriba','subir'],['arrow-down','Flecha abajo','bajar'],
     ['chevron-right','Chevron derecho','expandir siguiente'],['chevron-left','Chevron izquierdo','anterior volver'],['chevron-up','Chevron superior','contraer'],['chevron-down','Chevron inferior','desplegar'],
-    ['home','Inicio','casa portada'],['menu','Menú','navegacion hamburguesa'],['more-horizontal','Más acciones','puntos horizontal'],['more-vertical','Más opciones','puntos vertical'],['external-link','Enlace externo','abrir nueva pestaña'],['settings','Configuración','ajustes engranaje'],
+    ['home','Inicio','casa portada'],['menu','Menú','navegacion hamburguesa'],['panel-left-close','Contraer navegación','sidebar panel lateral cerrar'],['panel-left-open','Expandir navegación','sidebar panel lateral abrir'],['more-horizontal','Más acciones','puntos horizontal'],['more-vertical','Más opciones','puntos vertical'],['external-link','Enlace externo','abrir nueva pestaña'],['settings','Configuración','ajustes engranaje'],
   ],
   'Acciones':[
     ['plus','Añadir','crear nuevo mas'],['minus','Restar','quitar menos'],['close','Cerrar','cancelar equis'],['search','Buscar','lupa encontrar'],['check','Confirmar','listo verificacion'],['copy','Copiar','duplicar portapapeles'],['clipboard','Portapapeles','pegar'],['edit','Editar','lapiz modificar'],['trash','Eliminar','borrar papelera'],

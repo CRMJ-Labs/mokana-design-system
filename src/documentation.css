@@ -218,7 +218,7 @@
 .mk-interaction-guidelines p,.mk-interaction-guidelines li{color:var(--secondary)}
 @media(max-width:480px){.mk-interaction-preview{padding:24px 16px}}
 /* Documentation from intro.css */
-.mk-intro .mk-doc-hero{--button-primary-background:var(--accent);--button-primary-text:var(--accent-foreground);--focus:var(--accent);margin-bottom:var(--space-8)}
+.mk-intro .mk-doc-hero{--button-primary-background:var(--accent);--button-primary-text:var(--action-primary-text);--focus:var(--accent);margin-bottom:var(--space-8)}
 .mk-intro .mk-doc-hero p{margin:0}
 .mk-intro>.mk-section{padding:var(--space-8) 0}
 .mk-intro>.mk-section>:last-child{margin-bottom:0}

@@ -6,6 +6,7 @@ import './table.css';
 export type TableSort={key:string;direction:'asc'|'desc'};
 export type TableDensity='compact'|'normal'|'comfortable';
 export type TableVariant='primary'|'secondary'|'bordered'|'plain'|'striped';
+export type TableColumnPriority='primary'|'secondary'|'tertiary';
 export interface Column<T>{
   key:string;
   header:ReactNode;
@@ -20,6 +21,10 @@ export interface Column<T>{
   /** Providing an accessor enables sorting. Numbers remain numeric. */
   sortValue?:(row:T)=>string|number|null|undefined;
   sortLabel?:string;
+  /** Controls when a column moves into the responsive details below its row. */
+  responsivePriority?:TableColumnPriority;
+  /** Label used in responsive details. Defaults to the string header or key. */
+  responsiveLabel?:ReactNode;
 }
 export interface TableSelection<T>{
   selectedKeys:readonly string[];
@@ -99,6 +104,7 @@ export function Table<T>({caption,columns,rows,rowKey,empty='No hay registros.',
   const resizable=columns.some(column=>column.resizable);
   const columnKeys=JSON.stringify(columns.map(column=>[column.key,column.resizable,column.minWidth,column.maxWidth]));
   const controlColumns=Number(!!selection)+Number(!!expansion);
+  const responsiveColumns=columns.filter(column=>column.responsivePriority==='secondary'||column.responsivePriority==='tertiary');
   const initialWidth=(column:Column<T>)=>column.defaultWidth??(typeof column.width==='number'?column.width:200);
   const minWidth=(column:Column<T>)=>Math.max(40,typeof column.minWidth==='number'?column.minWidth:80);
   const maxWidth=(column:Column<T>)=>Math.max(minWidth(column),column.maxWidth??1000);
@@ -158,7 +164,7 @@ export function Table<T>({caption,columns,rows,rowKey,empty='No hay registros.',
         {resizable&&<colgroup>{Array.from({length:controlColumns},(_,index)=><col key={`control-${index}`} style={{width:48}}/>)}{columns.map(column=><col key={column.key} style={{width:widths[column.key]??column.width??clampWidth(column,initialWidth(column))}}/>)}</colgroup>}
         <thead><tr>{selection&&<th className="mk-table-selection" scope="col"><SelectionCheckbox label={`Seleccionar filas de ${caption}`} checked={selectable.length>0&&selectedVisible===selectable.length} mixed={selectedVisible>0&&selectedVisible<selectable.length} disabled={busy||!selectable.length} onChange={toggleAll}/></th>}
           {expansion&&<th className="mk-table-expansion" scope="col"><span className="mk-sr-only">Detalles</span></th>}
-          {columns.map(column=><th key={column.key} scope="col" data-align={column.align??'left'} data-allows-sorting={!!column.sortValue||undefined} style={resizable?undefined:{width:column.width,minWidth:column.minWidth}} aria-sort={column.sortValue?(sort?.key===column.key?(sort.direction==='asc'?'ascending':'descending'):'none'):undefined}>
+          {columns.map(column=><th key={column.key} scope="col" data-align={column.align??'left'} data-priority={column.responsivePriority??'primary'} data-allows-sorting={!!column.sortValue||undefined} style={resizable?undefined:{width:column.width,minWidth:column.minWidth}} aria-sort={column.sortValue?(sort?.key===column.key?(sort.direction==='asc'?'ascending':'descending'):'none'):undefined}>
             {column.sortValue?<button type="button" className="mk-table-sort" disabled={busy} onClick={()=>changeSort(column.key)} aria-label={`Ordenar por ${column.sortLabel??(typeof column.header==='string'?column.header:column.key)}`}>
               {column.header}<Icon name={sort?.key===column.key?(sort.direction==='asc'?'arrow-up':'arrow-down'):'chevron-down'} size={14}/>
             </button>:column.header}
@@ -176,11 +182,11 @@ export function Table<T>({caption,columns,rows,rowKey,empty='No hay registros.',
           const key=rowKey(row);const checked=selected.has(key);
           const expanded=expansion?.expandedKeys.includes(key)??false;
           const detailId=`${id}-details-${encodeURIComponent(key)}`;
-          return <Fragment key={key}><tr data-selected={selection?checked:undefined} data-selection-disabled={selection?.isDisabled?.(row)||undefined}>
+          return <Fragment key={key}><tr className="mk-table-data-row" data-selected={selection?checked:undefined} data-selection-disabled={selection?.isDisabled?.(row)||undefined}>
             {selection&&<td className="mk-table-selection"><SelectionCheckbox label={`Seleccionar ${selection.rowLabel(row)}`} checked={checked} disabled={selection.isDisabled?.(row)} onChange={()=>{const next=new Set(selection.selectedKeys);if(checked)next.delete(key);else next.add(key);selection.onChange([...next]);}}/></td>}
             {expansion&&<td className="mk-table-expansion"><button type="button" className="mk-table-expand" aria-expanded={expanded} aria-controls={expanded?detailId:undefined} aria-label={`${expanded?'Ocultar':'Mostrar'} detalles de ${expansion.rowLabel(row)}`} disabled={expansion.isDisabled?.(row)} onClick={()=>{const next=new Set(expansion.expandedKeys);if(expanded)next.delete(key);else next.add(key);expansion.onChange([...next]);}}><Icon name="chevron-right" size={16}/></button></td>}
-            {columns.map(column=><td key={column.key} data-align={column.align??'left'}>{column.render(row)}</td>)}
-          </tr>{expansion&&expanded&&<tr className="mk-table-detail-row"><td colSpan={colspan}><div id={detailId} role="region" aria-label={`Detalles de ${expansion.rowLabel(row)}`} className="mk-table-detail">{expansion.render(row)}</div></td></tr>}</Fragment>;
+            {columns.map(column=><td key={column.key} data-align={column.align??'left'} data-priority={column.responsivePriority??'primary'}>{column.render(row)}</td>)}
+          </tr>{responsiveColumns.length>0&&<tr className="mk-table-responsive-row"><td colSpan={colspan}><dl className="mk-table-responsive-details">{responsiveColumns.map(column=><div key={column.key} data-priority={column.responsivePriority}><dt>{column.responsiveLabel??(typeof column.header==='string'?column.header:column.key)}</dt><dd>{column.render(row)}</dd></div>)}</dl></td></tr>}{expansion&&expanded&&<tr className="mk-table-detail-row"><td colSpan={colspan}><div id={detailId} role="region" aria-label={`Detalles de ${expansion.rowLabel(row)}`} className="mk-table-detail">{expansion.render(row)}</div></td></tr>}</Fragment>;
         }):<tr><td colSpan={colspan} className="mk-table-state"><div className="mk-table-state-content"><Icon name="database" size={24}/><div>{empty}</div></div></td></tr>}
         {!busy&&loadMore&&(loadMore.hasMore||loadMore.loading||loadMore.error)&&<tr ref={sentinel} className="mk-table-load-more"><td colSpan={colspan}><div className="mk-table-load-more-content">{loadMore.loading?<span role="status"><Icon name="loading" className="mk-table-loading" size={18}/>{loadMore.loadingLabel??'Cargando más registros…'}</span>:loadMore.error?<><span role="alert">{loadMore.error}</span><button type="button" className="mk-table-retry" onClick={loadMore.onRetry??loadMore.onLoadMore}>Reintentar carga</button></>:<button type="button" className="mk-table-retry" onClick={loadMore.onLoadMore}>{loadMore.label??'Cargar más registros'}</button>}</div></td></tr>}
         </tbody>

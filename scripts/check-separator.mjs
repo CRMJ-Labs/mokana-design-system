@@ -37,7 +37,7 @@ try{
     const stroke=page.locator('#accent .mk-separator-stroke');
     const strokeBox=await stroke.boundingBox();
     assert.equal(strokeBox.height,2);assert.equal(strokeBox.width,48);
-    assert.equal(await rgba(stroke),await expectedRole(stroke,'accent-soft-foreground'));
+    assert.equal(await rgba(stroke),await expectedRole(stroke,'accent-text'));
     assert.notEqual(await stroke.evaluate(node=>getComputedStyle(node).borderTopLeftRadius),'0px');
     const accentVertical=await page.locator('#accent .mk-separator-vertical').first().boundingBox();
     assert.equal(accentVertical.width,2);assert.ok(accentVertical.height>=20);
@@ -50,7 +50,7 @@ try{
     const centered=page.locator('#label').getByRole('separator',{name:'O continúa con'});
     assert.equal(await centered.locator('.mk-separator-rule:visible').count(),2);
     const accentLabel=page.locator('#label').getByRole('separator',{name:'02 / Componentes'});
-    assert.equal(await rgba(accentLabel.locator('.mk-eyebrow'),'color'),await expectedRole(accentLabel,'accent-soft-foreground'));
+    assert.equal(await rgba(accentLabel.locator('.mk-eyebrow'),'color'),await expectedRole(accentLabel,'accent-text'));
 
     // Mark: the MOK isotype on the line, hidden from assistive tech.
     const mark=page.locator('#mark .mk-mark').first();

@@ -18,7 +18,7 @@ try{
     await page.goto(`http://127.0.0.1:${port}${route}`);
     await page.locator('.mk-website').evaluate((node,theme)=>node.dataset.theme=theme,theme);
     await page.addStyleTag({content:'*,*::before,*::after{animation:none!important;transition:none!important}'});
-    await page.locator('main').waitFor();
+    await page.locator('#main-content').waitFor();
     // Lazy component pages must finish loading before inspecting their examples.
     await page.locator('.mk-catalog-loading').waitFor({state:'detached'});
     await page.mouse.move(0,0);await page.evaluate(()=>document.activeElement?.blur());
@@ -45,9 +45,10 @@ try{
         await control.hover();
         const hover=await control.evaluate(node=>getComputedStyle(node.closest('.mk-input-control,.mk-clearable-control,.mk-address-search-control')??node).borderTopColor);
         await control.focus();
-        const focus=await control.evaluate(node=>getComputedStyle(node.closest('.mk-input-control,.mk-clearable-control,.mk-address-search-control')??node).borderTopColor);
+        const focus=await control.evaluate(node=>{const style=getComputedStyle(node.closest('.mk-input-control,.mk-clearable-control,.mk-address-search-control')??node);return {border:style.borderTopColor,outline:style.outlineColor};});
         assert.equal(hover,actual.cssColor,`${context}: error boundary survives hover`);
-        assert.equal(focus,actual.cssColor,`${context}: error boundary survives focus`);
+        assert.equal(focus.border,actual.cssColor,`${context}: error boundary survives focus`);
+        assert.equal(focus.outline,actual.cssColor,`${context}: error focus ring uses the error color`);
         await page.mouse.move(0,0);await control.blur();
       }
       measurements.push({theme,route,...actual});
