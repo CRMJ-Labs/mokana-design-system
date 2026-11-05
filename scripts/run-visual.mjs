@@ -1,6 +1,6 @@
 import {spawn} from 'node:child_process';
 import path from 'node:path';
-const consumer=path.resolve('examples/consumer');
+const consumer=path.resolve('tests/fixtures/consumer');
 const server=spawn(process.execPath,[path.join(consumer,'node_modules/vite/bin/vite.js'),'preview','--host','127.0.0.1','--port','3050','--strictPort'],{cwd:consumer,stdio:['ignore','pipe','pipe']});
 let runner;
 const interrupt=()=>{runner?.kill();server.kill();};

@@ -1,5 +1,27 @@
 # Third-party notices
 
+## HeroUI v3 default theme colors
+
+Source: https://github.com/heroui-inc/heroui/blob/b2c65a5b5236550526f23d475b1ad0c6e5eab1a2/packages/styles/themes/default/variables.css
+
+Copyright HeroUI contributors. Licensed under the Apache License, Version 2.0.
+The complete license is distributed in `licenses/Apache-2.0.txt`.
+MOK imports the upstream color declarations without changing their color values or
+mixing formulas, scopes them to `.mk`, and adds compatibility aliases for MOK
+components. Typography, layout, spacing and component implementations remain MOK.
+
+## HeroUI v3 table patterns
+
+Reference: https://heroui.com/en/docs/react/components/table
+
+Style reference: https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/table.css
+
+Table presentation follows HeroUI's primary/secondary surfaces, rounded body and
+header, column separators, resize affordances and footer organization. These
+patterns are adapted to MOK tokens, densities and its existing React API.
+HeroUI source is copyright HeroUI contributors and licensed under Apache 2.0;
+see `licenses/Apache-2.0.txt`. MOK implements its own native table behavior.
+
 ## Inter Variable
 
 Source: https://fontsource.org/fonts/inter

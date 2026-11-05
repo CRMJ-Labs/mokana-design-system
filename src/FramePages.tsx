@@ -9,10 +9,10 @@ function Art({label,tall=false}:{label:string;tall?:boolean}){
   const [width,height]=tall?[360,780]:[1200,750];
   const scale=tall?.6:.8;const cx=width/2;const cy=height*(tall?.42:.46);
   return <svg role="img" aria-label={label} viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid slice" className="mk-frame-art">
-    <rect width={width} height={height} fill="#0b0d16"/>
+    <rect width={width} height={height} fill="var(--eclipse)"/>
     <image href="/brand/isotipo.svg" x={cx-120*scale} y={cy-120*scale} width={240*scale} height={240*scale} style={{filter:'invert(1)'}}/>
-    <text x={cx} y={height*(tall?.62:.76)} fill="#f4f7fb" fontFamily="Inter Variable, sans-serif" fontSize={tall?30:44} fontWeight="600" textAnchor="middle">MOK Design System</text>
-    <text x={cx} y={height*(tall?.67:.83)} fill="#c1c6d2" fontFamily="Inter Variable, sans-serif" fontSize={tall?17:22} textAnchor="middle">Ideas que toman forma</text>
+    <text x={cx} y={height*(tall?.62:.76)} fill="var(--snow)" fontFamily="Inter Variable, sans-serif" fontSize={tall?30:44} fontWeight="600" textAnchor="middle">MOK Design System</text>
+    <text x={cx} y={height*(tall?.67:.83)} fill="var(--inverse-secondary)" fontFamily="Inter Variable, sans-serif" fontSize={tall?17:22} textAnchor="middle">Ideas que toman forma</text>
   </svg>;
 }
 const title='Guía de la identidad de MOK';

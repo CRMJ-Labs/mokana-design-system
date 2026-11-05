@@ -16,7 +16,7 @@ try{
   await page.goto('http://localhost:3015/components/separator');
   const rgba=(locator,property='backgroundColor')=>locator.evaluate((node,property)=>{const canvas=document.createElement('canvas').getContext('2d',{willReadFrequently:true});canvas.fillStyle=getComputedStyle(node)[property];canvas.fillRect(0,0,1,1);return [...canvas.getImageData(0,0,1,1).data].join(',');},property);
   const alpha=async locator=>Number((await rgba(locator)).split(',')[3]);
-  const accents={light:'88,53,217,255',dark:'184,243,61,255'};
+  const expectedRole=(locator,role)=>locator.evaluate((root,role)=>{const probe=document.createElement('span');probe.style.backgroundColor=`var(--${role})`;root.append(probe);const canvas=document.createElement('canvas').getContext('2d');canvas.fillStyle=getComputedStyle(probe).backgroundColor;canvas.fillRect(0,0,1,1);probe.remove();return [...canvas.getImageData(0,0,1,1).data].join(',');},role);
   for(const width of [1280,390])for(const theme of ['light','dark']){
     await page.setViewportSize({width,height:900});
     await page.locator('.mk-website').evaluate((node,theme)=>node.setAttribute('data-theme',theme),theme);
@@ -25,7 +25,7 @@ try{
     assert.equal(await horizontal.getAttribute('aria-orientation'),'horizontal');
     const horizontalBox=await horizontal.boundingBox();const horizontalParent=await page.locator('#horizontal .mk-separator-preview').evaluate(node=>{const style=getComputedStyle(node);return node.clientWidth-parseFloat(style.paddingLeft)-parseFloat(style.paddingRight);});
     assert.equal(horizontalBox.height,1);assert.equal(Math.round(horizontalBox.width),Math.round(horizontalParent));
-    assert.ok(await alpha(horizontal)<255,'default line uses the translucent token');
+    assert.equal(await rgba(horizontal),await expectedRole(horizontal,'separator'),'default line uses the MOK separator token');
 
     const vertical=page.locator('#vertical').getByRole('separator');
     assert.equal(await vertical.count(),3);
@@ -37,7 +37,7 @@ try{
     const stroke=page.locator('#accent .mk-separator-stroke');
     const strokeBox=await stroke.boundingBox();
     assert.equal(strokeBox.height,2);assert.equal(strokeBox.width,48);
-    assert.equal(await rgba(stroke),accents[theme]);
+    assert.equal(await rgba(stroke),await expectedRole(stroke,'accent-soft-foreground'));
     assert.notEqual(await stroke.evaluate(node=>getComputedStyle(node).borderTopLeftRadius),'0px');
     const accentVertical=await page.locator('#accent .mk-separator-vertical').first().boundingBox();
     assert.equal(accentVertical.width,2);assert.ok(accentVertical.height>=20);
@@ -50,7 +50,7 @@ try{
     const centered=page.locator('#label').getByRole('separator',{name:'O continúa con'});
     assert.equal(await centered.locator('.mk-separator-rule:visible').count(),2);
     const accentLabel=page.locator('#label').getByRole('separator',{name:'02 / Componentes'});
-    assert.equal(await rgba(accentLabel.locator('.mk-eyebrow'),'color'),accents[theme]);
+    assert.equal(await rgba(accentLabel.locator('.mk-eyebrow'),'color'),await expectedRole(accentLabel,'accent-soft-foreground'));
 
     // Mark: the MOK isotype on the line, hidden from assistive tech.
     const mark=page.locator('#mark .mk-mark').first();
@@ -60,8 +60,8 @@ try{
 
     // Ink panel: always the dark treatment, whatever the page theme.
     const ink=page.locator('#ink .mk-separator-ink');
-    assert.equal(await rgba(ink),'11,13,22,255');
-    assert.equal(await rgba(ink.getByRole('separator',{name:'MOK Design System'}).locator('.mk-eyebrow'),'color'),accents.dark);
+    assert.equal(await rgba(ink),await expectedRole(ink,'eclipse'));
+    assert.equal(await rgba(ink.getByRole('separator',{name:'MOK Design System'}).locator('.mk-eyebrow'),'color'),await expectedRole(ink,'accent'));
 
     // Inset: hidden from assistive tech, 1px short at each end, solid so it does not darken over the frame.
     const inset=page.locator('#inset .mk-separator');

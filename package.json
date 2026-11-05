@@ -33,7 +33,6 @@
     "prepublishOnly": "npm run verify",
     "check:links": "node scripts/check-links.mjs",
     "consumer:prepare": "node scripts/prepare-consumer.mjs",
-    "consumer:dev": "npm --prefix examples/consumer run dev",
     "test:consumer": "npm run consumer:prepare && node scripts/test-consumer.mjs && node scripts/test-palettes.mjs",
     "docs:api": "node scripts/build-api-reference.mjs",
     "docs:check": "node scripts/build-api-reference.mjs --check",
@@ -71,7 +70,10 @@
     "tokens.json",
     "figma-map.json",
     "THIRD_PARTY_NOTICES.md",
-    "docs/integration.md"
+    "docs/integration.md",
+    "docs/colors.md",
+    "docs/reference/default-theme/variables.css",
+    "licenses"
   ],
   "dependencies": {
     "lucide-react": "1.66.0"

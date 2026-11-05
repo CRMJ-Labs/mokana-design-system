@@ -24,9 +24,11 @@ assert.throws(()=>createPalette({brand:'red'}),/Invalid palette color/);
 assert.throws(()=>createPalette({brand:'#12345'}),/Invalid palette color/);
 assert.throws(()=>createPalette({brand:'#123456',error:'invalid'}),/Invalid palette color/);
 assert.equal(createPalette({brand:'#15803d',light:{background:'#fffafa'}}).light.background,'#fffafa');
-assert.notEqual(mokPalette.light['brand-primary'],mokPalette.dark['brand-primary']);
+assert.equal(mokPalette.light['brand-primary'],mokPalette.dark['brand-primary'],'MOK shares the accent between themes.');
+assert.notEqual(mokPalette.light.background,mokPalette.dark.background);
+console.log('Custom palettes: seed validation, complete role coverage and contrast checks passed for all test seeds.');
 
-const consumer=resolve('examples/consumer');const port=3041;
+const consumer=resolve('tests/fixtures/consumer');const port=3041;
 const server=spawn(process.execPath,[resolve(consumer,'node_modules/vite/bin/vite.js'),'preview','--host','127.0.0.1','--port',String(port),'--strictPort'],{cwd:consumer,stdio:'pipe'});
 let browser;
 try{

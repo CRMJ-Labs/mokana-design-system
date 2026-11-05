@@ -1418,6 +1418,12 @@
         "default": null
       },
       {
+        "name": "expansion",
+        "type": "TableExpansion<T>",
+        "required": false,
+        "default": null
+      },
+      {
         "name": "loading",
         "type": "boolean",
         "required": false,
@@ -1432,6 +1438,12 @@
       {
         "name": "maxHeight",
         "type": "CSSProperties['maxHeight']",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onColumnWidthsChange",
+        "type": "(widths:Record<string,number>)=>void",
         "required": false,
         "default": null
       },
@@ -3878,6 +3890,12 @@
         "default": null
       },
       {
+        "name": "expansion",
+        "type": "TableExpansion<T>",
+        "required": false,
+        "default": null
+      },
+      {
         "name": "footer",
         "type": "ReactNode",
         "required": false,
@@ -3896,8 +3914,20 @@
         "default": "'Cargando registros…'"
       },
       {
+        "name": "loadMore",
+        "type": "TableLoadMore",
+        "required": false,
+        "default": null
+      },
+      {
         "name": "maxHeight",
         "type": "CSSProperties['maxHeight']",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "onColumnWidthsChange",
+        "type": "(widths:Record<string,number>)=>void",
         "required": false,
         "default": null
       },
@@ -3947,7 +3977,7 @@
         "name": "variant",
         "type": "TableVariant",
         "required": false,
-        "default": "'bordered'"
+        "default": "'primary'"
       }
     ]
   },

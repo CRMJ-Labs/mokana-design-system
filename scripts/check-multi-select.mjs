@@ -14,6 +14,20 @@ try{
   const page=await browser.newPage({viewport:{width:1280,height:900}});
   const errors=[];page.on('pageerror',error=>errors.push(error.message));page.on('console',message=>{if(message.type()==='error')errors.push(message.text());});
   await page.goto('http://localhost:3014/components/multi-select');
+  // A compound select must be identifiable before hovering or opening it.
+  for(const width of [1280,390])for(const theme of ['light','dark']){
+    await page.setViewportSize({width,height:900});
+    await page.locator('.mk-website').evaluate((node,theme)=>node.dataset.theme=theme,theme);
+    await page.mouse.move(0,0);
+    for(const trigger of await page.locator('.mk-multi-select-trigger').all()){
+      const style=await trigger.evaluate(node=>{const style=getComputedStyle(node);return {border:parseFloat(style.borderTopWidth),color:style.borderTopColor,background:style.backgroundColor};});
+      assert.equal(style.border,1,`${width} ${theme}: select boundary at rest`);
+      assert.notEqual(style.color,'rgba(0, 0, 0, 0)');
+      assert.notEqual(style.color,style.background);
+    }
+  }
+  await page.setViewportSize({width:1280,height:900});
+  await page.locator('.mk-website').evaluate(node=>node.dataset.theme='light');
   const focused=()=>page.evaluate(()=>{const node=document.activeElement;return `${node?.tagName}:${node?.getAttribute('aria-label')}`;});
   const panel=page.getByRole('dialog');
   const isFocused=locator=>locator.evaluate(node=>node===document.activeElement);

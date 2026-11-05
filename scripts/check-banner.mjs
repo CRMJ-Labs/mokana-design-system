@@ -58,9 +58,9 @@ try{
       assert.ok(contrast(await rgb(button,'color'),await rgb(button,'backgroundColor'))>=4.5,`${name} action ${theme}`);
     }
     // Ink stays the brand panel whatever the theme is.
-    assert.deepEqual((await rgb(first,'backgroundColor')).slice(0,3),[11,13,22]);
-    assert.deepEqual((await rgb(first.locator('.mk-button'),'backgroundColor')).slice(0,3),[184,243,61]);
-    assert.deepEqual((await rgb(page.locator('#mark .mk-mark'),'backgroundColor')).slice(0,3),[184,243,61]);
+    assert.deepEqual((await rgb(first,'backgroundColor')).slice(0,3),[24,24,27]);
+    assert.deepEqual((await rgb(first.locator('.mk-button'),'backgroundColor')).slice(0,3),[4,133,247]);
+    assert.deepEqual((await rgb(page.locator('#mark .mk-mark'),'backgroundColor')).slice(0,3),[252,252,252]);
     // Long text wraps inside the banner and clears the close button.
     const long=page.locator('#long .mk-banner');
     const bounds=await long.boundingBox();const message=await long.locator('.mk-banner-message').boundingBox();const close=await long.locator('.mk-banner-close').boundingBox();

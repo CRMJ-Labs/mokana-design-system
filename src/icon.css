@@ -1,6 +1,5 @@
 .mk-icon{display:inline-block;flex-shrink:0;vertical-align:middle;stroke-linecap:round;stroke-linejoin:round}
 .mk-icon-text{display:inline-flex;align-items:center;gap:var(--space-2)}
 .mk .mk-copy-button>.mk-icon{width:20px;height:20px}.mk .mk-pagination button{display:inline-grid;place-items:center}
-.mk .mk-button>.mk-icon{width:20px;height:20px}.mk .mk-button-sm>.mk-icon{width:16px;height:16px}.mk .mk-button-lg>.mk-icon{width:24px;height:24px}
 .mk .mk-file-icon>.mk-icon{width:16px;height:16px}.mk .mk-input-search-icon>.mk-icon,.mk .mk-input-affix>.mk-icon{width:20px;height:20px}
 .mk .mk-filter-context,.mk .mk-filter-locked{display:inline-flex;align-items:center;gap:var(--space-2)}.mk-command-header button>.mk-icon,.mk-filter-dialog>header button>.mk-icon,.mk-feedback-close>.mk-icon{width:16px;height:16px}

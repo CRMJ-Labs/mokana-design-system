@@ -4,13 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1 --port 3001 --strictPort --force",
     "typecheck": "tsc --noEmit",
     "build": "npm run typecheck && vite build",
     "preview": "vite preview --host 127.0.0.1 --port 3001 --strictPort"
   },
   "dependencies": {
-    "@mokanadev/design-system": "file:../../.consumer-pack/design-system.tgz",
+    "@mokanadev/design-system": "file:../../../.consumer-pack/design-system.tgz",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },

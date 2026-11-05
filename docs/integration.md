@@ -22,10 +22,10 @@ Para probar el código local sin publicarlo:
 
 ```sh
 npm run consumer:prepare
-npm run consumer:dev
+npm run test:visual
 ```
 
-La aplicación en http://127.0.0.1:3001 instala el `.tgz` generado con `npm pack`. Después de cambiar la biblioteca, vuelve a prepararla y reinicia el servidor consumidor para renovar la caché de Vite.
+El fixture `tests/fixtures/consumer` instala el `.tgz` generado con `npm pack` y verifica los exports públicos. Después de cambiar la biblioteca, vuelve a prepararlo. Los scripts de pruebas abren y cierran sus propios servidores.
 
 `styles.css` incluye tokens, reglas tipográficas, componentes e isotipo, sin cargar fuentes. Importa también `fonts.css` para conservar Inter: los WOFF2 se sirven como archivos independientes y el navegador descarga solo los subconjuntos necesarios. Para usar tu propia fuente, omite ese import y define `--font-body` y `--font-heading` en la raíz `.mk`. No es necesario copiar `public/brand` ni `public/fonts`. Los recursos de demostración pertenecen al sitio; `src/examples.css`, `src/documentation.css`, `src/website.css` y los CSS específicos de páginas quedan fuera del paquete.
 
@@ -113,9 +113,9 @@ Para estilos propios de la aplicación utiliza funciones, no nombres de pigmento
 
 Otros tokens disponibles: `--background`, `--surface`, `--foreground`, `--secondary`, `--line`, `--brand-primary`, `--brand-on-primary`, `--focus`, `--action-primary`, `--action-primary-text`, `--error-text`, `--warning-text` y los pares de estado `--success-solid` / `--success-on-solid`, etc. Los tokens base y los valores predeterminados del generador proceden de `tokens.json`; después de cambiarlos ejecuta `npm run tokens`.
 
-La escala exporta `--font-size-9` a `--font-size-64` para los tamaños declarados en JSON; los roles incluyen `--text-body`, `--text-ui`, `--text-caption` y `--text-heading-lg`. También hay pesos `--weight-*`, alturas `--leading-*`, radios `--radius-*`, sombras y espaciado: `--space-2` equivale a 8 px y `--space-0-5` a 2 px. Button consume `--text-ui` y `--space-2` para su texto y separación. Puedes sobrescribirlos en tu raíz para personalizar esos valores. `npm run tokens:check`, incluido en builds de biblioteca y `verify`, falla si los archivos generados no corresponden al JSON.
+La escala exporta `--font-size-9` a `--font-size-64` para los tamaños declarados en JSON; los roles incluyen `--text-body`, `--text-ui`, `--text-caption` y `--text-heading-lg`. También hay pesos `--weight-*`, alturas `--leading-*`, radios `--radius-*`, sombras y espaciado: `--space-2` equivale a 8 px y `--space-0-5` a 2 px. Button consume `--text-button` (14 px en sm/md), `--text-button-lg` (16 px en lg) y `--space-2` para la separación; usa peso 500 y alturas de línea de 20/24 px. Puedes sobrescribir esos roles en tu raíz. Las alturas sm/md/lg son 36/40/44 px por debajo de 768 px y 32/36/40 px desde 768 px; los botones de solo icono son cuadrados con esas dimensiones. El padding horizontal es 12 px en sm y 16 px en md/lg, sin padding vertical. `npm run tokens:check`, incluido en builds de biblioteca y `verify`, falla si los archivos generados no corresponden al JSON.
 
-Prueba `/palette.html` en la aplicación consumidora del puerto 3001. El archivo `examples/consumer/src/palette.ts` concentra sus tres paletas; `defaultAppPalette` selecciona la inicial. Cambiar el selector modifica la paleta completa sin recargar ni recrear los componentes.
+El fixture `tests/fixtures/consumer/src/palette.ts` concentra tres paletas para las pruebas de integración; `defaultAppPalette` selecciona la inicial. Las pruebas verifican que cambiar el selector modifica la paleta completa sin recargar ni recrear los componentes.
 
 ## Atributos HTML y referencias
 
@@ -209,6 +209,23 @@ Un `error` del componente tiene prioridad sobre `aria-invalid`. El `hint` o erro
 `Table` admite datos de servidor mediante `sortMode="manual"`, `sort`, `onSortChange`, `loading`, `error` y `onRetry`. Tu aplicación realiza la petición y controla los resultados.
 
 `DataTable` busca, ordena y pagina datos locales. `searchText` define los campos buscables. La selección es controlada y el checkbox general opera sobre las filas visibles y habilitadas, conservando las seleccionadas en otras páginas.
+
+`variant="primary"` agrupa el cuerpo en una tarjeta; `variant="secondary"` presenta
+una cabecera redondeada y filas abiertas. Ambas conservan los tokens de MOK.
+`bordered`, `plain` y `striped` siguen disponibles.
+
+`expansion={{ expandedKeys, onChange, rowLabel, render }}` controla los detalles de
+cada fila. `Column.resizable` habilita ajuste mediante puntero y teclado; usa
+`defaultWidth`, `minWidth` y `maxWidth` numéricos. `onColumnWidthsChange` recibe los
+anchos para persistirlos. Los anchos y las filas expandidas sobreviven al ordenado.
+
+Para cargar datos remotos por grupos, usa `Table` con
+`loadMore={{ hasMore, loading, onLoadMore, error, onRetry }}`. La carga inicial
+pertenece a `loading`; `loadMore.loading` conserva las filas ya recibidas. El
+observador solicita un grupo por número de filas y mantiene un botón alternativo.
+`autoLoad: false` desactiva las solicitudes automáticas. El consumidor controla
+errores, cancelación de peticiones y `hasMore`. `DataTable` usa paginación local;
+la carga progresiva se ofrece en `Table`.
 
 ## Compatibilidad y verificación
 

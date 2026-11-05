@@ -1,0 +1,53 @@
+/* Component colors use the upstream roles; sizing and layout remain MOK. */
+
+/* Field boundaries remain visible on both the page and a matching surface.
+   Keep MOK's canonical (transparent) field-border token unchanged. */
+.mk :is(.mk-field>input,.mk-field>textarea,select:not([multiple]),
+  .mk-input-control,.mk-clearable-control,.mk-address-search-control,
+  .mk-combobox>input,.mk-input-icon>input,.mk-multi-select-trigger,
+  .mk-feedback-form>textarea,.mk-destructive-field>input,.mk-filter-dialog>input){
+  --mk-control-border:var(--border-secondary);
+  background:var(--field-background);color:var(--field-foreground);
+  border-color:var(--mk-control-border);box-shadow:var(--field-shadow);
+}
+.mk :is(.mk-field>input,.mk-field>textarea,select:not([multiple]),
+  .mk-input-control,.mk-clearable-control,.mk-address-search-control,
+  .mk-combobox>input,.mk-input-icon>input,.mk-multi-select-trigger,
+  .mk-feedback-form>textarea,.mk-destructive-field>input,.mk-filter-dialog>input):where(:hover:not(:disabled):not([data-disabled]):not(:has(>input:disabled))){
+  --mk-control-border:var(--border-tertiary);
+  background:var(--field-hover);
+}
+.mk :is(.mk-field>input,.mk-field>textarea,select:not([multiple]),
+  .mk-input-control,.mk-clearable-control,.mk-address-search-control,
+  .mk-combobox>input,.mk-input-icon>input,.mk-multi-select-trigger,
+  .mk-feedback-form>textarea,.mk-destructive-field>input,.mk-filter-dialog>input):is(:focus-visible,:has(:focus-visible)){
+  --mk-control-border:var(--focus);
+  background:var(--field-focus);border-color:var(--mk-control-border);
+}
+.mk :is(.mk-field>input,.mk-field>textarea,select:not([multiple]),
+  .mk-input-control,.mk-clearable-control,.mk-address-search-control,
+  .mk-combobox>input,.mk-input-icon>input,.mk-multi-select-trigger,
+  .mk-feedback-form>textarea,.mk-destructive-field>input,.mk-filter-dialog>input):is([aria-invalid=true],[data-invalid]:not([data-invalid=false]),:has(>input[aria-invalid=true])){
+  --mk-control-border:var(--danger);border-color:var(--mk-control-border);
+}
+.mk .mk-field input::placeholder,.mk .mk-field textarea::placeholder{color:var(--field-placeholder)}
+/* The wrapper owns the boundary, including validation and keyboard focus. */
+.mk :is(.mk-input-control,.mk-clearable-control,.mk-address-search-control)>input:not([type=hidden]){
+  border:0;box-shadow:none;background:transparent;
+}
+
+.mk .mk-badge-neutral{background:var(--default);color:var(--default-foreground);border-color:transparent}
+.mk .mk-badge-neutral.mk-badge-subtle{background:var(--default-soft);color:var(--default-soft-foreground)}
+.mk .mk-badge-brand.mk-badge-subtle{background:var(--accent-soft);color:var(--accent-soft-foreground)}
+.mk .mk-badge-info.mk-badge-subtle{background:var(--accent-soft);color:var(--accent-soft-foreground)}
+
+.mk .mk-alert-info{background:var(--accent-soft);color:var(--accent-soft-foreground);border-color:transparent}
+.mk .mk-alert-success{background:var(--success-soft);color:var(--success-soft-foreground);border-color:transparent}
+.mk .mk-alert-warning{background:var(--warning-soft);color:var(--warning-soft-foreground);border-color:transparent}
+.mk .mk-alert-error{background:var(--danger-soft);color:var(--danger-soft-foreground);border-color:transparent}
+.mk .mk-alert div>div{color:inherit}
+.mk .mk-alert-info>svg{color:var(--accent-soft-foreground)}
+
+.mk .mk-modal,.mk .mk-popover-panel,.mk .mk-menu-panel,.mk .mk-select-panel{
+  background:var(--overlay);color:var(--overlay-foreground);
+}

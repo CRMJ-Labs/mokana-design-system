@@ -4,11 +4,8 @@ import {chromium} from '@playwright/test';
 
 const port=3025;
 const base=`http://127.0.0.1:${port}`;
-// Syntax colors measured on vercel.com/geist in each mode.
-const colors={
-  light:{keyword:'rgb(189, 40, 100)',function:'rgb(120, 32, 188)',string:'rgb(0, 104, 214)',tag:'rgb(41, 122, 58)',constant:'rgb(41, 122, 58)'},
-  dark:{keyword:'rgb(247, 95, 143)',function:'rgb(191, 122, 240)',string:'rgb(82, 168, 255)',tag:'rgb(98, 192, 115)',constant:'rgb(98, 192, 115)'},
-};
+const roles={keyword:'danger-soft-foreground',function:'accent-soft-foreground',string:'success-soft-foreground',tag:'warning-soft-foreground',constant:'warning-soft-foreground'};
+const expectedColor=(page,kind)=>page.evaluate(role=>{const node=document.createElement('span');node.style.color=`var(--${role})`;document.querySelector('.mk-website').append(node);const color=getComputedStyle(node).color;node.remove();return color;},roles[kind]);
 const server=spawn(process.execPath,['node_modules/vite/bin/vite.js','preview','--config','vite.website.config.ts','--port',String(port)],{stdio:'pipe'});
 let browser;
 try{
@@ -58,13 +55,13 @@ try{
     await page.waitForTimeout(350);
     for(const kind of ['keyword','function','tag']){
       const token=sample.locator(`.mk-token-${kind}`).first();
-      assert.equal(await token.evaluate(node=>getComputedStyle(node).color),colors[theme][kind],`${theme} ${kind}`);
+      assert.equal(await token.evaluate(node=>getComputedStyle(node).color),await expectedColor(page,kind),`${theme} ${kind}`);
     }
     const diff=page.locator('#diff .mk-code-block-frame');
-    assert.equal(await diff.locator('.mk-token-constant').first().evaluate(node=>getComputedStyle(node).color),colors[theme].constant,`${theme} constant`);
+    assert.equal(await diff.locator('.mk-token-constant').first().evaluate(node=>getComputedStyle(node).color),await expectedColor(page,'constant'),`${theme} constant`);
     const languages=page.locator('#language .mk-code-block-frame');
     await languages.getByLabel('Lenguaje').selectOption('lua');
-    assert.equal(await languages.locator('.mk-token-string').first().evaluate(node=>getComputedStyle(node).color),colors[theme].string,`${theme} string`);
+    assert.equal(await languages.locator('.mk-token-string').first().evaluate(node=>getComputedStyle(node).color),await expectedColor(page,'string'),`${theme} string`);
     await languages.getByLabel('Lenguaje').selectOption('js');
   }
   // Tokenizer: JSX and names are read correctly.

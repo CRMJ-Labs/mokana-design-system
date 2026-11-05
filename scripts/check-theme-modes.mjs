@@ -4,10 +4,10 @@ import {chromium} from '@playwright/test';
 
 const port=3024;
 const base=`http://127.0.0.1:${port}`;
-// Neutral values measured on vercel.com/geist in each mode.
+// Exact MOK values, serialized by the browser without converting OKLCH to hex.
 const modes={
-  light:{background:'rgb(250, 250, 250)',surface:'rgb(255, 255, 255)',foreground:'rgb(23, 23, 23)',secondary:'rgb(77, 77, 77)',buttonBackground:'rgb(23, 23, 23)',buttonText:'rgb(255, 255, 255)',scheme:'light'},
-  dark:{background:'rgb(0, 0, 0)',surface:'rgb(10, 10, 10)',foreground:'rgb(237, 237, 237)',secondary:'rgb(161, 161, 161)',buttonBackground:'rgb(237, 237, 237)',buttonText:'rgb(10, 10, 10)',scheme:'dark'},
+  light:{background:'oklch(0.9702 0 0)',surface:'oklch(1 0 0)',foreground:'oklch(0.2103 0.0059 285.89)',secondary:'oklch(0.5517 0.0138 285.94)',buttonBackground:'oklch(0.6204 0.195 253.83)',buttonText:'oklch(0.9911 0 0)',scheme:'light'},
+  dark:{background:'oklch(0.12 0.005 285.823)',surface:'oklch(0.2103 0.0059 285.89)',foreground:'oklch(0.9911 0 0)',secondary:'oklch(0.705 0.015 286.067)',buttonBackground:'oklch(0.6204 0.195 253.83)',buttonText:'oklch(0.9911 0 0)',scheme:'dark'},
 };
 const server=spawn(process.execPath,['node_modules/vite/bin/vite.js','preview','--config','vite.website.config.ts','--port',String(port)],{stdio:'pipe'});
 let browser;
@@ -66,11 +66,11 @@ try{
     assert.equal(await header.getByRole('radio',{name:'Claro'}).isChecked(),true);
     await header.getByRole('radio',{name:'Sistema'}).check();
 
-    // Brand stays: lime action and Ink panel in both modes.
+    // The MOK accent and eclipse panel stay consistent in both modes.
     const primary=page.locator('.mk-doc-hero .mk-button-primary');
     await settle(page);
-    assert.equal(await primary.evaluate(node=>getComputedStyle(node).backgroundColor),'rgb(184, 243, 61)');
-    assert.equal(await page.locator('.mk-doc-hero').evaluate(node=>getComputedStyle(node).backgroundColor),'rgb(11, 13, 22)');
+    assert.equal(await primary.evaluate(node=>getComputedStyle(node).backgroundColor),'oklch(0.6204 0.195 253.83)');
+    assert.equal(await page.locator('.mk-doc-hero').evaluate(node=>getComputedStyle(node).backgroundColor),'oklch(0.2103 0.0059 285.89)');
     assert.deepEqual(errors,[]);
     await page.screenshot({path:`verification/theme-modes-1280-${scheme}.png`});
 
@@ -96,5 +96,5 @@ try{
     assert.equal(await page.evaluate(()=>getComputedStyle(document.documentElement).backgroundColor),modes[expected].background,`before app: stored=${stored} system=${system}`);
     await context.close();
   }
-  console.log('Theme modes: Geist neutrals, three-way switcher, system, persistence, keyboard, brand, mobile and no flash passed.');
+  console.log('Theme modes: MOK colors, three-way switcher, system, persistence, keyboard, brand, mobile and no flash passed.');
 }finally{await browser?.close();server.kill();}

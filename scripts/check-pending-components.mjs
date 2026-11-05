@@ -64,7 +64,7 @@ try{
   await section('callback').getByText('Comando copiado.').waitFor();
   await section('controlled').getByRole('button',{name:'Activar confirmación'}).click();
   await section('controlled').getByRole('button',{name:'Copiado'}).waitFor();
-  assert.equal(await section('inverted').locator('.mk-snippet').evaluate(node=>getComputedStyle(node).backgroundColor),'rgb(11, 13, 22)');
+  assert.equal(await section('inverted').locator('.mk-snippet').evaluate(node=>getComputedStyle(node).backgroundColor),'oklch(0.2103 0.0059 285.89)');
   await open('text-with-copy-button');
   await section('default').getByRole('button',{name:'Copiar dpl_8gmXTT1yJRP8'}).click();
   assert.equal(await page.evaluate(()=>navigator.clipboard.readText()),'dpl_8gmXTT1yJRP8');

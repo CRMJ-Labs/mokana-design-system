@@ -9,9 +9,9 @@ import {ToastProvider,useToasts} from './Toast';
 import {CodeDisclosure} from './CodeComponents';
 import './themes-documentation.css';
 
-const presets=[{name:'MOK',color:'#7557ff'},{name:'Verde',color:'#15803d'},{name:'Azul',color:'#0369a1'},{name:'Rosa',color:'#be185d'},{name:'Naranja',color:'#c2410c'},{name:'Turquesa',color:'#0f766e'}];
+const presets=[{name:'MOK',color:'#0485f7'},{name:'Verde',color:'#15803d'},{name:'Azul',color:'#0369a1'},{name:'Rosa',color:'#be185d'},{name:'Naranja',color:'#c2410c'},{name:'Turquesa',color:'#0f766e'}];
 export function ProductThemes(){
-  const [selected,setSelected]=useState('MOK');const [custom,setCustom]=useState('#7c3aed');
+  const [selected,setSelected]=useState('MOK');const [custom,setCustom]=useState('#0485f7');
   const seed=presets.find(item=>item.name===selected)?.color??custom;
   const palette=useMemo(()=>selected==='MOK'?mokPalette:createPalette({brand:seed}),[selected,seed]);
   const code=`import { createPalette, PaletteProvider, ThemeProvider, ToastProvider${selected==='MOK'?', mokPalette':''} } from '@mokanadev/design-system';\nimport '@mokanadev/design-system/styles.css';\n\nconst appPalette = ${selected==='MOK'?'mokPalette':`createPalette({ brand: '${seed}' })`};\n\n<ThemeProvider defaultTheme="system" storageKey="my-app-theme">\n  <PaletteProvider palette={appPalette}>\n    <ToastProvider><YourApp /></ToastProvider>\n  </PaletteProvider>\n</ThemeProvider>`;

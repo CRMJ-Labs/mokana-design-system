@@ -39,7 +39,7 @@ export function DestructiveActionModal({open,onOpenChange,title,description,veri
       <div className="mk-destructive-modal-body"><h2 id={`${id}-title`}>{title}</h2><div id={`${id}-description`} className="mk-destructive-description">{description}</div>
         <DestructiveConfirmationInput ref={input} verificationPhrase={verificationPhrase} verificationLabel={verificationLabel} value={value} onChange={event=>setValue(event.target.value)} readOnly={loading} error={error}/>
       </div>
-      <footer className="mk-destructive-modal-actions"><Button variant="secondary" disabled={loading} onClick={cancel}>{cancelLabel}</Button><Button type="submit" variant="error" disabled={!canConfirm} loading={loading}>{confirmLabel}</Button></footer>
+      <footer className="mk-destructive-modal-actions"><Button variant="secondary" disabled={loading} onClick={cancel}>{cancelLabel}</Button><Button type="submit" variant="danger" disabled={!canConfirm} loading={loading}>{confirmLabel}</Button></footer>
       {irreversibleDescription!=null&&<div className="mk-destructive-band"><Icon name="warning"/><span>{irreversibleDescription}</span></div>}
     </form>
   </dialog>;

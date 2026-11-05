@@ -82,7 +82,7 @@ export function CodeDisclosure({code,label='Ver código',openLabel='Ocultar cód
 export interface SnippetProps extends Omit<ComponentPropsWithRef<'div'>,'onCopy'> {
   text:string|string[];
   prompt?:boolean;
-  /** Ink panel with a lime prompt, in both themes. */
+  /** Dark panel with a contrasting prompt, in both themes. */
   inverted?:boolean;
   tone?:'default'|'success'|'warning'|'error';
   width?:string|number;

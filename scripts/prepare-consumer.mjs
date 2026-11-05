@@ -18,7 +18,7 @@ run(['pack','--ignore-scripts','--pack-destination',destination,'--cache',join(r
 const archive=readdirSync(destination).find(name=>name.endsWith('.tgz'));
 if(!archive)throw new Error('npm pack did not create an archive');
 renameSync(join(destination,archive),join(destination,'design-system.tgz'));
-const consumer=join(root,'examples/consumer');
+const consumer=join(root,'tests/fixtures/consumer');
 // A file dependency keeps the same version while its contents change between builds.
 rmSync(join(consumer,'node_modules/@mokanadev/design-system'),{recursive:true,force:true});
 const lockPath=join(consumer,'package-lock.json');

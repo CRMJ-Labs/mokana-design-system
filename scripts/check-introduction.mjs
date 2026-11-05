@@ -17,11 +17,11 @@ try{
   await page.goto(url);
   const main=page.locator('#main-content');
 
-  // Hero: one lime primary action inside the site, one external secondary link.
+  // Hero: one accent primary action inside the site, one external secondary link.
   const hero=page.locator('.mk-doc-hero');
   const primary=hero.getByRole('link',{name:'Ver componentes'});
   assert.equal(await hero.getByRole('link').count(),2);
-  assert.deepEqual(await primary.evaluate(node=>{const style=getComputedStyle(node);return [style.backgroundColor,style.color];}),['rgb(184, 243, 61)','rgb(11, 13, 22)']);
+  assert.deepEqual(await primary.evaluate(node=>{const style=getComputedStyle(node);return [style.backgroundColor,style.color];}),['oklch(0.6204 0.195 253.83)','oklch(0.9911 0 0)']);
   assert.equal(await hero.getByRole('link',{name:/Figma/}).getAttribute('target'),'_blank');
   assert.equal(await main.getByRole('link',{name:/código de la landing/}).getAttribute('rel'),'noreferrer');
   assert.equal(await hero.locator('.mk-eyebrow').textContent(),'Versión 0.1.0');

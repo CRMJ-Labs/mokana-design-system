@@ -5,6 +5,7 @@ import {componentCatalog} from './catalog-navigation';
 import {ThemeProvider,ThemeSwitcher,useTheme} from './ThemeSwitcher';
 import {lazy,Suspense} from 'react';
 import {Intro, BrandFoundations, UIFoundations, ProductThemes} from './Documentation';
+import {ColorFoundations} from './ColorFoundations';
 import {AuthPattern, DashboardPattern, CrudPattern, FiltersPattern, EmptyPattern, SettingsPattern} from './patterns';
 import './styles.css';
 import './fonts.css';
@@ -19,7 +20,7 @@ const foundations: Page[] = [
   {label:'Introducción',path:'/introduction',render:()=> <Intro/>},
   {label:'Integración',path:'/integration',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando integración…</p>}><IntegrationPage/></Suspense>},
   {label:'Marca',path:'/foundations/brand',render:()=> <BrandFoundations/>},
-  {label:'Color',path:'/foundations/colors',render:()=> <BrandFoundations/>},
+  {label:'Color',path:'/foundations/colors',render:()=> <ColorFoundations/>},
   {label:'Tipografía',path:'/foundations/typography',render:()=> <BrandFoundations/>},
   {label:'Iconografía',path:'/foundations/iconography',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando iconografía…</p>}><IconographyPage/></Suspense>},
   {label:'Fundamentos de UI',path:'/foundations/ui',render:()=> <UIFoundations/>},

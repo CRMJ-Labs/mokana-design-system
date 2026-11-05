@@ -1,10 +1,9 @@
 import {useId,useState,type ReactNode} from 'react';
 import {Button} from './components';
 import {Input} from './Input';
-import {Icon} from './Icon';
 import {Table,sortTableRows,type TableProps,type TableSort} from './Table';
 
-export interface DataTableProps<T> extends Omit<TableProps<T>,'sort'|'defaultSort'|'onSortChange'|'sortMode'|'toolbar'|'footer'>{
+export interface DataTableProps<T> extends Omit<TableProps<T>,'sort'|'defaultSort'|'onSortChange'|'sortMode'|'toolbar'|'footer'|'loadMore'>{
   searchText?:(row:T)=>string;
   searchLabel?:string;
   pageSize?:number;
@@ -32,7 +31,7 @@ export function DataTable<T>({rows,columns,searchText,searchLabel='Buscar regist
       {selection&&selectedCount>0&&<div className="mk-data-table-selection"><span role="status">{selectedCount} seleccionados</span>{selectionActions}<Button type="button" variant="ghost" size="sm" onClick={()=>selection.onChange([])}>Limpiar selección</Button></div>}
     </>}
     footer={<><p id={regionId} role="status">{loading?'Cargando registros…':error?'No se pudieron cargar los registros.':`${ordered.length?((current-1)*size+1):0}–${Math.min(current*size,ordered.length)} de ${ordered.length} registros`}</p>
-      <nav aria-label={`Paginación de ${props.caption}`} className="mk-data-table-pagination"><Button type="button" size="sm" variant="ghost" aria-label="Página anterior" aria-describedby={regionId} disabled={busy||current===1} onClick={()=>setPage(current-1)}><Icon name="chevron-left" size={16}/></Button><span>Página {current} de {pages}</span><Button type="button" size="sm" variant="ghost" aria-label="Página siguiente" aria-describedby={regionId} disabled={busy||current===pages} onClick={()=>setPage(current+1)}><Icon name="chevron-right" size={16}/></Button></nav>
+      <nav aria-label={`Paginación de ${props.caption}`} className="mk-data-table-pagination"><Button type="button" size="sm" variant="ghost" shape="rounded" svgOnly prefix="chevron-left" aria-label="Página anterior" aria-describedby={regionId} disabled={busy||current===1} onClick={()=>setPage(current-1)}/><span>Página {current} de {pages}</span><Button type="button" size="sm" variant="ghost" shape="rounded" svgOnly prefix="chevron-right" aria-label="Página siguiente" aria-describedby={regionId} disabled={busy||current===pages} onClick={()=>setPage(current+1)}/></nav>
     </>}
   />;
 }

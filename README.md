@@ -1,6 +1,11 @@
 # MOK Design System
 
-Sitio de documentación de MOK: fundamentos, componentes React y patrones de interfaz. Usa Inter, los tokens originales de marca y temas claro y oscuro.
+Sitio de documentación de MOK: fundamentos, componentes React y patrones de interfaz. Usa Inter, los colores exactos del tema predeterminado de MOK y temas claro y oscuro.
+
+La [guía de colores](docs/colors.md) documenta los 74 roles oficiales, su procedencia,
+los alias de MOK y los resultados de contraste. El catálogo completo está en
+`/foundations/colors`. Usa `mokPalette` para conservar la paleta oficial;
+`createPalette` permite crear una identidad personalizada.
 
 ## Abrir la web
 
@@ -58,7 +63,7 @@ Las pruebas del sitio usan Playwright y Microsoft Edge instalado. Comprueban rut
 
 ## Biblioteca React
 
-Para dar una identidad a cada producto define `createPalette({ brand: '#15803d' })` y pasa el resultado a `PaletteProvider` dentro de `ThemeProvider`. Botones, controles, estados, selección y gráficas consumen tokens semánticos compartidos. Consulta [la guía de paletas por aplicación](docs/integration.md#una-paleta-por-aplicación). La demo local está en `/palette.html` de la aplicación consumidora (puerto 3001).
+Para dar una identidad a cada producto define `createPalette({ brand: '#15803d' })` y pasa el resultado a `PaletteProvider` dentro de `ThemeProvider`. Botones, controles, estados, selección y gráficas consumen tokens semánticos compartidos. Consulta [la guía de paletas por aplicación](docs/integration.md#una-paleta-por-aplicación). La configuración utilizada por las pruebas está en `tests/fixtures/consumer/src/palette.ts`.
 
 ```sh
 npm run build:lib
@@ -101,7 +106,7 @@ CI y publicación instalan las dependencias con `npm ci --ignore-scripts`, prepa
 
 ### Comparaciones visuales
 
-Las 28 referencias en `tests/visual/baselines/win32` cubren controles, formularios, superficies y cuatro overlays, en claro/oscuro y a 390/1280 px. Se tomaron antes de consolidar el CSS y se comparan con el paquete instalado, usando fuentes locales y animaciones desactivadas. No constituyen una cobertura visual de los 98 componentes públicos.
+Las 40 referencias en `tests/visual/baselines/win32` cubren controles, tamaños de Button, formularios, superficies, tablas, el desplegable de Select y cuatro overlays, en claro/oscuro y a 390/1280 px. Se comparan con el paquete instalado, usando fuentes locales y animaciones desactivadas. No constituyen una cobertura visual de los 98 componentes públicos.
 
 ```sh
 npm run consumer:prepare
@@ -116,22 +121,22 @@ Genera y revisa estas referencias en Windows con Edge; los workflows usan Window
 
 `prepublishOnly` también ejecuta `verify` para las publicaciones manuales con `npm publish`. El workflow de tags ejecuta esa misma verificación en un paso previo y después usa `npm publish --ignore-scripts` para evitar repetirla. `consumer:prepare` empaqueta con `--ignore-scripts`, por lo que verificar el consumidor no vuelve a entrar en el hook de publicación. Véase el [ciclo de scripts de npm](https://docs.npmjs.com/cli/v11/using-npm/scripts/).
 
-## Integración en una aplicación independiente
+## Verificación del paquete instalado
 
-La aplicación de prueba está en [`examples/consumer`](examples/consumer/README.md). Instala el paquete creado con `npm pack` y utiliza únicamente sus exports públicos:
+El fixture de integración está en [`tests/fixtures/consumer`](tests/fixtures/consumer/README.md). Instala el paquete creado con `npm pack` y utiliza únicamente sus exports públicos:
 
 ```sh
 npm run consumer:prepare
-npm run consumer:dev
+npm run test:visual
 ```
 
-Disponible en http://127.0.0.1:3001. `npm run test:consumer` prepara el paquete y verifica su integración en navegador; también forma parte de `npm run verify`.
+`npm run test:consumer` prepara el paquete y verifica su integración en navegador; también forma parte de `npm run verify`. El fixture es soporte de pruebas, no una aplicación de demostración del producto.
 
 `src/styles.css` y los CSS de componentes forman los estilos publicados. `src/examples.css`, `src/documentation.css`, `src/website.css` y los CSS específicos de páginas pertenecen al sitio y quedan fuera del paquete. `scripts/example-css-classes.json` permite comprobar que las clases extraídas no reaparezcan en el CSS instalado. El paquete conserva tokens, reglas tipográficas, estilos base y utilidades de composición; las fuentes se ofrecen por separado. La raíz `.mk` no impone padding ni altura de página. Cada aplicación define su layout y aplica `data-theme` dentro de su propio `ThemeProvider`.
 
 ## Tablas
 
-El catálogo `/components/table` contiene ocho ejemplos interactivos: tabla de trabajo, densidades y superficies, ordenación numérica, selección controlada, encabezado fijo, carga, vacío y recuperación de errores.
+El catálogo `/components/table` contiene once ejemplos interactivos: superficies primaria y secundaria, selección, expansión, columnas ajustables y carga progresiva, además de búsqueda, paginación y estados de contenido.
 
 ```tsx
 import { DataTable, type Column } from '@mokanadev/design-system';
@@ -147,11 +152,13 @@ const columns: Column<Project>[] = [
   rowKey={row => row.id} searchText={row => row.name} pageSize={5} />;
 ```
 
-`Table` conserva sus props anteriores y añade `density` (`compact`, `normal`, `comfortable`), `variant` (`bordered`, `plain`, `striped`), `selection`, `loading`, `error`, `onRetry`, `stickyHeader` y `maxHeight`. La ordenación puede ser interna o controlada mediante `sort` y `onSortChange`. Para datos de servidor, usa `sortMode="manual"` y gestiona las peticiones en la aplicación.
+`Table` ofrece `density` (`compact`, `normal`, `comfortable`), `variant` (`primary` por defecto, `secondary`, `bordered`, `plain`, `striped`), `selection`, `expansion`, `loadMore`, `loading`, `error`, `onRetry`, `stickyHeader` y `maxHeight`. Conserva la API anterior. La ordenación puede ser interna o controlada mediante `sort` y `onSortChange`. Para datos de servidor, usa `sortMode="manual"` y gestiona las peticiones en la aplicación. `Column.resizable` habilita ajuste por puntero o teclado; `defaultWidth`, `minWidth` y `maxWidth` numéricos delimitan el ancho. `onColumnWidthsChange` permite guardar los anchos resultantes.
 
 `DataTable` compone búsqueda local sin distinguir acentos, ordenación estable sobre todos los resultados y paginación. El checkbox del encabezado afecta a las filas visibles y habilitadas; conserva la selección de otras páginas. `rowLabel` da nombre a cada checkbox. Las acciones por fila se componen con `DotsMenu`; `actions` y `selectionActions` permiten añadir acciones al conjunto.
 
 El CSS de producción está en `src/table.css`. Los estilos exclusivos de los ejemplos están en `src/table-documentation.css` y no se incluyen en el paquete. `node scripts/check-tables.mjs` comprueba los comportamientos, estados, accesibilidad y vistas móvil/escritorio sobre el build de la documentación.
+
+`node scripts/check-table-patterns.mjs` comprueba expansión controlada, redimensionado con puntero/teclado/RTL, carga progresiva con recuperación, selección entre páginas y las cinco superficies en ambos temas y tamaños. Las pruebas visuales de `tables` verifican también estas capacidades desde el paquete instalado.
 
 ## Iconografía
 

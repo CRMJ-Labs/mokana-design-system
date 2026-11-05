@@ -5,7 +5,7 @@ import {resolve} from 'node:path';
 import {chromium,expect} from '@playwright/test';
 import {testInteractionRegressions} from './test-interaction-regressions.mjs';
 
-const consumer=resolve('examples/consumer');
+const consumer=resolve('tests/fixtures/consumer');
 const css=readFileSync(resolve(consumer,'node_modules/@mokanadev/design-system/dist/styles.css'),'utf8');
 const packageRoot=resolve(consumer,'node_modules/@mokanadev/design-system');
 const exampleClasses=JSON.parse(readFileSync('scripts/example-css-classes.json','utf8'));
@@ -119,7 +119,7 @@ try{
   await testInteractionRegressions(page,`http://127.0.0.1:${port}`);
   await page.goto(`http://127.0.0.1:${port}/visual.html?view=controls`);
   const tokenStyles=await page.evaluate(()=>{
-    const root=document.querySelector('.mk');root.style.setProperty('--space-2','20px');root.style.setProperty('--text-ui','18px');
+    const root=document.querySelector('.mk');root.style.setProperty('--space-2','20px');root.style.setProperty('--text-button','18px');
     const style=getComputedStyle(document.querySelector('.mk-button'));
     return {gap:style.gap,fontSize:style.fontSize};
   });
