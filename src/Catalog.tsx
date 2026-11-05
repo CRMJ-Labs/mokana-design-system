@@ -1,4 +1,5 @@
-import {lazy,Suspense,useEffect,type ComponentType,type ReactNode} from 'react';
+import {lazy,Suspense,useRef,type ComponentType,type ReactNode} from 'react';
+import {PageOutline} from './PageOutline';
 
 const pages:Record<string,ComponentType>={
   'address-input':lazy(()=>import('./CoreFormPages').then(module=>({default:module.AddressInputPage}))),
@@ -85,12 +86,12 @@ const ApiReference=lazy(()=>import('./ApiReference').then(module=>({default:modu
 
 export function isComponentImplemented(slug:string){return Object.hasOwn(pages,slug);}
 
-function ReadyPage({slug,children}:{slug:string;children:ReactNode}){
-  useEffect(()=>{if(location.hash){try{document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView();}catch{/* Invalid fragments do not block navigation. */}}},[slug]);
-  return <>{children}</>;
+function ReadyPage({children}:{children:ReactNode}){
+  const content=useRef<HTMLDivElement>(null);
+  return <div className="mk-component-layout"><PageOutline content={content}/><div ref={content} className="mk-component-content">{children}</div></div>;
 }
 
 export function CatalogPage({slug}:{slug:string}){
   const Page=pages[slug];
-  return Page?<Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando componente…</p>}><ReadyPage slug={slug}><Page/><Suspense fallback={<p role="status">Cargando referencia de API…</p>}><ApiReference slug={slug}/></Suspense></ReadyPage></Suspense>:null;
+  return Page?<Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando componente…</p>}><ReadyPage><Page/><Suspense fallback={<p role="status">Cargando referencia de API…</p>}><ApiReference slug={slug}/></Suspense></ReadyPage></Suspense>:null;
 }

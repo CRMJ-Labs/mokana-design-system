@@ -20,7 +20,7 @@ function RecoveryDemo(){
 
 export function ErrorPage(){
   return <article className="mk-docs-component-page"><header><p className="mk-eyebrow">COMPONENTE</p><h1>Error</h1><p>Mensajes claros que explican qué ocurrió y cómo continuar.</p></header>
-    <nav className="mk-error-index" aria-label="Secciones de Error"><a href="#default">Predeterminado</a><a href="#custom-label">Etiqueta personalizada</a><a href="#no-label">Sin etiqueta</a><a href="#sizes">Tamaños</a><a href="#error-property">Propiedad error</a></nav>
+
     <Example id="default" title="Predeterminado" description="El icono y la etiqueta identifican el mensaje sin depender solo del color." code={'<Error>No se pudo cargar el proyecto. Actualiza la página.</Error>'}><Error>No se pudo cargar el proyecto. Actualiza la página.</Error></Example>
     <Example id="custom-label" title="Etiqueta personalizada" description="Especifica el recurso o la operación que produjo el error." code={'<Error label="Error de conexión:">\n  Revisa tu conexión y vuelve a intentarlo.\n</Error>'}><Error label="Error de conexión:">Revisa tu conexión y vuelve a intentarlo.</Error></Example>
     <Example id="no-label" title="Sin etiqueta" description="Omite la etiqueta cuando el contexto ya comunica el estado de error." code={'<Error label={false}>No se pudo verificar el acceso. Inicia sesión de nuevo.</Error>'}><Error label={false}>No se pudo verificar el acceso. Inicia sesión de nuevo.</Error></Example>
@@ -32,7 +32,7 @@ export function ErrorPage(){
 
 export function ErrorCardPage(){
   return <article className="mk-docs-component-page"><header><p className="mk-eyebrow">COMPONENTE</p><h1>Error Card</h1><p>Una tarjeta que explica un estado de error y ofrece un siguiente paso.</p></header>
-    <nav className="mk-error-index" aria-label="Secciones de Error Card"><a href="#default">Predeterminado</a><a href="#with-message">Con mensaje</a><a href="#recovery">Recuperación</a></nav>
+
     <Example id="default" title="Predeterminado" description="Una tarjeta compacta con un icono y un título que identifica el problema." code={'<ErrorCard title="No quedan créditos" />'}><ErrorCard title="No quedan créditos"/></Example>
     <Example id="with-message" title="Con mensaje" description="Añade contexto e instrucciones sin sobrecargar el título." code={'<ErrorCard title="No tienes acceso a este proyecto">\n  Solicita acceso al administrador del equipo para continuar.\n</ErrorCard>'}><ErrorCard title="No tienes acceso a este proyecto">Solicita acceso al administrador del equipo para continuar.</ErrorCard></Example>
     <Example id="recovery" title="Recuperación" description="El reintento simula una solicitud de 800 ms, bloquea clics repetidos y muestra el resultado. El identificador de demostración se puede consultar en los detalles." code={'<div aria-live="polite" aria-busy={loading}>\n  <ErrorCard\n    title="No se pudieron cargar los proyectos"\n    requestId={requestId}\n    action={<Button disabled={loading} loading={loading} onClick={retry}>Volver a intentar</Button>}\n  >\n    Revisa tu conexión y vuelve a intentarlo.\n  </ErrorCard>\n</div>'}><RecoveryDemo/></Example>

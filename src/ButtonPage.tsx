@@ -21,7 +21,7 @@ export function ButtonPage(){
   const [clicks,setClicks]=useState(0);
   async function save(){setLoading(true);setNotice('Guardando cambios…');await new Promise(resolve=>setTimeout(resolve,1200));setLoading(false);setNotice('Cambios guardados.');}
   return <article className="mk-docs-component-page"><header><p className="mk-eyebrow">COMPONENTE</p><h1>Button</h1><p>Siete variantes con los colores de MOK para expresar jerarquía, navegación y acciones destructivas.</p></header>
-    <nav className="mk-button-index" aria-label="Secciones de Button">{[['variants','Variantes'],['sizes','Tamaños'],['comparison','Comparación'],['shapes','Formas'],['icons','Iconos'],['rounded','Redondeados'],['loading','Carga'],['disabled','Deshabilitados'],['link','Enlaces'],['custom','Personalización'],['legacy','Compatibilidad']].map(([id,label])=><a key={id} href={'#'+id}>{label}</a>)}</nav>
+
     <Example id="variants" title="Variantes" description="Primary destaca la acción principal; Secondary y Tertiary aportan dos énfasis sobre fondo neutro. Outline dibuja el borde y Ghost deja el fondo libre. Danger y Danger Soft expresan acciones destructivas." code={variantCode}>
       {variants.map(({variant,label})=><Button key={variant} variant={variant} onClick={()=>setVariantNotice(label+' seleccionado.')}>{label}</Button>)}
       {variantNotice&&<span className="mk-button-feedback" role="status">{variantNotice}</span>}

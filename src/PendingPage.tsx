@@ -3,8 +3,8 @@ import type {ReactNode} from 'react';
 import './status-components.css';
 
 export function ComponentPage({title,intro,sections,reference,guidelines,children,exportName}:{title:string;intro:string;sections:string[][];reference?:string;guidelines:ReactNode;children:ReactNode;exportName?:string}){
-  return <article className="mk-docs-component-page"><header><p className="mk-eyebrow">COMPONENTE</p><h1>{title}</h1><p>{intro}</p></header>
-    <nav className="mk-pending-index" aria-label={`Secciones de ${title}`}>{sections.map(([id,name])=><a href={`#${id}`} key={id}>{name}</a>)}</nav>
+  return <article className="mk-docs-component-page" data-page-sections={JSON.stringify(sections)}><header><p className="mk-eyebrow">COMPONENTE</p><h1>{title}</h1><p>{intro}</p></header>
+
     {children}
     <section className="mk-pending-guidelines"><h2>Uso y accesibilidad</h2>{guidelines}<p>Importa {exportName??({'Keyboard Input':'Kbd','JSON View':'JsonView'} as Record<string,string>)[title]??title.replace(/\s/g,'')} desde <code>@mokanadev/design-system</code>.</p>{reference&&<a href={reference} target="_blank" rel="noreferrer">Referencia: Geist {title}</a>}</section>
   </article>;

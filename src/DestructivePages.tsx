@@ -11,7 +11,7 @@ function Example({id,title,description,code,children}:{id:string;title:string;de
   return <section id={id} className="mk-destructive-example"><h2><a href={`#${id}`}>{title}</a></h2><p>{description}</p><div className="mk-destructive-preview">{children}</div><CodeDisclosure code={code}/></section>;
 }
 function Page({title,description,sections,children}:{title:string;description:string;sections:[string,string][];children:ReactNode}){
-  return <article className="mk-docs-component-page"><header><p className="mk-eyebrow">COMPONENTE</p><h1>{title}</h1><p>{description}</p></header><nav className="mk-destructive-index" aria-label={`Secciones de ${title}`}>{sections.map(([id,label])=><a href={`#${id}`} key={id}>{label}</a>)}</nav>{children}</article>;
+  return <article className="mk-docs-component-page" data-page-sections={JSON.stringify(sections)}><header><p className="mk-eyebrow">COMPONENTE</p><h1>{title}</h1><p>{description}</p></header>{children}</article>;
 }
 function Guidelines({slug,children}:{slug:string;children:ReactNode}){return <section className="mk-destructive-guidelines"><h2>Uso y accesibilidad</h2>{children}<a href={`https://vercel.com/geist/${slug}`} target="_blank" rel="noreferrer">Referencia: Geist</a></section>;}
 

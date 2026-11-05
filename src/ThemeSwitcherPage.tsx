@@ -9,7 +9,7 @@ export function ThemeSwitcherPage(){
   const {theme,resolvedTheme}=useTheme();
   const names={system:'Sistema',light:'Claro',dark:'Oscuro'};
   return <article className="mk-docs-component-page"><header><p className="mk-eyebrow">COMPONENTE</p><h1>Theme Switcher</h1><p>Selecciona el tema claro, oscuro o la apariencia del sistema.</p></header>
-    <nav className="mk-theme-index" aria-label="Secciones de Theme Switcher"><a href="#default">Predeterminado</a><a href="#small">Compacto</a><a href="#disabled">Deshabilitado</a></nav>
+
     <Example id="default" title="Predeterminado" description="La selección cambia el tema de todo el sitio y se conserva al recargar. Sistema sigue la preferencia de tu dispositivo, incluso si cambia mientras usas la página." code={'<ThemeSwitcher />'}><ThemeSwitcher/><p role="status">Preferencia: {names[theme]} · Tema activo: {names[resolvedTheme]}</p></Example>
     <Example id="small" title="Compacto" description="Usa small en pies de página y espacios reducidos. Los ejemplos comparten la misma preferencia." code={'<ThemeSwitcher small />'}><ThemeSwitcher small/></Example>
     <Example id="disabled" title="Deshabilitado" description="El control muestra la selección actual sin permitir cambios. También se deshabilita si ThemeProvider define forcedTheme." code={'<ThemeSwitcher disabled />'}><ThemeSwitcher disabled/></Example>

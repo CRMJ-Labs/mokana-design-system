@@ -26,7 +26,7 @@ function ResultsDemo(){
 
 export function LoadMoreButtonPage(){
   return <article className="mk-docs-component-page"><header><p className="mk-eyebrow">COMPONENTE</p><h1>Load More Button</h1><p>Un botón de ancho completo para añadir resultados a una lista sin perder el contexto.</p></header>
-    <nav className="mk-load-more-index" aria-label="Secciones de Load More Button"><a href="#default">Predeterminado</a><a href="#loading">Cargando</a><a href="#no-gap">Sin separación</a><a href="#no-border-radius">Sin bordes redondeados</a><a href="#custom-text">Texto personalizado</a></nav>
+
     <Example id="default" title="Predeterminado" description="Carga tres proyectos por vez. El botón bloquea nuevas solicitudes durante la carga y se deshabilita al llegar al final." code={'<LoadMoreButton loading={loading} disabled={!hasMore} onClick={loadNextPage}>\n  Cargar más\n</LoadMoreButton>'}><ResultsDemo/></Example>
     <Example id="loading" title="Cargando" description="Un indicador acompaña el texto de carga. loadingText permite personalizar el mensaje." code={'<LoadMoreButton loading />\n<LoadMoreButton loading loadingText="Buscando proyectos…" />'}><LoadMoreButton loading/><LoadMoreButton loading loadingText="Buscando proyectos…"/></Example>
     <Example id="no-gap" title="Sin separación" description="Elimina el margen superior para unir la acción a la lista." code={'<LoadMoreButton noGap />'}><ul className="mk-load-more-results"><li><strong>Proyecto MOK</strong><span>Listo</span></li></ul><SinglePageDemo noGap/></Example>

@@ -8,7 +8,7 @@ export function ClearableInputPage(){
   const [query,setQuery]=useState('');
   const [cleared,setCleared]=useState(0);
   return <article className="mk-docs-component-page"><header><p className="mk-eyebrow">COMPONENTE</p><h1>Clearable Input</h1><p>Un campo de texto que se limpia con un botón o con Escape, conservando el foco para continuar escribiendo.</p></header>
-    <nav className="mk-clearable-index" aria-label="Secciones de Clearable Input"><a href="#default">Predeterminado</a><a href="#label">Con etiqueta</a><a href="#shortcut">Atajo de teclado</a><a href="#disabled">Deshabilitado</a><a href="#callback">Al limpiar</a></nav>
+
     <Example id="default" title="Predeterminado" description="Escribe para mostrar el botón de limpieza. El campo conserva un nombre accesible aunque no tenga etiqueta visible." code={'<ClearableInput aria-label="Texto de ejemplo" placeholder="Escribe algo…" />'}><ClearableInput aria-label="Texto de ejemplo" placeholder="Escribe algo…"/></Example>
     <Example id="label" title="Con etiqueta" description="Usa una etiqueta persistente para identificar el dato que esperas." code={'<ClearableInput label="Correo electrónico" type="email" placeholder="nombre@equipo.com" />'}><ClearableInput label="Correo electrónico" type="email" placeholder="nombre@equipo.com" hint="Usa tu correo de trabajo."/></Example>
     <Example id="shortcut" title="Con atajo de teclado" description="Pulsa Ctrl K o ⌘ K para enfocar la búsqueda. Escape limpia su contenido." code={'<ClearableInput aria-label="Buscar proyectos" placeholder="Buscar proyectos…" icon="search" shortcut />'}><ClearableInput aria-label="Buscar proyectos" placeholder="Buscar proyectos…" icon="search" shortcut/></Example>

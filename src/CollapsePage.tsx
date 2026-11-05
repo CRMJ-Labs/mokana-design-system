@@ -10,7 +10,7 @@ function Example({id,title,description,code,children}:{id:string;title:string;de
 
 export function CollapsePage(){
   return <article className="mk-docs-component-page"><header><p className="mk-eyebrow">COMPONENTE</p><h1>Collapse</h1><p>Encabezados que revelan contenido relacionado. Organiza información opcional sin perder el contexto de la página.</p></header>
-    <nav className="mk-collapse-index" aria-label="Secciones de Collapse"><a href="#default">Predeterminado</a><a href="#expanded">Expandido</a><a href="#multiple">Múltiple</a><a href="#small">Compacto</a></nav>
+
     <Example id="default" title="Predeterminado" description="Los paneles comienzan cerrados. Abrir uno cierra el anterior." code={'<CollapseGroup items={questions} />'}><CollapseGroup items={questions}/></Example>
     <Example id="expanded" title="Expandido" description="Define el panel que estará abierto al entrar, cuando su contenido sea útil desde el primer momento." code={'<CollapseGroup items={questions} defaultExpanded={["system"]} />'}><CollapseGroup items={questions} defaultExpanded={['system']}/></Example>
     <Example id="multiple" title="Múltiple" description="Permite abrir varios paneles al mismo tiempo cuando sus contenidos son independientes." code={'<CollapseGroup items={questions} multiple />'}><CollapseGroup items={questions} multiple/></Example>

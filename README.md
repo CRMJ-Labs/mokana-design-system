@@ -2,6 +2,11 @@
 
 Sitio de documentación de MOK: fundamentos, componentes React y patrones de interfaz. Usa Inter, los colores exactos del tema predeterminado de MOK y temas claro y oscuro.
 
+Cada página de componente tiene un índice «En esta página» a la derecha, con
+sección activa al desplazarse y subapartados de API. En móvil y tablet funciona
+como un desplegable. `node scripts/check-page-outline.mjs` comprueba los enlaces,
+el foco, el historial, los índices de todo el catálogo y los tamaños responsivos.
+
 La [guía de colores](docs/colors.md) documenta los 74 roles oficiales, su procedencia,
 los alias de MOK y los resultados de contraste. El catálogo completo está en
 `/foundations/colors`. Usa `mokPalette` para conservar la paleta oficial;

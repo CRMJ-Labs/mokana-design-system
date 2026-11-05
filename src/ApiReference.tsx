@@ -7,7 +7,7 @@ export const apiNames=reference.map(item=>item.name);
 export function ApiReference({slug,names}:{slug?:string;names?:string[]}){
   const requested=names??(slug?(aliases[slug]??[slug.split('-').map(part=>part.charAt(0).toUpperCase()+part.slice(1)).join('')]):[]);
   const entries=reference.filter(entry=>requested.includes(entry.name));
-  return <section className="mk-api-reference" aria-label="Referencia de API">
+  return <section id="api" className="mk-api-reference" aria-label="Referencia de API">
     <h2>API y valores predeterminados</h2>
     <p>Propiedades propias extraídas del código TypeScript. Los atributos HTML heredados se consultan con el autocompletado del tipo exportado; no se repiten en estas tablas. «—» indica que no hay un valor predeterminado declarado al desestructurar las propiedades.</p>
     {entries.length?entries.map(entry=><section className="mk-api-component" key={entry.name} id={`api-${entry.name}`}>

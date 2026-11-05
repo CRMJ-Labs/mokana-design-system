@@ -20,7 +20,7 @@ export function AvatarPage(){
   const [overlap,setOverlap]=useState(12);
   return <article className="mk-docs-component-page mk-avatar-page">
     <header><p className="mk-eyebrow">COMPONENTE</p><h1>Avatar</h1><p>Representa a una persona o un equipo. Agrupa avatares para mostrar a quienes participan en un proyecto.</p></header>
-    <nav className="mk-avatar-index" aria-label="Secciones de Avatar">{[['group','Grupo'],['stacking','Orden'],['overlap','Solapamiento'],['size','Tamaño'],['git','Git'],['icon','Icono'],['letter','Iniciales'],['placeholder','Carga']].map(([id,label])=><a key={id} href={`#${id}`}>{label}</a>)}</nav>
+
     <Example id="group" title="Grupo" description="Muestra los miembros de un equipo y resume los restantes con un contador." code={'<AvatarGroup members={members} max={4} />'}><AvatarGroup members={members}/></Example>
     <Example id="stacking" title="Orden de apilado" description="La primera persona aparece encima por defecto. Invierte el apilado sin cambiar el orden de los miembros." code={'<AvatarGroup members={members} reverse={reverse} />'}>
       <AvatarGroup members={members} reverse={reverse}/><button type="button" className="mk-button mk-button-secondary" aria-pressed={reverse} onClick={()=>setReverse(!reverse)}>{reverse?'Último encima':'Primero encima'}</button>

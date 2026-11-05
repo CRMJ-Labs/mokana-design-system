@@ -19,7 +19,7 @@ function Example({id,title,description,code,children}:{id:string;title:string;de
 export function BadgePage(){
   return <article className="mk-docs-component-page mk-badge-page">
     <header><p className="mk-eyebrow">COMPONENTE</p><h1>Badge</h1><p>Una etiqueta breve para destacar un estado, clasificar contenido o aportar contexto junto a un elemento.</p></header>
-    <nav aria-label="Secciones de Badge"><a href="#variants">Variantes</a><a href="#sizes">Tamaños</a><a href="#icons">Iconos</a><a href="#pill">Pill</a><a href="#best-practices">Buenas prácticas</a></nav>
+
     <Example id="variants" title="Variantes" description="Tonos de MOK para estados y categorías. Cada variante incluye una versión suave para superficies con mayor densidad." code={'<Badge tone="brand" icon={false}>MOK</Badge>\n<Badge tone="info" subtle icon={false}>Información</Badge>\n<Badge tone="success" icon={false}>Activo</Badge>'}>
       <div className="mk-badge-variant-grid">{variants.map(({tone,label})=><div className="mk-badge-variant-row" key={tone}><Badge tone={tone} icon={false}>{label}</Badge><Badge tone={tone} subtle icon={false}>{label}</Badge></div>)}</div>
     </Example>
