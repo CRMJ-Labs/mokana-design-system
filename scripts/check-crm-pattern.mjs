@@ -30,6 +30,12 @@ try{
   const topBars=await crm.locator('.mk-crm-workspace,.mk-crm-content-nav').evaluateAll(nodes=>nodes.map(node=>({top:Math.round(node.getBoundingClientRect().top),height:Math.round(node.getBoundingClientRect().height)})));
   assert.deepEqual(topBars,[{top:topBars[0].top,height:64},{top:topBars[0].top,height:64}],'Sidebar and content controls must share the first row.');
   assert.equal(await crm.locator('.mk-crm-sidebar-toggle').evaluate(node=>Math.round(node.getBoundingClientRect().left-node.closest('.mk-crm-content-nav').getBoundingClientRect().left)),16,'Sidebar control must stay close to the divider.');
+  await crm.getByRole('button',{name:'Abrir menú de Milton Escorcia'}).click();
+  const userMenu=page.getByRole('dialog',{name:'Menú de Milton Escorcia'});
+  for(const label of ['Perfil','Configuración','Cerrar sesión'])await expect(userMenu.getByRole('button',{name:label,exact:true})).toBeVisible();
+  for(const label of ['Sistema','Claro','Oscuro'])await expect(userMenu.getByRole('radio',{name:label,exact:true})).toHaveCount(1);
+  await page.keyboard.press('Escape');
+  await expect(userMenu).toHaveCount(0);
 
   await crm.getByRole('button',{name:'Cerrar navegación lateral'}).click();
   await expect(crm.locator('.mk-crm-sidebar')).toHaveClass(/is-collapsed/);
@@ -37,6 +43,8 @@ try{
   await expect(crm.locator('.mk-crm-sidebar nav').first().locator('a').first().locator('svg')).toBeVisible();
   assert.equal(await crm.locator('.mk-crm-sidebar nav').first().locator('a span').first().isVisible(),false,'Collapsed CRM navigation label remains visible.');
   await expect(crm.locator('.mk-crm-workspace .mk-crm-avatar')).toBeVisible();
+  await expect(crm.locator('.mk-crm-user-trigger .mk-crm-avatar')).toBeVisible();
+  assert.equal(await crm.locator('.mk-crm-user-copy').isVisible(),false,'Collapsed CRM user details remain visible.');
   assert.equal(await crm.locator('.mk-app-shell-sidebar').evaluate(node=>Math.round(node.getBoundingClientRect().width)),72,'Collapsed CRM sidebar must become a 72px icon rail.');
   await expect(crm.getByRole('button',{name:'Abrir navegación lateral'})).toBeVisible();
   await crm.getByRole('button',{name:'Abrir navegación lateral'}).click();
