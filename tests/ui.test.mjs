@@ -94,7 +94,14 @@ test('MOK: pages, contrast, mobile, keyboard and local workflows', async () => {
     await page.getByLabel('Correo electrónico').fill('demo@example.com');
     await page.getByLabel('Contraseña').fill('abc');
     await page.getByRole('button', { name: 'Entrar', exact: true }).click();
-    assert.equal(await page.getByLabel('Contraseña').getAttribute('aria-invalid'), 'true');
+    const invalidPassword = page.getByLabel('Contraseña');
+    assert.equal(await invalidPassword.getAttribute('aria-invalid'), 'true');
+    await invalidPassword.focus();
+    assert.deepEqual(await invalidPassword.evaluate(node => {
+      const frame = node.closest('.mk-input-control') ?? node;
+      const style = getComputedStyle(frame);
+      return { borderWidth: style.borderTopWidth, outlineWidth: style.outlineWidth };
+    }), { borderWidth: '2px', outlineWidth: '0px' }, 'Invalid password focus has one red boundary');
     await page.getByLabel('Contraseña').fill('clave-larga-demo');
     await page.getByRole('button', { name: 'Entrar', exact: true }).click();
     assert.match(await page.locator('#main-content').getByRole('status').textContent(), /Demostración completada/);

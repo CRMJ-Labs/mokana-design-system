@@ -26,6 +26,9 @@
 
 /* Address Input */
 
+/* Invalid fields keep a single error boundary, regardless of lazy CSS chunk order. */
+.mk :where(input,select,textarea)[aria-invalid=true]:focus-visible,.mk .mk-input-control:is([data-invalid=true],:has(>input[aria-invalid=true])):has(>input:focus-visible),.mk .mk-clearable-control[data-invalid]:focus-within,.mk .mk-address-search-control:has(input[aria-invalid=true]):focus-within{outline-width:0!important;border-color:var(--error-text)}
+
 .mk ::selection{background:var(--selection-background);color:var(--selection-text)}.mk input{accent-color:var(--brand-primary)}
 
 /* Bridge the visual gap so a slow pointer can reach the tooltip. */

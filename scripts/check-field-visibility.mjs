@@ -35,7 +35,7 @@ try{
           innerBorder:frame===node?null:parseFloat(own.borderTopWidth),disabled:node.matches(':disabled'),readonly:node.readOnly??false,
           invalid:node.getAttribute('aria-invalid')==='true',danger:rgba(style.getPropertyValue('--danger').trim())};
       });
-      const context=`${theme} ${route}: ${actual.label??actual.frame}`;
+      const context=`${theme} ${route}: ${actual.label??actual.frame} [${actual.frame}]`;
       assert.ok(actual.border>0,`${context}: missing resting boundary`);
       assert.ok(actual.color[3]>0,`${context}: transparent resting boundary`);
       assert.notDeepEqual(actual.color,actual.background,`${context}: boundary blends into its background`);
@@ -45,10 +45,11 @@ try{
         await control.hover();
         const hover=await control.evaluate(node=>getComputedStyle(node.closest('.mk-input-control,.mk-clearable-control,.mk-address-search-control')??node).borderTopColor);
         await control.focus();
-        const focus=await control.evaluate(node=>{const style=getComputedStyle(node.closest('.mk-input-control,.mk-clearable-control,.mk-address-search-control')??node);return {border:style.borderTopColor,outline:style.outlineColor};});
+        const focus=await control.evaluate(node=>{const style=getComputedStyle(node.closest('.mk-input-control,.mk-clearable-control,.mk-address-search-control')??node);return {border:style.borderTopColor,borderWidth:parseFloat(style.borderTopWidth),outlineWidth:parseFloat(style.outlineWidth)};});
         assert.equal(hover,actual.cssColor,`${context}: error boundary survives hover`);
         assert.equal(focus.border,actual.cssColor,`${context}: error boundary survives focus`);
-        assert.equal(focus.outline,actual.cssColor,`${context}: error focus ring uses the error color`);
+        assert.equal(focus.borderWidth,2,`${context}: error focus keeps one boundary`);
+        assert.equal(focus.outlineWidth,0,`${context}: error focus has one visual stroke`);
         await page.mouse.move(0,0);await control.blur();
       }
       measurements.push({theme,route,...actual});

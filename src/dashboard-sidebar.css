@@ -1,3 +1,11 @@
+.mk-dashboard-pattern .mk-app-shell-navigation{
+  display:none;
+}
+
+.mk-dashboard-sidebar{
+  padding-top:var(--space-4);
+}
+
 .mk-dashboard-pattern.is-sidebar-collapsed .mk-app-shell-body{
   grid-template-columns:72px minmax(0,1fr);
 }
@@ -7,20 +15,161 @@
   padding:var(--space-4) var(--space-2);
 }
 
-.mk-dashboard-sidebar.is-collapsed .mk-dashboard-account{
+.mk-dashboard-sidebar.is-collapsed>nav{
   width:100%;
-  justify-content:center;
-  padding-bottom:0;
-  border-bottom:0;
+  align-items:center;
 }
 
-.mk-dashboard-sidebar.is-collapsed .mk-dashboard-avatar,
-.mk-dashboard-sidebar.is-collapsed .mk-dashboard-account>div,
-.mk-dashboard-sidebar.is-collapsed>nav{
+.mk-dashboard-sidebar.is-collapsed>nav .mk-badge{
   display:none;
 }
 
+.mk-dashboard-sidebar.is-collapsed>nav a{
+  justify-content:center;
+  width:40px;
+  min-height:40px;
+  padding:0;
+}
+
+.mk-dashboard-sidebar.is-collapsed>nav a>span:not(.mk-badge){
+  display:none;
+}
+
+.mk-dashboard-user-popover{
+  display:flex;
+  width:100%;
+  margin-top:auto;
+}
+
+.mk .mk-dashboard-user-trigger{
+  display:flex;
+  align-items:center;
+  gap:var(--space-3);
+  width:100%;
+  min-height:48px;
+  padding:var(--space-1) var(--space-2);
+  border:0;
+  border-radius:var(--radius-md);
+  background:transparent;
+  color:var(--foreground);
+  font:inherit;
+  text-align:left;
+}
+
+.mk .mk-dashboard-user-trigger:hover,
+.mk .mk-dashboard-user-trigger[aria-expanded=true]{background:var(--default-soft-hover)}
+
+.mk-dashboard-user-copy,
+.mk-dashboard-user-summary>span:last-child{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+.mk-dashboard-user-copy small,
+.mk-dashboard-user-summary small{
+  overflow:hidden;
+  color:var(--secondary);
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.mk-dashboard-user-popover .mk-popover-panel{
+  width:264px;
+  padding:var(--space-3);
+}
+
+.mk-dashboard-user-popover .mk-popover-heading{display:none}
+
+.mk-dashboard-user-card{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-1);
+}
+
+.mk-dashboard-user-summary{
+  display:flex;
+  align-items:center;
+  gap:var(--space-3);
+  padding:var(--space-1) var(--space-2) var(--space-3);
+}
+
+.mk .mk-dashboard-user-card>button,
+.mk-dashboard-user-theme{
+  display:flex;
+  align-items:center;
+  gap:var(--space-3);
+  width:100%;
+  min-height:40px;
+  padding:var(--space-2) var(--space-2-5);
+  border:0;
+  border-radius:var(--radius-sm);
+  background:transparent;
+  color:var(--foreground);
+  font:inherit;
+  font-weight:var(--weight-semibold);
+  text-align:left;
+}
+
+.mk .mk-dashboard-user-card>button:hover{background:var(--default-soft-hover)}
+.mk .mk-dashboard-user-card>button.is-danger{color:var(--error-text)}
+.mk-dashboard-user-theme{justify-content:space-between}
+.mk-dashboard-user-theme>span{display:flex;align-items:center;gap:var(--space-3)}
+
+.mk-dashboard-sidebar.is-collapsed .mk-dashboard-user-popover,
+.mk-dashboard-sidebar.is-collapsed .mk-dashboard-user-trigger{
+  width:40px;
+}
+
+.mk-dashboard-sidebar.is-collapsed .mk-dashboard-user-trigger{
+  justify-content:center;
+  padding:0;
+}
+
+.mk-dashboard-sidebar.is-collapsed .mk-dashboard-user-copy{display:none}
+
+.mk-dashboard-content-nav{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(220px,460px) minmax(0,1fr);
+  align-items:center;
+  gap:var(--space-4);
+  min-height:64px;
+  padding:var(--space-2) var(--space-4);
+  border-bottom:1px solid var(--line);
+  background:var(--surface);
+  font-size:var(--text-ui);
+}
+
+.mk-dashboard-content-section,
+.mk-dashboard-content-actions{
+  display:flex;
+  align-items:center;
+  gap:var(--space-2-5);
+  flex:none;
+}
+
+.mk-dashboard-content-section{justify-self:start}
+.mk-dashboard-content-section>strong{font-weight:var(--weight-semibold)}
+
+.mk-dashboard-content-search{
+  width:100%;
+  min-width:0;
+}
+
+.mk-dashboard-content-actions{
+  justify-self:end;
+}
+
+@media(max-width:1080px){
+  .mk-dashboard-content-nav{display:flex;flex-wrap:wrap}
+  .mk-dashboard-content-search{order:3;flex:1 1 100%;max-width:none}
+  .mk-dashboard-content-actions{margin-left:auto}
+}
+
 @media(max-width:900px){
+  .mk-dashboard-pattern .mk-app-shell-navigation{display:block}
+  .mk-dashboard-pattern .mk-app-shell-body,
   .mk-dashboard-pattern.is-sidebar-collapsed .mk-app-shell-body{grid-template-columns:minmax(0,1fr)}
   .mk-dashboard-sidebar.is-collapsed{display:none}
+  .mk-dashboard-sidebar-toggle{display:none!important}
 }

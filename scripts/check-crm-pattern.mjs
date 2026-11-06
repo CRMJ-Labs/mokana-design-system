@@ -21,6 +21,27 @@ try{
   await expect(crm.getByRole('img',{name:/Evolución de días/})).toHaveCount(1);
   await expect(crm.getByRole('img',{name:/Pronóstico ponderado/})).toHaveCount(1);
   await expect(crm.getByRole('img',{name:/Embudo de oportunidades/})).toHaveCount(1);
+  await expect(crm.locator('.mk-app-shell-header')).toHaveCount(0);
+  assert.equal(await crm.locator('.mk-app-shell-navigation').isVisible(),false,'Desktop CRM must not leave an empty navigation strip.');
+  await expect(crm.getByLabel('Buscar en CRM')).toBeVisible();
+  await expect(crm.getByRole('button',{name:'Notificaciones',exact:true})).toBeVisible();
+  await expect(crm.getByRole('button',{name:'Invitar',exact:true})).toBeVisible();
+  assert.ok(await crm.locator('.mk-crm-content-search').evaluate(node=>{const search=node.getBoundingClientRect(),nav=node.parentElement.getBoundingClientRect();return Math.abs((search.left+search.width/2)-(nav.left+nav.width/2))<=1;}),'CRM search must be centered in the navbar.');
+  const topBars=await crm.locator('.mk-crm-workspace,.mk-crm-content-nav').evaluateAll(nodes=>nodes.map(node=>({top:Math.round(node.getBoundingClientRect().top),height:Math.round(node.getBoundingClientRect().height)})));
+  assert.deepEqual(topBars,[{top:topBars[0].top,height:64},{top:topBars[0].top,height:64}],'Sidebar and content controls must share the first row.');
+  assert.equal(await crm.locator('.mk-crm-sidebar-toggle').evaluate(node=>Math.round(node.getBoundingClientRect().left-node.closest('.mk-crm-content-nav').getBoundingClientRect().left)),16,'Sidebar control must stay close to the divider.');
+
+  await crm.getByRole('button',{name:'Cerrar navegación lateral'}).click();
+  await expect(crm.locator('.mk-crm-sidebar')).toHaveClass(/is-collapsed/);
+  await expect(crm.locator('.mk-crm-sidebar nav').first()).toBeVisible();
+  await expect(crm.locator('.mk-crm-sidebar nav').first().locator('a').first().locator('svg')).toBeVisible();
+  assert.equal(await crm.locator('.mk-crm-sidebar nav').first().locator('a span').first().isVisible(),false,'Collapsed CRM navigation label remains visible.');
+  await expect(crm.locator('.mk-crm-workspace .mk-crm-avatar')).toBeVisible();
+  assert.equal(await crm.locator('.mk-app-shell-sidebar').evaluate(node=>Math.round(node.getBoundingClientRect().width)),72,'Collapsed CRM sidebar must become a 72px icon rail.');
+  await expect(crm.getByRole('button',{name:'Abrir navegación lateral'})).toBeVisible();
+  await crm.getByRole('button',{name:'Abrir navegación lateral'}).click();
+  await expect(crm.locator('.mk-crm-sidebar')).not.toHaveClass(/is-collapsed/);
+  await expect(crm.locator('.mk-crm-sidebar nav').first()).toBeVisible();
 
   await crm.getByLabel('Periodo',{exact:true}).selectOption('30');
   await expect(crm.locator('.mk-crm-metric').first()).toContainText('12 oportunidades');
@@ -57,5 +78,5 @@ try{
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'CRM must not overflow the mobile viewport.');
   assert.equal(await crm.locator('.mk-crm-metrics').evaluate(node=>getComputedStyle(node).gridTemplateColumns.split(' ').length),1);
   assert.deepEqual(errors,[]);
-  console.log('CRM pattern: navigation, six metrics, four accessible charts, periods, opportunity creation, light/dark accessibility and mobile layout passed.');
+  console.log('CRM pattern: collapsible navigation, six metrics, four accessible charts, periods, opportunity creation, light/dark accessibility and mobile layout passed.');
 }finally{await browser?.close();server.kill();}
