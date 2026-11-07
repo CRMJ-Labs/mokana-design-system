@@ -2,6 +2,10 @@
 
 Sitio de documentación de MOK: fundamentos, componentes React y patrones de interfaz. Usa Inter, los colores exactos del tema predeterminado de MOK y temas claro y oscuro.
 
+La guía [`MOK_DESIGN.md`](MOK_DESIGN.md) define cómo construir plataformas completas con MOK y funciona como contrato de decisiones para equipos humanos y agentes de IA.
+
+Para iniciar un back office o producto interno, usa el [`starter administrativo`](starters/admin-platform/README.md): incluye proveedor, shell colapsable, navegación responsive, cuenta, filtros, tabla y estados de integración.
+
 Cada página de componente tiene un índice «En esta página» a la derecha, con
 sección activa al desplazarse y subapartados de API. En móvil y tablet funciona
 como un desplegable. `node scripts/check-page-outline.mjs` comprueba los enlaces,
@@ -75,16 +79,17 @@ npm run build:lib
 ```
 
 ```tsx
-import { Button, Input, AddressInput } from '@mokanadev/design-system';
+import { AddressInput, Button, Input, MokProvider, ThemeSwitcher } from '@mokanadev/design-system';
 import '@mokanadev/design-system/styles.css';
 import '@mokanadev/design-system/fonts.css'; // Opcional: Inter autoalojada.
 
-export function Form() {
-  return <div className="mk" data-theme="light">
+export function App() {
+  return <MokProvider defaultTheme="system" storageKey="my-app-theme">
+    <ThemeSwitcher />
     <Input label="Nombre" />
     <AddressInput />
     <Button>Continuar</Button>
-  </div>;
+  </MokProvider>;
 }
 ```
 

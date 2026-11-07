@@ -4,7 +4,7 @@
   --palette-black: oklch(0% 0 0);
   --palette-snow: oklch(0.9911 0 0);
   --palette-eclipse: oklch(0.2103 0.0059 285.89);
-  --palette-accent: oklch(0.6204 0.195 253.83);
+  --palette-accent: #006FEE;
   --palette-accent-foreground: var(--snow);
   --palette-success: oklch(0.7329 0.1935 150.81);
   --palette-success-foreground: var(--eclipse);
@@ -32,6 +32,7 @@
   --palette-warning-foreground-light: var(--eclipse);
   --palette-danger-light: oklch(0.6532 0.2328 25.74);
   --palette-danger-foreground-light: var(--snow);
+  --palette-error-solid-light: #b91c1c;
   --palette-segment-light: var(--white);
   --palette-segment-foreground-light: var(--eclipse);
   --palette-border-light: oklch(90% 0.004 286.32);
@@ -44,10 +45,10 @@
   --palette-background-tertiary-light: color-mix(in oklab, var(--background) 92%, var(--foreground) 8%);
   --palette-background-inverse-light: var(--foreground);
   --palette-default-hover-light: color-mix(in oklab, var(--default) 96%, var(--default-foreground) 4%);
-  --palette-accent-hover-light: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+  --palette-accent-hover-light: color-mix(in oklab, var(--accent) 90%, var(--black) 10%);
   --palette-success-hover-light: color-mix(in oklab, var(--success) 90%, var(--success-foreground) 10%);
   --palette-warning-hover-light: color-mix(in oklab, var(--warning) 90%, var(--warning-foreground) 10%);
-  --palette-danger-hover-light: color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%);
+  --palette-danger-hover-light: color-mix(in oklab, var(--error-solid) 90%, var(--black) 10%);
   --palette-field-hover-light: color-mix( in oklab, var(--field-background, var(--default)) 90%, var(--field-foreground, var(--foreground)) 2% );
   --palette-field-focus-light: var(--field-background, var(--default));
   --palette-field-border-hover-light: color-mix( in oklab, var(--field-border, var(--border)) 88%, var(--field-foreground, var(--foreground)) 10% );
@@ -97,6 +98,7 @@
   --palette-warning-foreground-dark: var(--eclipse);
   --palette-danger-dark: oklch(0.594 0.1967 24.63);
   --palette-danger-foreground-dark: var(--snow);
+  --palette-error-solid-dark: #b91c1c;
   --palette-segment-dark: oklch(0.3964 0.01 285.93);
   --palette-segment-foreground-dark: var(--foreground);
   --palette-border-dark: oklch(28% 0.006 286.033);
@@ -112,10 +114,10 @@
   --palette-background-tertiary-dark: color-mix(in oklab, var(--background) 92%, var(--foreground) 8%);
   --palette-background-inverse-dark: var(--foreground);
   --palette-default-hover-dark: color-mix(in oklab, var(--default) 96%, var(--default-foreground) 4%);
-  --palette-accent-hover-dark: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+  --palette-accent-hover-dark: color-mix(in oklab, var(--accent) 90%, var(--black) 10%);
   --palette-success-hover-dark: color-mix(in oklab, var(--success) 90%, var(--success-foreground) 10%);
   --palette-warning-hover-dark: color-mix(in oklab, var(--warning) 90%, var(--warning-foreground) 10%);
-  --palette-danger-hover-dark: color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%);
+  --palette-danger-hover-dark: color-mix(in oklab, var(--error-solid) 90%, var(--black) 10%);
   --palette-field-hover-dark: color-mix( in oklab, var(--field-background, var(--default)) 90%, var(--field-foreground, var(--foreground)) 2% );
   --palette-field-focus-dark: var(--field-background, var(--default));
   --palette-field-border-hover-dark: color-mix( in oklab, var(--field-border, var(--border)) 88%, var(--field-foreground, var(--foreground)) 10% );
@@ -370,7 +372,7 @@
   --warning-on-solid: var(--palette-warning-foreground-light);
   --error-text: var(--error-light);
   --error-background: var(--palette-danger-soft-light);
-  --error-solid: var(--palette-danger-light);
+  --error-solid: var(--palette-error-solid-light);
   --error-on-solid: var(--paper);
   --info-background: var(--palette-accent-soft-light);
   --info-solid: var(--palette-accent);
@@ -491,7 +493,7 @@
   --warning-on-solid: var(--palette-warning-foreground-dark);
   --error-text: var(--error-dark);
   --error-background: var(--palette-danger-soft-dark);
-  --error-solid: var(--palette-danger-dark);
+  --error-solid: var(--palette-error-solid-dark);
   --error-on-solid: var(--paper);
   --info-background: var(--palette-accent-soft-dark);
   --info-solid: var(--palette-accent);

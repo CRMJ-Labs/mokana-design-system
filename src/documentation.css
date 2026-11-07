@@ -303,7 +303,7 @@
 .mk-separator-preview{display:flex;flex-direction:column;gap:var(--space-6);padding:var(--space-8) var(--space-6);border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface);min-width:0}
 .mk .mk-separator-preview p{margin:0}
 .mk-separator-preview .mk-eyebrow{margin:0}
-.mk-doc-hero .mk-separator{--line:var(--line-dark);--foreground:var(--paper);--secondary:var(--secondary-dark);--surface:var(--ink);--accent-text:var(--lime)}
+.mk-doc-hero .mk-separator{--line:var(--line-dark);--foreground:var(--paper);--secondary:var(--secondary-dark);--surface:var(--ink);--accent-text:var(--inverse-accent)}
 .mk-separator-guidelines{padding:var(--space-8) 0}
 .mk-separator-guidelines h2{font-size:20px}
 .mk-separator-guidelines p,.mk-separator-guidelines li{color:var(--secondary)}

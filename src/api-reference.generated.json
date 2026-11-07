@@ -357,6 +357,18 @@
         "default": null
       },
       {
+        "name": "sidebarCollapsed",
+        "type": "boolean",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "name": "sidebarLabel",
+        "type": "string",
+        "required": false,
+        "default": "'Navegación principal'"
+      },
+      {
         "name": "skipLinkLabel",
         "type": "string",
         "required": false,
@@ -3016,6 +3028,49 @@
         "type": "(open:boolean)=>void",
         "required": false,
         "default": null
+      }
+    ]
+  },
+  {
+    "name": "MokProvider",
+    "source": "MokProvider.tsx",
+    "signature": "MokProviderProps",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "defaultTheme",
+        "type": "ThemePreference",
+        "required": false,
+        "default": "'system'"
+      },
+      {
+        "name": "enableToasts",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "forcedTheme",
+        "type": "ResolvedTheme",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "palette",
+        "type": "Palette",
+        "required": false,
+        "default": "mokPalette"
+      },
+      {
+        "name": "storageKey",
+        "type": "string|null",
+        "required": false,
+        "default": "'mok-theme'"
       }
     ]
   },

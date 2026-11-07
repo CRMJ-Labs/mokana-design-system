@@ -31,6 +31,23 @@ El fixture `tests/fixtures/consumer` instala el `.tgz` generado con `npm pack` y
 
 ## Raíz, tema y notificaciones
 
+`MokProvider` es la integración recomendada para una aplicación nueva. Crea la raíz `.mk`, aplica la paleta oficial o la paleta del producto, conecta el tema y añade la región de notificaciones.
+
+```tsx
+import { MokProvider, ThemeSwitcher } from '@mokanadev/design-system';
+
+export function App() {
+  return <MokProvider defaultTheme="system" storageKey="my-app-theme" className="app-shell">
+    <ThemeSwitcher />
+    <YourApplication />
+  </MokProvider>;
+}
+```
+
+Usa `palette` para proporcionar el resultado de `createPalette`, `forcedTheme` para fijar el modo y `enableToasts={false}` solo cuando la aplicación no utilice `useToasts`. Los atributos de `div`, `className`, `style` y `ref` llegan a la raíz visual.
+
+Los proveedores individuales siguen disponibles para integraciones avanzadas o raíces anidadas:
+
 ```tsx
 import {
   ThemeProvider, ThemeSwitcher, ToastProvider, useTheme,
@@ -53,7 +70,7 @@ export function App() {
 }
 ```
 
-`.mk` proporciona el contexto visual. La aplicación define padding, altura y ancho; la biblioteca no impone dimensiones de página. `ThemeProvider` no crea una raíz DOM: aplica `resolvedTheme` a `data-theme`. `ToastProvider` debe estar dentro de la raíz para heredar sus tokens.
+`.mk` proporciona el contexto visual. La aplicación define padding, altura y ancho; la biblioteca no impone dimensiones de página. `ThemeProvider` no crea una raíz DOM: aplica `resolvedTheme` a `data-theme`. `ToastProvider` debe estar dentro de la raíz para heredar sus tokens. No envuelvas `MokProvider` con estos mismos proveedores: ya los incluye.
 
 ## Estructura de aplicación y página
 
@@ -114,9 +131,10 @@ const columns: Column<Equipment>[] = [
 
 | Propiedad | Predeterminado | Uso |
 | --- | --- | --- |
-| `ThemeProvider.defaultTheme` | `system` | Preferencia si no hay una guardada. |
-| `ThemeProvider.storageKey` | `mok-theme` | Clave independiente por aplicación; `null` desactiva la persistencia. |
-| `ThemeProvider.forcedTheme` | Sin definir | Fuerza `light` o `dark` y bloquea el selector. |
+| `MokProvider.defaultTheme` / `ThemeProvider.defaultTheme` | `system` | Preferencia si no hay una guardada. |
+| `MokProvider.storageKey` / `ThemeProvider.storageKey` | `mok-theme` | Clave independiente por aplicación; `null` desactiva la persistencia. |
+| `MokProvider.forcedTheme` / `ThemeProvider.forcedTheme` | Sin definir | Fuerza `light` o `dark` y bloquea el selector. |
+| `MokProvider.enableToasts` | `true` | Incluye la región y el contexto de notificaciones. |
 | `ThemeSwitcher.small` | `false` | Tamaño compacto del selector. |
 
 ## Una paleta por aplicación

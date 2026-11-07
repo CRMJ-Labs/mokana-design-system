@@ -44,6 +44,11 @@ function readable(seed:string,background:string){
   return target;
 }
 function on(color:string){return contrast(color,'#ffffff')>=contrast(color,'#000000')?'#ffffff':'#000000';}
+function withWhiteText(seed:string){
+  if(contrast(seed,'#ffffff')>=5.5)return seed;
+  for(let step=1;step<=100;step++){const color=mix(seed,'#000000',step/100);if(contrast(color,'#ffffff')>=5.5)return color;}
+  return '#000000';
+}
 
 /** Derives semantic colors and readable foregrounds from one product palette. */
 export function createPalette(options:PaletteOptions):Palette {
@@ -57,8 +62,8 @@ export function createPalette(options:PaletteOptions):Palette {
     const surface=options.neutral?mix(options.neutral,dark?'#000000':'#ffffff',dark?.87:1):hex(cssRGB(defaults.surface));
     const foreground=options.neutral?mix(options.neutral,dark?'#ffffff':'#000000',.9):hex(cssRGB(defaults.foreground));
     const secondary=options.neutral?readable(mix(foreground,surface,.35),surface):hex(cssRGB(defaults.secondary));
-    const brand=readable(seeds.brand,surface);
-    const accent=readable(seeds.accent??seeds.brand,surface);
+    const brand=withWhiteText(readable(seeds.brand,surface));
+    const accent=withWhiteText(readable(seeds.accent??seeds.brand,surface));
     const success=readable(seeds.success,surface),warning=readable(seeds.warning,surface),error=readable(seeds.error,surface),info=readable(seeds.info,surface);
     const inverse=options.neutral?mix(options.neutral,dark?'#ffffff':'#000000',.94):hex(cssRGB(dark?defaultPaletteColors.light.surface:defaultPaletteColors.light['inverse-background']));
     const inverseText=on(inverse);
@@ -75,7 +80,8 @@ export function createPalette(options:PaletteOptions):Palette {
     };
     for(const [name,color]of Object.entries({accent:brand,success,warning,danger:error,default:custom.default!})){
       const soft=mix(color,surface,.9);
-      Object.assign(custom,{[name]:color,[`${name}-foreground`]:on(color),[`${name}-hover`]:mix(color,surface,.1),
+      const hoverBase=name==='danger'?withWhiteText(color):color;
+      Object.assign(custom,{[name]:color,[`${name}-foreground`]:on(color),[`${name}-hover`]:mix(hoverBase,name==='accent'||name==='danger'?'#000000':surface,.1),
         [`${name}-soft`]:soft,[`${name}-soft-foreground`]:name==='default'?foreground:readable(color,soft),[`${name}-soft-hover`]:mix(color,surface,.85)});
     }
     const accentSoft=mix(brand,surface,.9),infoSoft=mix(info,surface,.9);
@@ -91,8 +97,8 @@ export function createPalette(options:PaletteOptions):Palette {
       'selection-background':mix(brand,surface,.88),'selection-text':readable(brand,mix(brand,surface,.88)),
       'success-text':success,'success-background':mix(success,surface,.9),'success-solid':success,'success-on-solid':on(success),
       'warning-text':warning,'warning-background':mix(warning,surface,.9),'warning-solid':warning,'warning-on-solid':on(warning),
-      'error-text':error,'error-background':mix(error,surface,.9),'error-solid':error,'error-on-solid':'#ffffff',
-      'info-background':mix(info,surface,.9),'info-solid':info,'info-on-solid':'#ffffff',
+      'error-text':error,'error-background':mix(error,surface,.9),'error-solid':withWhiteText(error),'error-on-solid':'#ffffff',
+      'info-background':mix(info,surface,.9),'info-solid':withWhiteText(info),'info-on-solid':'#ffffff',
       'inverse-background':inverse,'inverse-text':inverseText,'inverse-secondary':mix(inverseText,inverse,.25),
       'inverse-line':mix(inverseText,inverse,.7),'inverse-accent':readable(seeds.accent??seeds.brand,inverse),
       ...options[mode],

@@ -3,7 +3,7 @@ import {spawn} from 'node:child_process';
 import {mkdirSync} from 'node:fs';
 import {chromium,expect} from '@playwright/test';
 
-const variants=[['primary','Primary','button-primary-background','button-primary-text','accent-hover'],['secondary','Secondary','button-secondary-background','button-secondary-text','default-hover'],['tertiary','Tertiary','default','default-foreground','default-hover'],['outline','Outline',null,'default-foreground','default-soft-hover'],['ghost','Ghost',null,'default-foreground','default'],['danger','Danger','error-text','error-on-solid','raw:color-mix(in oklab,var(--error-text) 90%,var(--background) 10%)'],['danger-soft','Danger Soft','danger-soft','danger-soft-foreground','danger-soft-hover']];
+const variants=[['primary','Primary','button-primary-background','button-primary-text','accent-hover'],['secondary','Secondary','button-secondary-background','button-secondary-text','default-hover'],['tertiary','Tertiary','default','default-foreground','default-hover'],['outline','Outline',null,'default-foreground','default-soft-hover'],['ghost','Ghost',null,'default-foreground','default'],['danger','Danger','error-solid','error-on-solid','danger-hover'],['danger-soft','Danger Soft','danger-soft','danger-soft-foreground','danger-soft-hover']];
 const port=3042;
 const server=spawn(process.execPath,['node_modules/vite/bin/vite.js','preview','--config','vite.website.config.ts','--port',String(port)],{stdio:'pipe'});
 let browser;

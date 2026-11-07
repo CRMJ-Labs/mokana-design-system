@@ -1,7 +1,7 @@
 import reference from './api-reference.generated.json';
 import './integration-documentation.css';
 
-const aliases:Record<string,string[]>={progress:['ProgressBar'],'filter-params':['FilterParamsBar'],'keyboard-input':['Kbd'],'json-view':['JsonView'],avatar:['Avatar','AvatarGroup'],table:['Table','DataTable'],button:['Button','ButtonLink','CustomButton'],collapse:['Collapse','CollapseGroup'],'theme-switcher':['ThemeSwitcher','ThemeProvider'],toast:['Toast','ToastProvider']};
+const aliases:Record<string,string[]>={progress:['ProgressBar'],'filter-params':['FilterParamsBar'],'keyboard-input':['Kbd'],'json-view':['JsonView'],avatar:['Avatar','AvatarGroup'],table:['Table','DataTable'],button:['Button','ButtonLink','CustomButton'],collapse:['Collapse','CollapseGroup'],'theme-switcher':['ThemeSwitcher','ThemeProvider','MokProvider'],toast:['Toast','ToastProvider']};
 export const apiNames=reference.map(item=>item.name);
 
 export function ApiReference({slug,names}:{slug?:string;names?:string[]}){

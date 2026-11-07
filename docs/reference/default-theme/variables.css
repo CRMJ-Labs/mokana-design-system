@@ -34,7 +34,7 @@
     --field-radius: calc(var(--radius) * 1.5);
 
     /* Accent and status hues (shared with the dark theme) */
-    --accent: oklch(0.6204 0.195 253.83);
+    --accent: #006fee;
     --accent-foreground: var(--snow);
 
     --success: oklch(0.7329 0.1935 150.81);
@@ -105,6 +105,7 @@
 
     --danger: oklch(0.6532 0.2328 25.74);
     --danger-foreground: var(--snow);
+    --error-solid: #b91c1c;
 
     /* Component Colors */
     --segment: var(--white);
@@ -127,10 +128,10 @@
     --background-inverse: var(--foreground);
 
     --default-hover: color-mix(in oklab, var(--default) 96%, var(--default-foreground) 4%);
-    --accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+    --accent-hover: color-mix(in oklab, var(--accent) 90%, var(--black) 10%);
     --success-hover: color-mix(in oklab, var(--success) 90%, var(--success-foreground) 10%);
     --warning-hover: color-mix(in oklab, var(--warning) 90%, var(--warning-foreground) 10%);
-    --danger-hover: color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%);
+    --danger-hover: color-mix(in oklab, var(--error-solid) 90%, var(--black) 10%);
 
     --field-hover: color-mix(
       in oklab,
@@ -237,6 +238,7 @@
 
     --danger: oklch(0.594 0.1967 24.63);
     --danger-foreground: var(--snow);
+    --error-solid: #b91c1c;
 
     /* Component Colors */
     --segment: oklch(0.3964 0.01 285.93);
@@ -264,10 +266,10 @@
     --background-inverse: var(--foreground);
 
     --default-hover: color-mix(in oklab, var(--default) 96%, var(--default-foreground) 4%);
-    --accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+    --accent-hover: color-mix(in oklab, var(--accent) 90%, var(--black) 10%);
     --success-hover: color-mix(in oklab, var(--success) 90%, var(--success-foreground) 10%);
     --warning-hover: color-mix(in oklab, var(--warning) 90%, var(--warning-foreground) 10%);
-    --danger-hover: color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%);
+    --danger-hover: color-mix(in oklab, var(--error-solid) 90%, var(--black) 10%);
 
     --field-hover: color-mix(
       in oklab,

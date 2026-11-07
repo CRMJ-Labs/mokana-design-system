@@ -17,6 +17,7 @@ type Page = {label: string; path: string; pending?: boolean; render: () => React
 const IconographyPage=lazy(()=>import('./IconographyPage').then(module=>({default:module.IconographyPage})));
 const IntegrationPage=lazy(()=>import('./IntegrationPage').then(module=>({default:module.IntegrationPage})));
 const ApplicationLayoutPage=lazy(()=>import('./ApplicationLayoutPage').then(module=>({default:module.ApplicationLayoutPage})));
+const AdminPlatformStarterPage=lazy(()=>import('./AdminPlatformStarterPage').then(module=>({default:module.AdminPlatformStarterPage})));
 const CrmPattern=lazy(()=>import('./CrmPattern').then(module=>({default:module.CrmPattern})));
 const foundations: Page[] = [
   {label:'Introducción',path:'/introduction',render:()=> <Intro/>},
@@ -42,7 +43,10 @@ const patterns: Page[] = [
   {label:'Estados vacíos',path:'/patterns/empty',render:()=> <EmptyPattern/>},
   {label:'Configuración',path:'/patterns/settings',render:()=> <SettingsPattern/>},
 ];
-const pages=[...foundations,...components,...patterns];
+const starters: Page[] = [
+  {label:'Plataforma administrativa',path:'/starters/admin-platform',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando starter…</p>}><AdminPlatformStarterPage/></Suspense>},
+];
+const pages=[...foundations,...components,...patterns,...starters];
 
 function currentPath(){
   return decodeURI(location.pathname).replace(/\/$/,'')||'/introduction';
@@ -108,7 +112,7 @@ function Website(){
       <div className="mk-website-actions"><ThemeSwitcher small className="mk-website-theme" label="Tema de la documentación"/><button ref={menuButton} type="button" className="mk-menu-toggle" aria-expanded={menuOpen} aria-controls="website-navigation" onClick={()=>setMenuOpen(!menuOpen)}>Menú</button></div>
     </header>
     <aside id="website-navigation" className={`mk-docs-sidebar ${menuOpen?'is-open':''}`} aria-label="Documentación">
-      {group('Fundamentos',foundations)}{group('Componentes',components)}{group('Patrones',patterns)}
+      {group('Fundamentos',foundations)}{group('Componentes',components)}{group('Patrones',patterns)}{group('Starters',starters)}
       {query&&!pages.some(item=>item.label.toLocaleLowerCase().includes(query.toLocaleLowerCase().trim()))&&<p role="status">No se encontraron páginas.</p>}
     </aside>
     <main id="main-content" className="mk-docs-content" tabIndex={-1}>

@@ -25,8 +25,8 @@
     "test": "npm run build && npm run test:ui",
     "test:ui": "node --test tests/*.test.mjs",
     "test:checks": "npm run consumer:prepare && node scripts/run-checks.mjs",
-    "verify": "npm run tokens:check && npm run docs:check && npm run typecheck && npm run build && npm run build:lib && npm run test:ui && npm run test:checks && npm run test:consumer && npm run test:visual",
-    "verify:ci": "npm run tokens:check && npm run docs:check && npm run typecheck && npm run build && npm run build:lib && npm run test:ui && npm run test:checks && npm run test:consumer",
+    "verify": "npm run tokens:check && npm run docs:check && npm run typecheck && npm run build && npm run build:lib && npm run starter:check && npm run test:ui && npm run test:checks && npm run test:consumer && npm run test:visual",
+    "verify:ci": "npm run tokens:check && npm run docs:check && npm run typecheck && npm run build && npm run build:lib && npm run starter:check && npm run test:ui && npm run test:checks && npm run test:consumer",
     "tokens": "node scripts/build-tokens.mjs",
     "preview": "vite preview --config vite.website.config.ts",
     "test:website": "node scripts/check-website.mjs",
@@ -38,7 +38,8 @@
     "docs:check": "node scripts/build-api-reference.mjs --check",
     "tokens:check": "node scripts/build-tokens.mjs --check",
     "test:visual": "node scripts/run-visual.mjs",
-    "test:visual:update": "node scripts/run-visual.mjs --update-snapshots"
+    "test:visual:update": "node scripts/run-visual.mjs --update-snapshots",
+    "starter:check": "tsc -p scripts/tsconfig.starter.json && vite build starters/admin-platform --config scripts/vite.starter.config.ts"
   },
   "exports": {
     ".": {
@@ -69,6 +70,14 @@
     "dist",
     "tokens.json",
     "figma-map.json",
+    "MOK_DESIGN.md",
+    "starters/admin-platform/src",
+    "starters/admin-platform/index.html",
+    "starters/admin-platform/package.json",
+    "starters/admin-platform/README.md",
+    "starters/admin-platform/tsconfig.json",
+    "starters/admin-platform/vite.config.ts",
+    "docs/admin-platform-starter.md",
     "THIRD_PARTY_NOTICES.md",
     "docs/integration.md",
     "docs/colors.md",
