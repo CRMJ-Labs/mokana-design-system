@@ -31,8 +31,11 @@ Abre [MOK en localhost:3000](http://localhost:3000/introduction). En Windows tam
 | Marca | `/foundations/brand` |
 | Colores | `/foundations/colors` |
 | Tipografía | `/foundations/typography` |
+| Anatomías y slots | `/foundations/anatomies` |
 | Button | `/components/button` |
 | Address Input | `/components/address-input` |
+| Catálogo de patrones | `/patterns` |
+| Formularios completos | `/patterns/forms` |
 | Autenticación | `/patterns/auth` |
 | Dashboard | `/patterns/dashboard` |
 

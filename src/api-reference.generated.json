@@ -2462,6 +2462,82 @@
     ]
   },
   {
+    "name": "FormErrorSummary",
+    "source": "FormLayout.tsx",
+    "signature": "FormErrorSummaryProps",
+    "props": [
+      {
+        "name": "errors",
+        "type": "FormErrorItem[]",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "focusOnChange",
+        "type": "boolean",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "name": "title",
+        "type": "ReactNode",
+        "required": false,
+        "default": "'Revisa la información'"
+      }
+    ]
+  },
+  {
+    "name": "FormGrid",
+    "source": "FormLayout.tsx",
+    "signature": "FormGridProps",
+    "props": [
+      {
+        "name": "columns",
+        "type": "1|2|3",
+        "required": false,
+        "default": "2"
+      }
+    ]
+  },
+  {
+    "name": "FormLayout",
+    "source": "FormLayout.tsx",
+    "signature": "FormLayoutProps",
+    "props": [
+      {
+        "name": "actions",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "feedback",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "FormReadOnly",
+    "source": "FormLayout.tsx",
+    "signature": "FormReadOnlyProps",
+    "props": [
+      {
+        "name": "label",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      },
+      {
+        "name": "value",
+        "type": "ReactNode",
+        "required": true,
+        "default": null
+      }
+    ]
+  },
+  {
     "name": "FunnelChart",
     "source": "Charts.tsx",
     "signature": "FunnelChartProps",
@@ -3243,6 +3319,49 @@
         "type": "1|2",
         "required": false,
         "default": "1"
+      }
+    ]
+  },
+  {
+    "name": "PageLayout",
+    "source": "ApplicationLayout.tsx",
+    "signature": "PageLayoutProps",
+    "props": [
+      {
+        "name": "aside",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "feedback",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "filters",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "footer",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "header",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
+      },
+      {
+        "name": "toolbar",
+        "type": "ReactNode",
+        "required": false,
+        "default": null
       }
     ]
   },

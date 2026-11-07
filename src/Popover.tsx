@@ -69,6 +69,7 @@ export function Popover({trigger,children,title,label='Información adicional',o
   const childProps=isValidElement<TriggerProps>(resolvedTrigger)&&resolvedTrigger.type!==Fragment?resolvedTrigger.props:null;
   const triggerProps={
     'aria-haspopup':'dialog' as const,'aria-expanded':open,'aria-controls':open?id:undefined,
+    'data-slot':'popover-trigger',
     onClick:(event:MouseEvent<HTMLButtonElement>)=>{
       childProps?.onClick?.(event);
       if(event.defaultPrevented||childProps?.disabled||childProps?.['aria-disabled']===true||childProps?.['aria-disabled']==='true')return;
@@ -86,13 +87,13 @@ export function Popover({trigger,children,title,label='Información adicional',o
     className:`mk-popover-trigger ${childProps?.className??''}`,
     ...(resolvedTrigger.type==='button'||resolvedTrigger.type===Button?{type:childProps?.type??'button'}:{}),
   }):<Button {...triggerProps} className="mk-popover-trigger">{resolvedTrigger??'Más información'}</Button>;
-  return <span {...props} ref={root} className={`mk-popover ${className}`} onKeyDown={event=>{
+  return <span {...props} ref={root} className={`mk-popover ${className}`} data-slot="popover" onKeyDown={event=>{
     onKeyDown?.(event);
     if(event.key==='Escape'&&open&&!event.defaultPrevented){event.preventDefault();event.stopPropagation();change(false);}
   }}>
     {control}
-    {open&&<div ref={panel} id={id} role="dialog" aria-labelledby={title?`${id}-title`:undefined} aria-label={title?undefined:label} tabIndex={-1} className="mk-popover-panel">
-      <div className="mk-popover-heading">{title&&<strong id={`${id}-title`}>{title}</strong>}<button type="button" className="mk-popover-close" aria-label="Cerrar" onClick={()=>change(false)}><Icon name="close"/></button></div>
+    {open&&<div ref={panel} id={id} role="dialog" aria-labelledby={title?`${id}-title`:undefined} aria-label={title?undefined:label} tabIndex={-1} className="mk-popover-panel" data-slot="popover-content">
+      <div className="mk-popover-heading" data-slot="popover-header">{title&&<strong id={`${id}-title`}>{title}</strong>}<button type="button" className="mk-popover-close" aria-label="Cerrar" onClick={()=>change(false)}><Icon name="close"/></button></div>
       {children}
     </div>}
   </span>;

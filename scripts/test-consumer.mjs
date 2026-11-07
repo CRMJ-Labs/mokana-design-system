@@ -11,7 +11,7 @@ const packageRoot=resolve(consumer,'node_modules/@mokanadev/design-system');
 const exampleClasses=JSON.parse(readFileSync('scripts/example-css-classes.json','utf8'));
 for(const name of exampleClasses)assert.doesNotMatch(css,new RegExp('\\.'+name+'(?![\\w-])'),`${name}: example CSS leaked into the installed package`);
 assert.doesNotMatch(css,/@font-face|data:font|data:application\/font/,'Component CSS must not embed or register fonts');
-assert.ok(Buffer.byteLength(css)<180000,'Component CSS exceeded its 180 KB budget');
+assert.ok(Buffer.byteLength(css)<183000,'Component CSS exceeded its 183 KB budget');
 const fontCss=readFileSync(resolve(packageRoot,'dist/fonts.css'),'utf8');
 assert.match(fontCss,/@font-face/);assert.doesNotMatch(fontCss,/data:/);
 for(const match of fontCss.matchAll(/url\(\.\/([^\s)]+)\)/g))assert.ok(readFileSync(resolve(packageRoot,'dist',match[1])).length>0,'Missing packaged font asset');

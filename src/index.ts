@@ -23,6 +23,8 @@ export * from './ThemeSwitcher';
 export * from './palette';
 export * from './PaletteProvider';
 export * from './MokProvider';
+export * from './FormLayout';
+export * from './pattern-catalog';
 export * from './CopyButton';
 export * from './ContextMenu';
 export * from './ContextCard';

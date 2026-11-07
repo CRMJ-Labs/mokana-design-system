@@ -260,6 +260,8 @@ Pasa a `trigger` texto, contenido o un único control que propague los atributos
 
 ## Formularios
 
+Para formularios de producto usa `FormLayout`: ordena feedback, contenido y acciones sin imponer la lógica de datos. Agrupa campos con `Fieldset`, distribuye campos relacionados con `FormGrid`, presenta el índice accesible con `FormErrorSummary` y usa `FormReadOnly` para datos que no se editan. El ejemplo completo vive en `/patterns/forms`.
+
 Usa `name`, `required`, `disabled`, `defaultValue` y atributos nativos cuando correspondan. `value` o `checked` proporcionados por la aplicación requieren actualizar el estado en su manejador. Un valor predeterminado solo inicializa el control.
 
 ```tsx
@@ -278,6 +280,8 @@ const [name, setName] = useState('');
 `Button` usa `type="button"` por defecto. Los botones de paginación, acciones de archivo y cierre de diálogos no envían formularios. Los controles compuestos como AddressInput devuelven objetos que la aplicación debe añadir al envío; sus datos de demostración no representan una integración con un proveedor de direcciones.
 
 Un `error` del componente tiene prioridad sobre `aria-invalid`. El `hint` o error se relaciona con el campo sin perder las descripciones externas.
+
+Los componentes complejos exponen propiedades de composición y regiones `data-slot`. Consulta `docs/anatomies-and-slots.md`; no uses clases internas como contrato desde una aplicación consumidora.
 
 ## Tablas y datos remotos
 

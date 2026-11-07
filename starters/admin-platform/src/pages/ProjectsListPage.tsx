@@ -1,5 +1,5 @@
 import {useMemo,useState} from 'react';
-import {AdminTable,Badge,Button,FilterBar,Icon,Input,PageHeader,PageToolbar,Select,type Column,type MenuEntry} from '@mokanadev/design-system';
+import {AdminTable,Badge,Button,FilterBar,Icon,Input,PageHeader,PageLayout,PageToolbar,Select,type Column,type MenuEntry} from '@mokanadev/design-system';
 import type {Project} from '../data';
 
 const statusOptions=[{value:'all',label:'Todos los estados'},{value:'Activo',label:'Activos'},{value:'Pendiente',label:'Pendientes'},{value:'Archivado',label:'Archivados'}];
@@ -32,11 +32,7 @@ export function ProjectsListPage({projects,onProjectsChange,onCreate,onOpen,onEd
     {id:'delete',label:'Eliminar',danger:true,prefix:<Icon name="trash" size={16}/>,onSelect:()=>onProjectsChange(projects.filter(item=>item.id!==project.id))},
   ]}
   function retry(){setTableError('');setLoading(true);window.setTimeout(()=>setLoading(false),500)}
-  return <>
-    <PageHeader eyebrow="Gestión / Proyectos" title="Proyectos" description="Administra el trabajo activo, sus responsables y estados." actions={<Button prefix="plus" onClick={onCreate}>Nuevo proyecto</Button>}/>
-    <PageToolbar actions={<Button variant="secondary" prefix="download" onClick={onExport}>Exportar</Button>}><Input search aria-label="Buscar proyectos" placeholder="Buscar por nombre, código o responsable" value={query} onValueChange={setQuery} onClear={()=>setQuery('')}/></PageToolbar>
-    <FilterBar actions={<Button variant="ghost" onClick={()=>{setQuery('');setStatus('all')}} disabled={!query&&status==='all'}>Limpiar filtros</Button>}><Select label="Estado" value={status} options={statusOptions} onValueChange={setStatus}/></FilterBar>
+  return <PageLayout header={<PageHeader eyebrow="Gestión / Proyectos" title="Proyectos" description="Administra el trabajo activo, sus responsables y estados." actions={<Button prefix="plus" onClick={onCreate}>Nuevo proyecto</Button>}/>} toolbar={<PageToolbar actions={<Button variant="secondary" prefix="download" onClick={onExport}>Exportar</Button>}><Input search aria-label="Buscar proyectos" placeholder="Buscar por nombre, código o responsable" value={query} onValueChange={setQuery} onClear={()=>setQuery('')}/></PageToolbar>} filters={<FilterBar actions={<Button variant="ghost" onClick={()=>{setQuery('');setStatus('all')}} disabled={!query&&status==='all'}>Limpiar filtros</Button>}><Select label="Estado" value={status} options={statusOptions} onValueChange={setStatus}/></FilterBar>} footer={<div className="admin-demo-controls" aria-label="Estados de demostración"><span>Verifica el listado:</span><Button size="sm" variant="ghost" onClick={()=>{setTableError('');setLoading(true);window.setTimeout(()=>setLoading(false),700)}}>Carga</Button><Button size="sm" variant="ghost" onClick={()=>setTableError('No pudimos cargar los proyectos.')}>Error</Button><Button size="sm" variant="ghost" onClick={()=>{setQuery('sin-resultados');setTableError('')}}>Vacío</Button></div>}>
     <AdminTable caption="Proyectos de la organización" rows={filtered} columns={columns} rowKey={row=>row.id} defaultSort={{key:'project',direction:'asc'}} loading={loading} error={tableError} onRetry={retry} empty={<div><strong>No hay proyectos para mostrar.</strong><p>Cambia los filtros o crea el primer proyecto.</p><Button size="sm" onClick={onCreate}>Nuevo proyecto</Button></div>} footer={<span role="status">{filtered.length} de {projects.length} proyectos</span>} rowActionLabel={row=>`Acciones de ${row.name}`} rowActions={actions}/>
-    <div className="admin-demo-controls" aria-label="Estados de demostración"><span>Verifica el listado:</span><Button size="sm" variant="ghost" onClick={()=>{setTableError('');setLoading(true);window.setTimeout(()=>setLoading(false),700)}}>Carga</Button><Button size="sm" variant="ghost" onClick={()=>setTableError('No pudimos cargar los proyectos.')}>Error</Button><Button size="sm" variant="ghost" onClick={()=>{setQuery('sin-resultados');setTableError('')}}>Vacío</Button></div>
-  </>;
+  </PageLayout>;
 }

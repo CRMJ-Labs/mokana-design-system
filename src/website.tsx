@@ -18,11 +18,15 @@ const IconographyPage=lazy(()=>import('./IconographyPage').then(module=>({defaul
 const IntegrationPage=lazy(()=>import('./IntegrationPage').then(module=>({default:module.IntegrationPage})));
 const ApplicationLayoutPage=lazy(()=>import('./ApplicationLayoutPage').then(module=>({default:module.ApplicationLayoutPage})));
 const AdminPlatformStarterPage=lazy(()=>import('./AdminPlatformStarterPage').then(module=>({default:module.AdminPlatformStarterPage})));
+const PatternCatalogPage=lazy(()=>import('./PatternCatalogPage').then(module=>({default:module.PatternCatalogPage})));
+const FormPattern=lazy(()=>import('./FormPattern').then(module=>({default:module.FormPattern})));
+const AnatomiesPage=lazy(()=>import('./AnatomiesPage').then(module=>({default:module.AnatomiesPage})));
 const CrmPattern=lazy(()=>import('./CrmPattern').then(module=>({default:module.CrmPattern})));
 const foundations: Page[] = [
   {label:'Introducción',path:'/introduction',render:()=> <Intro/>},
   {label:'Integración',path:'/integration',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando integración…</p>}><IntegrationPage/></Suspense>},
   {label:'Estructura de aplicación',path:'/foundations/application-layout',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando estructura…</p>}><ApplicationLayoutPage/></Suspense>},
+  {label:'Anatomías y slots',path:'/foundations/anatomies',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando anatomías…</p>}><AnatomiesPage/></Suspense>},
   {label:'Marca',path:'/foundations/brand',render:()=> <BrandFoundations/>},
   {label:'Color',path:'/foundations/colors',render:()=> <ColorFoundations/>},
   {label:'Tipografía',path:'/foundations/typography',render:()=> <BrandFoundations/>},
@@ -35,6 +39,8 @@ const components: Page[] = componentCatalog.map(item=> {
   return {label:item.label,path:`/components/${slug}`,pending:!isComponentImplemented(slug),render:()=> <CatalogPage slug={slug}/>};
 });
 const patterns: Page[] = [
+  {label:'Catálogo de patrones',path:'/patterns',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando catálogo…</p>}><PatternCatalogPage/></Suspense>},
+  {label:'Formularios completos',path:'/patterns/forms',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando formulario…</p>}><FormPattern/></Suspense>},
   {label:'CRM',path:'/patterns/crm',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando CRM…</p>}><CrmPattern/></Suspense>},
   {label:'Autenticación',path:'/patterns/auth',render:()=> <AuthPattern/>},
   {label:'Dashboard',path:'/patterns/dashboard',render:()=> <DashboardPattern/>},

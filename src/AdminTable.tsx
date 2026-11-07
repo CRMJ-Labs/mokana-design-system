@@ -19,5 +19,5 @@ export function AdminTable<T>({columns,rowActions,rowActionLabel,rowActionsDisab
     key:'__admin-actions',header:actionsHeader,align:'right',width:56,minWidth:56,responsivePriority:'primary',
     render:row=>{const items=rowActions(row);return items.length?<DotsMenu size="sm" position="bottom-end" label={rowActionLabel(row)} disabled={rowActionsDisabled?.(row)} items={items}/>:null;},
   };
-  return <Table {...props} columns={[...columns,actionColumn]} density={density} variant={variant} className={`mk-admin-table${className?` ${className}`:''}`}/>;
+  return <Table {...props} data-slot="admin-table" columns={[...columns,actionColumn]} density={density} variant={variant} className={`mk-admin-table${className?` ${className}`:''}`}/>;
 }

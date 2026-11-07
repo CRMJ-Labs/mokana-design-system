@@ -1,6 +1,6 @@
 import {useRef,useState,type ComponentProps} from 'react';
 import {createRoot} from 'react-dom/client';
-import {AddressInput,Alert,Avatar,AvatarGroup,Badge,Brand,Button,ButtonLink,Card,Checkbox,ClearableInput,Collapse,Combobox,DatePicker,Drawer,EmptyState,FileUpload,Input,Modal,Navigation,Pagination,Pill,ProgressBar,Radio,Select,Skeleton,Table,Tabs,Textarea,Toggle,Tooltip,type AlertProps,type CardProps,type EmptyStateProps,type ComboboxProps,type PaginationProps} from '@mokanadev/design-system';
+import {AddressInput,Alert,Avatar,AvatarGroup,Badge,Brand,Button,ButtonLink,Card,Checkbox,ClearableInput,Collapse,Combobox,DatePicker,Drawer,EmptyState,FileUpload,FormErrorSummary,FormGrid,FormLayout,FormReadOnly,Input,Modal,Navigation,PageLayout,Pagination,Pill,ProgressBar,Radio,Select,Skeleton,Table,Tabs,Textarea,Toggle,Tooltip,patternCatalog,type AlertProps,type CardProps,type EmptyStateProps,type ComboboxProps,type PaginationProps} from '@mokanadev/design-system';
 import '@mokanadev/design-system/styles.css';
 import '@mokanadev/design-system/fonts.css';
 import './app.css';
@@ -35,6 +35,7 @@ function ApiContract(){
       <FileUpload label="Archivo de contrato" name="attachment" onChange={event=>record('file-native',event.currentTarget.files?.[0]?.name)} onValueChange={files=>record('file',files?.[0]?.name)}/>
       <Button type="submit">Enviar contrato</Button><Pagination {...pagerProps} data-contract="pagination"/><output aria-label="Página actual">{page}</output>
     </form>
+    <PageLayout header={<h2>Contrato de slots</h2>} aside={<span>Contexto</span>} footer={<span>Pie</span>}><FormLayout aria-label="Formulario compuesto" feedback={<FormErrorSummary errors={[]}/>} actions={<Button type="submit">Guardar compuesto</Button>}><FormGrid><FormReadOnly label="Patrones" value={patternCatalog.length}/><Input label="Campo compuesto"/></FormGrid></FormLayout></PageLayout>
     <Tabs tabs={[{id:'one',label:'Uno',content:'Panel uno'},{id:'two',label:'Dos',content:'Panel dos'}]} active={tab} onValueChange={setTab} className="consumer-tabs"/>
     <Button onClick={()=>setOpen(true)}>Abrir modal de contrato</Button><Modal ref={modal} open={open} onClose={()=>setOpen(false)} onOpenChange={value=>record('modal-open',value)} title="Modal de contrato" className="consumer-modal"><p>Contenido modal</p></Modal>
     <Button onClick={()=>setPanel(true)}>Abrir panel de contrato</Button><Drawer ref={drawer} open={panel} onClose={()=>setPanel(false)} title="Panel de contrato" onOpenChange={value=>record('drawer-open',value)} className="consumer-drawer"><p>Contenido del panel</p></Drawer>

@@ -177,6 +177,8 @@ No pongas búsqueda, filtros, paginación ni acciones por fila en `PageHeader`.
 
 Consulta `/patterns/auth`, `/patterns/dashboard`, `/patterns/crm` y `/patterns/crud` como referencias de integración. Los ejemplos internos de documentación no son automáticamente componentes públicos del paquete.
 
+Consulta `/patterns` como índice oficial. Su fuente estructurada `patternCatalog` permite que documentación y herramientas consulten tarea principal, criterios de uso, estados, responsive, accesibilidad y componentes de cada patrón.
+
 Para una plataforma nueva, comienza con el starter oficial de `starters/admin-platform` o consulta `/starters/admin-platform`. El starter es una aplicación copiable: conserva la estructura y sustituye navegación, datos, permisos y acciones por los contratos reales del producto.
 
 El starter incluye plantillas completas de listado, crear/editar, detalle y configuración. Úsalas como punto de partida de una ruta real; no copies únicamente el contenido visual ni mantengas la navegación demostrativa basada en estado local.
@@ -251,6 +253,8 @@ Un formulario debe ser comprensible sin depender del placeholder.
 - Usa una columna como opción predeterminada.
 - Usa dos columnas solo cuando los campos se relacionan y hay ancho suficiente.
 - Mantén las acciones finales en un lugar constante.
+
+Usa `FormLayout` para ordenar feedback, contenido y acciones; `FormGrid` para campos relacionados; `FormErrorSummary` para indexar errores y `FormReadOnly` para información no editable. Consulta `/patterns/forms` para el flujo completo con errores locales y remotos, cambios pendientes, archivos, envío y éxito.
 
 ### Validación
 
@@ -327,6 +331,8 @@ Usa roles semánticos, nunca pigmentos directos para construir una interfaz de p
 - `focus` debe permanecer visible en ambos temas.
 
 No introduzcas hexadecimales, sombras, radios, espaciados o tamaños tipográficos locales si existe un token. No uses un color de estado como color de marca.
+
+Los componentes complejos exponen propiedades de composición y regiones `data-slot`. Prefiere las propiedades; usa slots únicamente para inspección, pruebas y ajustes de layout documentados. No dependas de clases internas `mk-*` desde una aplicación. Consulta `/foundations/anatomies`.
 
 El tema oscuro no es una inversión mecánica del claro. Verifica contraste, elevación, bordes, estados de hover, focus, disabled y selección en ambos.
 
