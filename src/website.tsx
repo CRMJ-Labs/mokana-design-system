@@ -13,7 +13,8 @@ import './examples.css';
 import './documentation.css';
 import './website.css';
 
-type Page = {label: string; path: string; pending?: boolean; render: () => ReactNode};
+type Page = {label: string; path: string; pending?: boolean; standalone?:boolean; render: () => ReactNode};
+const InvoiceReviewExample=lazy(()=>import('./examples/invoice-review/InvoiceReviewExample').then(module=>({default:module.InvoiceReviewExample})));
 const IconographyPage=lazy(()=>import('./IconographyPage').then(module=>({default:module.IconographyPage})));
 const IntegrationPage=lazy(()=>import('./IntegrationPage').then(module=>({default:module.IntegrationPage})));
 const ApplicationLayoutPage=lazy(()=>import('./ApplicationLayoutPage').then(module=>({default:module.ApplicationLayoutPage})));
@@ -39,6 +40,7 @@ const components: Page[] = componentCatalog.map(item=> {
   return {label:item.label,path:`/components/${slug}`,pending:!isComponentImplemented(slug),render:()=> <CatalogPage slug={slug}/>};
 });
 const patterns: Page[] = [
+  {label:'Revisión de facturas',path:'/examples/invoice-review',standalone:true,render:()=> <Suspense fallback={<p role="status">Cargando revisión de factura…</p>}><InvoiceReviewExample/></Suspense>},
   {label:'Catálogo de patrones',path:'/patterns',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando catálogo…</p>}><PatternCatalogPage/></Suspense>},
   {label:'Formularios completos',path:'/patterns/forms',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando formulario…</p>}><FormPattern/></Suspense>},
   {label:'CRM',path:'/patterns/crm',render:()=> <Suspense fallback={<p className="mk-catalog-loading" role="status">Cargando CRM…</p>}><CrmPattern/></Suspense>},
@@ -110,6 +112,7 @@ function Website(){
     if(!visible.length)return null;
     return <section className="mk-docs-nav-group"><h2>{title}</h2><ul>{visible.map(item=><li key={item.path}><a href={item.path} aria-current={path===item.path?'page':undefined}><span>{item.label}</span>{item.pending&&<span className="mk-nav-pending" title="Componente pendiente de implementar">Pendiente</span>}</a></li>)}</ul></section>;
   }
+  if(page?.standalone)return page.render();
   return <div className="mk mk-docs mk-website" data-theme={theme} onClick={navigate}>
     <a className="mk-skip-link" href="#main-content">Ir al contenido</a>
     <header className="mk-docs-header">

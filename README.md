@@ -11,6 +11,10 @@ sección activa al desplazarse y subapartados de API. En móvil y tablet funcion
 como un desplegable. `node scripts/check-page-outline.mjs` comprueba los enlaces,
 el foco, el historial, los índices de todo el catálogo y los tamaños responsivos.
 
+El [ejemplo de revisión de facturas](docs/invoice-review-example.md) está en
+`/examples/invoice-review`: una vista independiente con documento vinculado,
+520 ítems, edición y aprobación local, construida con los componentes públicos de MOK.
+
 La [guía de colores](docs/colors.md) documenta los 74 roles oficiales, su procedencia,
 los alias de MOK y los resultados de contraste. El catálogo completo está en
 `/foundations/colors`. Usa `mokPalette` para conservar la paleta oficial;
