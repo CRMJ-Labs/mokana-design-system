@@ -1,6 +1,6 @@
 {
   "name": "@mokanadev/design-system",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "MOK Design System: tokens semánticos, componentes React y temas por producto.",
   "license": "UNLICENSED",
   "repository": {

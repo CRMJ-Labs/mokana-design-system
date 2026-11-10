@@ -29,7 +29,7 @@ export function Card({title,eyebrow,children,footer,tone='default',className='',
 export type BadgeTone='neutral'|'brand'|'info'|'success'|'warning'|'error'|'inverted';
 export interface BadgeProps extends ComponentPropsWithRef<'span'> {children:ReactNode;tone?:BadgeTone;size?:'sm'|'md'|'lg';subtle?:boolean;icon?:IconName|false;iconPosition?:'start'|'end';}
 export function Badge({children,tone='neutral',size='md',subtle=false,icon,iconPosition='start',className='',...props}:BadgeProps){
-  const resolvedIcon=icon===false?undefined:icon??(tone==='success'?'check':tone==='warning'?'warning':tone==='info'?'info':undefined);
+  const resolvedIcon=icon===false?undefined:icon??(tone==='success'?'check':tone==='warning'?'warning':tone==='info'?'info':tone==='error'?'close':undefined);
   return <span {...props} className={`mk-badge mk-badge-${tone} mk-badge-size-${size}${subtle?' mk-badge-subtle':''} ${className}`}>{resolvedIcon&&iconPosition==='start'&&<Icon name={resolvedIcon}/>}<span>{children}</span>{resolvedIcon&&iconPosition==='end'&&<Icon name={resolvedIcon}/>}</span>;
 }
 export interface PillProps extends ComponentPropsWithRef<'a'>,Pick<BadgeProps,'tone'|'size'|'subtle'|'icon'|'iconPosition'> {href:string;children:ReactNode;}
