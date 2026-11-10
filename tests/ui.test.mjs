@@ -29,13 +29,19 @@ test('MOK: pages, contrast, mobile, keyboard and local workflows', async () => {
     preview = startPreview();
     await preview.ready;
     browser = await chromium.launch({ channel: 'msedge', headless: true });
-    const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
-    page.on('pageerror', error => report.errors.push(`${page.url()}: ${error.message}`));
+    const createPage = async () => {
+      const nextContext = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+      const nextPage = await nextContext.newPage();
+      nextPage.on('pageerror', error => report.errors.push(`${nextPage.url()}: ${error.message}`));
+      return { context: nextContext, page: nextPage };
+    };
+    let { context, page } = await createPage();
     async function open(route, theme = 'light') {
-      await page.goto(base + route);
+      const response = await page.goto(base + route);
+      assert.equal(response?.status(), 200, `${route} returned ${response?.status() ?? 'no response'}`);
       await page.locator('#main-content > div > :not(.mk-catalog-loading)').first().waitFor();
       if(route.startsWith('/components/'))await page.locator('.mk-api-reference').waitFor();
-      await page.locator('.mk-website').evaluate((node, value) => node.setAttribute('data-theme', value), theme);
+      await page.locator('.mk').first().evaluate((node, value) => node.setAttribute('data-theme', value), theme);
       // Contrast must be measured on final colors, not halfway through a theme transition.
       await page.addStyleTag({ content: '*,*::before,*::after{transition:none!important;animation:none!important}' });
       await page.evaluate(() => document.fonts.ready);
@@ -45,16 +51,22 @@ test('MOK: pages, contrast, mobile, keyboard and local workflows', async () => {
     const routes = await page.locator('#website-navigation a').evaluateAll(nodes => nodes.map(node => new URL(node.href).pathname));
     assert.ok(routes.length > 80, `Se esperaban todas las rutas del menú y hay ${routes.length}`);
 
-    for (const theme of ['light', 'dark']) for (const route of routes) {
-      await open(route, theme);
-      // Code panels render when opened, and their syntax colors must pass contrast too.
-      await page.evaluate(() => document.querySelectorAll('.mk-code-disclosure').forEach(node => { node.open = true; }));
-      await page.waitForFunction(() => [...document.querySelectorAll('.mk-code-disclosure')].every(node => node.querySelector('.mk-code-block-frame')));
-      await page.addScriptTag({ path: path.resolve('node_modules/axe-core/axe.min.js') });
-      const result = await page.evaluate(() => axe.run(document.querySelector('.mk-website'), { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] } }));
-      const violations = result.violations.map(violation => ({ id: violation.id, impact: violation.impact, nodes: violation.nodes.map(node => ({ html: node.html, summary: node.failureSummary })) }));
-      report.pages.push({ route, theme, violations });
-      if (violations.length) failures.push({ route, theme, violations });
+    for (const theme of ['light', 'dark']) {
+      if (theme === 'dark') {
+        await context.close();
+        ({ context, page } = await createPage());
+      }
+      for (const route of routes) {
+        await open(route, theme);
+        // Code panels render when opened, and their syntax colors must pass contrast too.
+        await page.evaluate(() => document.querySelectorAll('.mk-code-disclosure').forEach(node => { node.open = true; }));
+        await page.waitForFunction(() => [...document.querySelectorAll('.mk-code-disclosure')].every(node => node.querySelector('.mk-code-block-frame')));
+        await page.addScriptTag({ path: path.resolve('node_modules/axe-core/axe.min.js') });
+        const result = await page.evaluate(() => axe.run(document.querySelector('.mk'), { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] } }));
+        const violations = result.violations.map(violation => ({ id: violation.id, impact: violation.impact, nodes: violation.nodes.map(node => ({ html: node.html, summary: node.failureSummary })) }));
+        report.pages.push({ route, theme, violations });
+        if (violations.length) failures.push({ route, theme, violations });
+      }
     }
 
     await open('/components/modal');

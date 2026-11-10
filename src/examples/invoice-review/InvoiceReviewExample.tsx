@@ -15,7 +15,7 @@ const pageSize=8;
 function InvoicePaper({items,page,selected,zoom}:{items:InvoiceItem[];page:number;selected:number;zoom:number}){
   const current=items.slice((page-1)*32,page*32),row=useRef<HTMLTableRowElement>(null);
   useEffect(()=>{const target=row.current,viewport=target?.closest('.ir-paper-viewport');if(target&&viewport)viewport.scrollTop+=target.getBoundingClientRect().top-viewport.getBoundingClientRect().top-viewport.clientHeight/2;},[selected,page,zoom]);
-  return <div className="ir-paper-viewport" aria-label="Vista reconstruida del documento"><article className="ir-paper" style={{'--document-zoom':zoom/100} as CSSProperties}>
+  return <div className="ir-paper-viewport" aria-label="Vista reconstruida del documento" tabIndex={0}><article className="ir-paper" style={{'--document-zoom':zoom/100} as CSSProperties}>
     <div className="ir-paper-heading"><span>ZHONGTAI / EXPORT DIVISION</span><span>ORIGINAL</span></div>
     <h2>COMMERCIAL INVOICE</h2><p className="ir-paper-company">NINGBO ZHONGTAI HARDWARE TRADING CO., LTD.</p>
     <div className="ir-paper-meta"><div><strong>BUYER</strong><span>GPS CARGO S.A.S.</span><span>COLOMBIA</span></div><div><span><strong>INVOICE NO.</strong> NB-2611-0520</span><span><strong>DATE</strong> NOV 05, 2026</span><span><strong>TRADE TERMS</strong> FOB NINGBO</span></div></div>
