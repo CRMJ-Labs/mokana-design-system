@@ -203,7 +203,7 @@ Los componentes base exponen tipos `ComponentPropsWithRef` del elemento correspo
 | `Brand`, `Badge`, `Avatar`, `AvatarGroup`, `Tooltip`, `Popover`, `DropdownMenu` | Contenedor `span` |
 | `Pill`, `ButtonLink` | `a` |
 | `Button`, `CustomButton`, `Toggle` / `Switch` | `button` |
-| `Input`, `Checkbox`, `Radio`, `ClearableInput`, `Combobox`, `DatePicker`, `FileUpload` | `input` |
+| `Input`, `Checkbox`, `Radio`, `ClearableInput`, `Combobox`, `DatePicker`, `FileUpload`, `InputFile` | `input` |
 | `Select`, `Textarea` | `select`, `textarea` |
 | `Modal`, `Drawer` | `dialog` |
 | `Navigation`, `Pagination` | `nav` |
@@ -234,6 +234,7 @@ Los componentes que necesitan una referencia interna comparten el nodo con el co
 | Combobox, ClearableInput, AddressInput, Tabs | `onValueChange(value)` | `onChange(value)` |
 | Checkbox, Radio, Toggle / Switch | `onCheckedChange(checked)` | `onChange(checked)` |
 | Pagination | `onPageChange(page)` | `onChange(page)` |
+| InputFile | `onValueChange(files)` y `onChange(event)` nativo | — |
 | FileUpload | `onValueChange(files)` y `onChange(event)` nativo | `onFiles(files)` |
 | Modal, Drawer | `onOpenChange(false)` al solicitar cierre | `onClose()` sigue siendo necesario. |
 | Popover, Menu, DropdownMenu | `open`, `defaultOpen`, `onOpenChange(open)` | Funcionan sin props de control como antes. |

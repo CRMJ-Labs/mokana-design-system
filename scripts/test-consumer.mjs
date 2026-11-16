@@ -11,7 +11,8 @@ const packageRoot=resolve(consumer,'node_modules/@mokanadev/design-system');
 const exampleClasses=JSON.parse(readFileSync('scripts/example-css-classes.json','utf8'));
 for(const name of exampleClasses)assert.doesNotMatch(css,new RegExp('\\.'+name+'(?![\\w-])'),`${name}: example CSS leaked into the installed package`);
 assert.doesNotMatch(css,/@font-face|data:font|data:application\/font/,'Component CSS must not embed or register fonts');
-assert.ok(Buffer.byteLength(css)<183000,'Component CSS exceeded its 183 KB budget');
+// InputFile adds native file-control styles; retain a bounded budget for the expanded library.
+assert.ok(Buffer.byteLength(css)<185000,'Component CSS exceeded its 185 KB budget');
 const fontCss=readFileSync(resolve(packageRoot,'dist/fonts.css'),'utf8');
 assert.match(fontCss,/@font-face/);assert.doesNotMatch(fontCss,/data:/);
 for(const match of fontCss.matchAll(/url\(\.\/([^\s)]+)\)/g))assert.ok(readFileSync(resolve(packageRoot,'dist',match[1])).length>0,'Missing packaged font asset');
@@ -108,6 +109,15 @@ try{
   await page.getByLabel('Limpiable de contrato',{exact:true}).fill('Editable');await expect(events).toContainText('clearable:Editable');
   await page.getByLabel('Combinación',{exact:true}).fill('Dos');await expect(events).toContainText('combo:Dos');
   await page.getByLabel('Fecha de contrato',{exact:true}).fill('2026-11-01');await expect(events).toContainText('date:2026-11-01');
+  const nativeFile=page.getByLabel('Selector de archivo de contrato',{exact:true});
+  await nativeFile.setInputFiles({name:'native-contract.txt',mimeType:'text/plain',buffer:Buffer.from('MOK')});
+  await expect(events).toContainText('input-file-native:native-contract.txt\ninput-file-value:native-contract.txt');
+  await expect(nativeFile).toHaveClass(/consumer-input-file/);
+  assert.ok((await nativeFile.getAttribute('aria-describedby')).startsWith('shared-help '));
+  await page.getByRole('button',{name:'Comprobar InputFile',exact:true}).click();
+  await expect(events).toContainText('input-file-refs:INPUT,DIV');await expect(nativeFile).toBeFocused();
+  await page.getByLabel('Selector de archivo cancelado',{exact:true}).setInputFiles({name:'cancelled.txt',mimeType:'text/plain',buffer:Buffer.from('MOK')});
+  await expect(events).not.toContainText('input-file-cancelled:');
   await page.getByLabel('Archivo de contrato',{exact:true}).setInputFiles({name:'contract.txt',mimeType:'text/plain',buffer:Buffer.from('MOK')});await expect(events).toContainText('file-native:contract.txt');await expect(events).toContainText('file:contract.txt');
   await page.getByRole('button',{name:'Página siguiente',exact:true}).click();await expect(page.getByLabel('Página actual')).toHaveText('2');await expect(events).not.toContainText('form:');
   await page.getByRole('button',{name:'Enviar contrato'}).click();await expect(events).toContainText('form:Proyecto API');

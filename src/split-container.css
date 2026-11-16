@@ -1,0 +1,15 @@
+.mk-split-container{display:flex;width:100%;min-width:0;min-height:0;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface);color:var(--foreground)}
+.mk-split-container-vertical{flex-direction:column}
+.mk-split-panel{flex-basis:0;min-width:0;min-height:0;overflow:auto;overflow-wrap:anywhere}
+.mk .mk-split-panel:focus-visible{outline:2px solid var(--focus);outline-offset:-3px}
+.mk-split-handle{position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 24px;align-self:stretch;touch-action:none;user-select:none;cursor:col-resize;background:var(--background);border-inline:1px solid var(--line)}
+.mk-split-handle>span{width:3px;height:32px;border-radius:var(--radius-pill);background:var(--secondary)}
+.mk-split-container-vertical>.mk-split-handle{cursor:row-resize;border-inline:0;border-block:1px solid var(--line)}
+.mk-split-container-vertical>.mk-split-handle>span{width:32px;height:3px}
+.mk-split-handle:hover>span,.mk-split-handle:focus-visible>span,.mk-split-container-dragging>.mk-split-handle>span{background:var(--accent-text)}
+.mk .mk-split-handle:focus-visible{outline:2px solid var(--focus);outline-offset:-3px;z-index:1}
+.mk-split-handle[aria-disabled=true]{cursor:default;touch-action:auto}
+.mk-split-handle[aria-disabled=true]>span{background:var(--line)}
+.mk-split-container-dragging,.mk-split-container-dragging *{user-select:none!important;cursor:col-resize!important}
+.mk-split-container-vertical.mk-split-container-dragging,.mk-split-container-vertical.mk-split-container-dragging *{cursor:row-resize!important}
+@media(max-width:639px){.mk-split-container-horizontal.mk-split-container-responsive{flex-direction:column;height:auto!important}.mk-split-container-horizontal.mk-split-container-responsive>.mk-split-panel{flex:0 0 auto!important;max-height:none}.mk-split-container-horizontal.mk-split-container-responsive>.mk-split-handle{display:none}.mk-split-container-horizontal.mk-split-container-responsive>.mk-split-panel+div+div{border-top:1px solid var(--line)}}

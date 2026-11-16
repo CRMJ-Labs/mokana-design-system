@@ -156,6 +156,10 @@ export const componentCatalog = [
     "slug": "input"
   },
   {
+    "label": "Input File",
+    "slug": "input-file"
+  },
+  {
     "label": "JSON View",
     "slug": "json-view"
   },
@@ -270,6 +274,10 @@ export const componentCatalog = [
   {
     "label": "Split Button",
     "slug": "split-button"
+  },
+  {
+    "label": "Split Container",
+    "slug": "split-container"
   },
   {
     "label": "Status Dot",

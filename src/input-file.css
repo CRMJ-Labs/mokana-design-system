@@ -1,0 +1,11 @@
+.mk-input-file{min-width:0;width:100%;--mk-input-file-height:44px}
+.mk .mk-input-file-control{display:block;box-sizing:border-box;width:100%;min-width:0;height:var(--mk-input-file-height);min-height:0;margin:0;padding:0;padding-inline-end:var(--space-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border:1px solid var(--secondary);border-radius:var(--radius-sm);background:var(--surface);color:var(--foreground);font-family:var(--font-body);font-size:var(--text-ui);line-height:var(--leading-ui);cursor:pointer}
+.mk-input-file-control::file-selector-button{height:100%;margin:0;margin-inline-end:var(--space-3);padding:0 var(--space-4);border:0;border-inline-end:1px solid var(--line);border-radius:0;background:var(--background);color:var(--foreground);font:inherit;font-weight:var(--weight-semibold);cursor:pointer}
+.mk-input-file-control:hover:not(:disabled)::file-selector-button{background:var(--line)}
+.mk .mk-input-file-control:focus-visible{outline:2px solid var(--focus);outline-offset:0;border-color:var(--focus)}
+.mk .mk-input-file-control[aria-invalid=true]{border:2px solid var(--error-text)}
+.mk .mk-input-file-control[aria-invalid=true]:focus-visible{outline:0;border-color:var(--error-text)}
+.mk .mk-input-file-control:disabled,.mk-input-file-control:disabled::file-selector-button{cursor:not-allowed}
+.mk-input-file-sm{--mk-input-file-height:36px}.mk .mk-input-file-sm .mk-input-file-control{font-size:var(--text-caption)}.mk-input-file-sm .mk-input-file-control::file-selector-button{padding-inline:var(--space-3)}
+.mk-input-file-lg{--mk-input-file-height:48px}.mk .mk-input-file-lg .mk-input-file-control{font-size:var(--text-body)}
+.mk-input-file-message:empty{display:none}.mk-input-file-message>.mk-help{align-items:flex-start;overflow-wrap:anywhere}.mk .mk-input-file-error{color:var(--error-text)}.mk-input-file-error>svg{flex:none;margin-top:var(--space-0-5)}

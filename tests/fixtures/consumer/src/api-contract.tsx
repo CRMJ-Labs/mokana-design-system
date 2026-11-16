@@ -1,6 +1,6 @@
 import {useRef,useState,type ComponentProps} from 'react';
 import {createRoot} from 'react-dom/client';
-import {AddressInput,Alert,Avatar,AvatarGroup,Badge,Brand,Button,ButtonLink,Card,Checkbox,ClearableInput,Collapse,Combobox,DatePicker,Drawer,EmptyState,FileUpload,FormErrorSummary,FormGrid,FormLayout,FormReadOnly,Input,Modal,Navigation,PageLayout,Pagination,Pill,ProgressBar,Radio,Select,Skeleton,Table,Tabs,Textarea,Toggle,Tooltip,patternCatalog,type AlertProps,type CardProps,type EmptyStateProps,type ComboboxProps,type PaginationProps} from '@mokanadev/design-system';
+import {AddressInput,Alert,Avatar,AvatarGroup,Badge,Brand,Button,ButtonLink,Card,Checkbox,ClearableInput,Collapse,Combobox,DatePicker,Drawer,EmptyState,FileUpload,FormErrorSummary,FormGrid,FormLayout,FormReadOnly,Input,InputFile,Modal,Navigation,PageLayout,Pagination,Pill,ProgressBar,Radio,Select,Skeleton,Table,Tabs,Textarea,Toggle,Tooltip,patternCatalog,type AlertProps,type CardProps,type EmptyStateProps,type ComboboxProps,type PaginationProps} from '@mokanadev/design-system';
 import '@mokanadev/design-system/styles.css';
 import '@mokanadev/design-system/fonts.css';
 import './app.css';
@@ -8,6 +8,7 @@ import './app.css';
 // This entry compiles against the installed declarations and runs against the packed JS.
 function ApiContract(){
   const card=useRef<HTMLElement>(null),alert=useRef<HTMLDivElement>(null),empty=useRef<HTMLDivElement>(null),button=useRef<HTMLButtonElement>(null),input=useRef<HTMLInputElement>(null),checkbox=useRef<HTMLInputElement>(null),clearable=useRef<HTMLInputElement>(null),select=useRef<HTMLSelectElement>(null),textarea=useRef<HTMLTextAreaElement>(null),modal=useRef<HTMLDialogElement>(null),drawer=useRef<HTMLDialogElement>(null),table=useRef<HTMLDivElement>(null);
+  const inputFile=useRef<HTMLInputElement>(null),inputFileRoot=useRef<HTMLDivElement>(null);
   const [events,setEvents]=useState<string[]>([]);const [open,setOpen]=useState(false);const [panel,setPanel]=useState(false);const [checked,setChecked]=useState(false);const [tab,setTab]=useState('one');const [page,setPage]=useState(1);
   const record=(name:string,value:unknown)=>setEvents(previous=>[...previous,`${name}:${String(value)}`]);
   const cardProps:CardProps={title:'Contrato de Card',className:'consumer-card',id:'contract-card',style:{padding:28},'aria-label':'Tarjeta de integración'};
@@ -33,6 +34,9 @@ function ApiContract(){
       <ClearableInput ref={clearable} label="Limpiable de contrato" defaultValue="Texto" onValueChange={value=>record('clearable',value)}/>
       <Combobox {...comboProps}/><DatePicker label="Fecha de contrato" onValueChange={value=>record('date',value)}/>
       <FileUpload label="Archivo de contrato" name="attachment" onChange={event=>record('file-native',event.currentTarget.files?.[0]?.name)} onValueChange={files=>record('file',files?.[0]?.name)}/>
+      <InputFile ref={inputFile} label="Selector de archivo de contrato" name="native-file" className="consumer-input-file" hint="Ayuda de archivo" aria-describedby="shared-help" rootProps={{ref:inputFileRoot,id:'native-file-container'}} onChange={event=>record('input-file-native',event.currentTarget.files?.[0]?.name)} onValueChange={files=>record('input-file-value',files?.[0]?.name)}/>
+      <InputFile label="Selector de archivo cancelado" onChange={event=>event.preventDefault()} onValueChange={()=>record('input-file-cancelled','unexpected')}/>
+      <Button onClick={()=>{record('input-file-refs',`${inputFile.current?.tagName},${inputFileRoot.current?.tagName}`);inputFile.current?.focus();}}>Comprobar InputFile</Button>
       <Button type="submit">Enviar contrato</Button><Pagination {...pagerProps} data-contract="pagination"/><output aria-label="Página actual">{page}</output>
     </form>
     <PageLayout header={<h2>Contrato de slots</h2>} aside={<span>Contexto</span>} footer={<span>Pie</span>}><FormLayout aria-label="Formulario compuesto" feedback={<FormErrorSummary errors={[]}/>} actions={<Button type="submit">Guardar compuesto</Button>}><FormGrid><FormReadOnly label="Patrones" value={patternCatalog.length}/><Input label="Campo compuesto"/></FormGrid></FormLayout></PageLayout>
