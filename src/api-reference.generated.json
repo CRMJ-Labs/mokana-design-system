@@ -2877,6 +2877,12 @@
         "type": "'sm'|'md'|'lg'",
         "required": false,
         "default": "'md'"
+      },
+      {
+        "name": "variant",
+        "type": "'compact'|'dropzone'",
+        "required": false,
+        "default": "'compact'"
       }
     ]
   },

@@ -3,11 +3,14 @@
 - Fecha: 2026-11-16 · Tipo: componente
 - Página: `/components/input-file`
 
-Selector compacto basado en `input type="file"`, con los tokens y estados de los campos MOK. Se exporta como `InputFile` e `InputFileProps` desde `@mokanadev/design-system`. `FileUpload` conserva su zona de carga existente.
+Selector basado en `input type="file"`, disponible como campo compacto o zona de carga amplia, con los tokens y estados de los campos MOK. Se exporta como `InputFile` e `InputFileProps` desde `@mokanadev/design-system`.
 
 ```tsx
 <InputFile label="Adjuntar documento" name="document" accept=".pdf,application/pdf"
   hint="Selecciona un PDF." onValueChange={files => handleFiles(files)} />
+
+<InputFile variant="dropzone" label="Adjuntar documento" accept=".pdf,image/*"
+  hint="PDF o imagen, máximo definido por la aplicación" />
 ```
 
 ## API
@@ -15,6 +18,7 @@ Selector compacto basado en `input type="file"`, con los tokens y estados de los
 - Nombre accesible obligatorio en TypeScript: `label`, `aria-label` o `aria-labelledby`.
 - `hint` / `error`: ayuda o error; el error tiene prioridad, establece `aria-invalid` y se anuncia con una región viva cortés.
 - `size`: `sm` (36 px), `md` (44 px, predeterminado), `lg` (48 px).
+- `variant`: `compact` (predeterminada) muestra el campo nativo; `dropzone` presenta una superficie amplia con borde discontinuo. Las dos variantes conservan el mismo input, eventos y atributos de formulario.
 - `onChange(event)`: evento React nativo.
 - `onValueChange(files: FileList | null)`: notificación posterior al evento nativo; `preventDefault` en `onChange` la suprime sin revertir la selección.
 - `ref`, `className`, `style`, `id`, atributos ARIA y atributos nativos llegan al input. `rootProps` personaliza el contenedor `div`, incluido su ref.

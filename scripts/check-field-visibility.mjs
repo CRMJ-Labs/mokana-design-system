@@ -26,7 +26,7 @@ try{
     for(const control of await controls.all()){
       if(!await control.isVisible())continue;
       const actual=await control.evaluate(node=>{
-        const frame=node.closest('.mk-input-control,.mk-clearable-control,.mk-address-search-control')??node;
+        const frame=node.closest('.mk-input-control,.mk-clearable-control,.mk-address-search-control,.mk-input-file-dropzone,.mk-upload')??node;
         const style=getComputedStyle(frame),own=getComputedStyle(node);
         const ctx=document.createElement('canvas').getContext('2d');
         const rgba=color=>{ctx.clearRect(0,0,1,1);ctx.fillStyle=color;ctx.fillRect(0,0,1,1);return [...ctx.getImageData(0,0,1,1).data];};
@@ -43,9 +43,9 @@ try{
       if(actual.invalid){
         assert.deepEqual(actual.color,actual.danger,`${context}: error boundary at rest`);
         await control.hover();
-        const hover=await control.evaluate(node=>getComputedStyle(node.closest('.mk-input-control,.mk-clearable-control,.mk-address-search-control')??node).borderTopColor);
+        const hover=await control.evaluate(node=>getComputedStyle(node.closest('.mk-input-control,.mk-clearable-control,.mk-address-search-control,.mk-input-file-dropzone,.mk-upload')??node).borderTopColor);
         await control.focus();
-        const focus=await control.evaluate(node=>{const style=getComputedStyle(node.closest('.mk-input-control,.mk-clearable-control,.mk-address-search-control')??node);return {border:style.borderTopColor,borderWidth:parseFloat(style.borderTopWidth),outlineWidth:parseFloat(style.outlineWidth)};});
+        const focus=await control.evaluate(node=>{const style=getComputedStyle(node.closest('.mk-input-control,.mk-clearable-control,.mk-address-search-control,.mk-input-file-dropzone,.mk-upload')??node);return {border:style.borderTopColor,borderWidth:parseFloat(style.borderTopWidth),outlineWidth:parseFloat(style.outlineWidth)};});
         assert.equal(hover,actual.cssColor,`${context}: error boundary survives hover`);
         assert.equal(focus.border,actual.cssColor,`${context}: error boundary survives focus`);
         assert.equal(focus.borderWidth,2,`${context}: error focus keeps one boundary`);

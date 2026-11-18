@@ -9,3 +9,14 @@
 .mk-input-file-sm{--mk-input-file-height:36px}.mk .mk-input-file-sm .mk-input-file-control{font-size:var(--text-caption)}.mk-input-file-sm .mk-input-file-control::file-selector-button{padding-inline:var(--space-3)}
 .mk-input-file-lg{--mk-input-file-height:48px}.mk .mk-input-file-lg .mk-input-file-control{font-size:var(--text-body)}
 .mk-input-file-message:empty{display:none}.mk-input-file-message>.mk-help{align-items:flex-start;overflow-wrap:anywhere}.mk .mk-input-file-error{color:var(--error-text)}.mk-input-file-error>svg{flex:none;margin-top:var(--space-0-5)}
+.mk .mk-input-file-dropzone{position:relative;display:flex;box-sizing:border-box;min-height:132px;width:100%;align-items:center;justify-content:center;flex-direction:column;gap:var(--space-1-5);margin:0;padding:var(--space-5);overflow:hidden;border:1px dashed var(--secondary);border-radius:var(--radius-md);background:var(--surface);color:var(--foreground);text-align:center;cursor:pointer;transition:background-color var(--duration-fast) var(--ease),border-color var(--duration-fast) var(--ease)}
+.mk-input-file-dropzone:hover{border-color:var(--focus);background:var(--background)}
+.mk-input-file-dropzone:focus-within{outline:2px solid var(--focus);outline-offset:3px;border-color:var(--focus)}
+.mk .mk-input-file-dropzone>.mk-input-file-control{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;opacity:0;cursor:pointer}
+.mk .mk-input-file-dropzone>.mk-input-file-control:focus-visible{outline:0}
+.mk-input-file-dropzone>svg{flex:none}.mk .mk-input-file-dropzone>strong{font-size:var(--text-ui);line-height:var(--leading-ui)}
+.mk .mk-input-file-dropzone>.mk-input-file-message{color:var(--secondary);font-size:var(--text-caption);line-height:var(--leading-ui);overflow-wrap:anywhere}
+.mk .mk-input-file-dropzone>.mk-input-file-message>span{display:flex;align-items:flex-start;justify-content:center;gap:var(--space-1-5)}
+.mk .mk-input-file-dropzone:has(.mk-input-file-control[aria-invalid=true]){border:2px dashed var(--error-text)}
+.mk .mk-input-file-dropzone:has(.mk-input-file-control[aria-invalid=true]):focus-within{outline:0;border-color:var(--error-text)}
+.mk .mk-input-file-dropzone:has(.mk-input-file-control:disabled){cursor:not-allowed;opacity:.6}.mk .mk-input-file-dropzone>.mk-input-file-control:disabled{cursor:not-allowed}

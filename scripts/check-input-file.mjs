@@ -33,6 +33,15 @@ try{
   assert.equal(chooser.isMultiple(),false);
   await chooser.setFiles(file('resumen del proyecto con un nombre suficientemente largo para probar el campo en móvil.txt'));
 
+  const dropzone=input('dropzone');
+  assert.equal(await dropzone.getAttribute('accept'),'.pdf,image/*');
+  await expect(page.locator('#dropzone .mk-input-file-dropzone')).toContainText('Adjuntar documento');
+  await expect(page.locator('#dropzone .mk-input-file-dropzone')).toContainText('PDF o imagen, máximo definido por la aplicación');
+  await dropzone.setInputFiles(file('documento.pdf','application/pdf'));
+  assert.deepEqual(await names(dropzone),['documento.pdf']);
+  await dropzone.focus();
+  await expect(dropzone).toBeFocused();
+
   await input('multiple').setInputFiles([file('uno.txt'),file('dos.pdf','application/pdf')]);
   assert.deepEqual(await names(input('multiple')),['uno.txt','dos.pdf']);
   assert.equal(await input('accept').getAttribute('accept'),'.pdf,application/pdf');
@@ -79,6 +88,7 @@ try{
     assert.deepEqual(violations,[],`${width}px ${theme}: accessibility`);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'no horizontal page overflow');
     await page.locator('#default').screenshot({path:`verification/input-file-${width}-${theme}.png`});
+    await page.locator('#dropzone').screenshot({path:`verification/input-file-dropzone-${width}-${theme}.png`});
   }
   await page.locator('#sizes').evaluate(node=>node.dir='rtl');
   assert.equal(await page.locator('#sizes input').first().evaluate(node=>getComputedStyle(node).direction),'rtl');
